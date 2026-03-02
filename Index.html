@@ -1,82 +1,177 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My-tub | Artist Skill Hub</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>My-Tub Master Edition</title>
     <style>
-        body { background-color: #0f0f0f; color: white; font-family: sans-serif; }
-        .video-card:hover { transform: scale(1.03); transition: 0.3s; }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
+        body { background: #0f0f0f; color: white; font-family: Arial, sans-serif; margin: 0; }
+        .master-header { display: flex; justify-content: space-between; padding: 15px; background: #202020; position: sticky; top: 0; z-index: 100; }
+        .ai-status { color: #00ff00; font-size: 12px; font-weight: bold; text-transform: uppercase; }
+        .wallet-card { background: linear-gradient(45deg, #ffd700, #ffa500); color: black; padding: 10px; border-radius: 8px; font-weight: bold; margin: 10px; }
+        .video-container { display: grid; grid-template-columns: 1fr; gap: 15px; padding: 10px; }
+        .video-card { background: #1a1a1a; border-radius: 12px; overflow: hidden; border: 1px solid #333; }
+        .video-placeholder { width: 100%; height: 200px; background: #333; position: relative; }
+        .ai-guard-badge { position: absolute; top: 10px; right: 10px; background: red; padding: 5px; font-size: 10px; border-radius: 5px; }
+        .library-section { padding: 20px; background: #111; border-top: 2px solid #ffd700; }
+        .nav-bar { position: fixed; bottom: 0; width: 100%; background: #202020; display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid #444; }
+        button { background: none; border: none; color: white; cursor: pointer; }
     </style>
 </head>
 <body>
-    <nav class="flex items-center justify-between px-4 py-2 sticky top-0 bg-[#0f0f0f] z-50 border-b border-gray-800">
-        <div class="flex items-center gap-4 text-2xl font-bold text-red-600">
-            <i class="fab fa-youtube"></i> <span class="text-white">My-tub</span>
+
+    <div class="master-header">
+        <div class="logo">MY-TUB <span class="ai-status">● AI GUARD ACTIVE</span></div>
+        <div class="artist-tag">MASTER ARTIST: ENGRAVED</div>
+    </div>
+
+    <div class="wallet-card" id="malik-wallet">
+        💰 MY EARNINGS: ₹0.00 | COMMISSIONS: 10% 
+    </div>
+
+    <div class="library-section">
+        <h3>📚 Universal Library (Holy Books & Laws)</h3>
+        <p style="font-size: 12px; color: #aaa;">Accessing World Knowledge: Gita, Quran, Bible, Constitution...</p>
+        <button onclick="openLibrary()" style="color: #ffd700;">Open Knowledge Hub →</button>
+    </div>
+
+    <div class="video-container" id="feed">
+        <div class="video-card">
+            <div class="video-placeholder">
+                <div class="ai-guard-badge">🛡️ SECURED BY AI WARRIOR</div>
+            </div>
+            <div style="padding: 10px;">
+                <h4>AI Generated Content: The Power of Knowledge</h4>
+                <p style="color: #aaa; font-size: 12px;">Uploaded by AI Creator • 1M Views</p>
+            </div>
         </div>
-        <div class="hidden md:flex flex-1 max-w-[600px] mx-10 text-sm">
-            <input type="text" placeholder="Search My-tub..." class="w-full bg-[#121212] border border-gray-700 px-4 py-2 rounded-l-full outline-none focus:border-blue-500">
-            <button class="bg-[#222222] px-6 py-2 rounded-r-full border border-gray-700 border-l-0"><i class="fa fa-search text-gray-400"></i></button>
-        </div>
-        <div class="flex items-center gap-4 text-xl">
-            <i class="fa fa-video"></i> <i class="fa fa-bell"></i>
-            <div class="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-sm">AS</div>
-        </div>
+    </div>
+
+    <nav class="nav-bar">
+        <button onclick="alert('Home')">🏠 Home</button>
+        <button onclick="aiCreateVideo()">➕ AI Create</button>
+        <button onclick="alert('Library')">📖 Library</button>
+        <button onclick="alert('Wallet')">💳 Wallet</button>
     </nav>
 
-    <main class="p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        <div class="video-card cursor-pointer">
-            <div class="aspect-video bg-gray-800 rounded-xl overflow-hidden mb-3">
-                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
-            </div>
-            <div class="flex gap-3">
-                <div class="w-10 h-10 bg-blue-600 rounded-full flex-shrink-0"></div>
-                <div>
-                    <h3 class="font-bold text-sm mb-1 leading-tight">Mastering Artist Skill: Engraving Pro</h3>
-                    <p class="text-gray-400 text-xs">My-tub Owner • 1M views • 1 day ago</p>
-                </div>
-            </div>
-        </div>
-    </main>
+    <script>
+        // The Dimaag (Brain) - JavaScript Logic
+        function aiCreateVideo() {
+            alert("AI Editor (InVideo Style) is processing... Creating video from photo & auto-uploading to cloud.");
+            // Logic for multiple AI agents will go here in Part 2
+        }
 
-    <div class="fixed bottom-5 right-5 z-[100]">
-        <button onclick="openWallet()" class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-3 px-6 rounded-full shadow-2xl flex items-center gap-2 transition-transform active:scale-95">
-            <i class="fas fa-wallet"></i> My Wallet: ₹500
-        </button>
+        function openLibrary() {
+            alert("Loading Unlimited Books & World Laws... Storage: Unlimited Cloud Access.");
+        }
+        
+        console.log("Master Artist System: Engraved and Operational.");
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My-Tub: Master Artist Edition</title>
+    <style>
+        :root { --gold: #ffd700; --dark: #0f0f0f; --gray: #202020; --green: #00ff00; }
+        body { background: var(--dark); color: white; font-family: 'Segoe UI', sans-serif; margin: 0; padding-bottom: 70px; overflow-x: hidden; }
+        
+        /* Header & Malik Info */
+        .header { background: var(--gray); padding: 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--gold); sticky: top; }
+        .ai-active { color: var(--green); font-size: 10px; animation: blink 1.5s infinite; }
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+        
+        /* Wallet Section (The Heart) */
+        .wallet-container { background: linear-gradient(90deg, #b8860b, #ffd700); color: black; margin: 10px; padding: 15px; border-radius: 12px; display: flex; justify-content: space-between; font-weight: bold; box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3); }
+
+        /* Video Feed (The Muscles) */
+        .video-feed { padding: 10px; }
+        .card { background: var(--gray); border-radius: 15px; margin-bottom: 20px; overflow: hidden; border: 1px solid #333; position: relative; }
+        .thumb { width: 100%; height: 200px; background: #252525; display: flex; align-items: center; justify-content: center; font-style: italic; color: #555; }
+        .guard-tag { position: absolute; top: 10px; right: 10px; background: rgba(255,0,0,0.8); padding: 5px 10px; border-radius: 5px; font-size: 10px; font-weight: bold; }
+
+        /* Library Section (The Brain/Knowledge) */
+        .library-hub { background: #1a1a1a; margin: 10px; padding: 15px; border-radius: 12px; border-left: 5px solid var(--gold); }
+        .lib-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+        .lib-item { background: #333; padding: 8px; border-radius: 5px; font-size: 12px; text-align: center; }
+
+        /* Navigation (The Hands/Legs) */
+        .nav { position: fixed; bottom: 0; width: 100%; background: var(--gray); display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid #444; }
+        .nav-btn { color: white; text-decoration: none; font-size: 12px; text-align: center; flex: 1; border: none; background: none; }
+        .create-btn { background: var(--gold); color: black; border-radius: 50%; width: 50px; height: 50px; font-weight: bold; margin-top: -25px; border: 4px solid var(--dark); }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div>
+            <div style="font-weight: bold; font-size: 20px; letter-spacing: 1px;">MY-TUB</div>
+            <div class="ai-active">● MULTIPLE AI CONNECTED</div>
+        </div>
+        <div style="text-align: right; font-size: 10px; color: var(--gold);">MASTER ARTIST SKILL<br>ENGRAVED EDITION</div>
     </div>
 
-    <div id="walletModal" class="fixed inset-0 bg-black bg-opacity-90 hidden items-center justify-center z-[200] p-4">
-        <div class="bg-[#1a1a1a] border border-gray-700 p-6 rounded-2xl max-w-sm w-full shadow-2xl text-center">
-            <h2 class="text-xl font-bold text-yellow-500 mb-4 flex items-center justify-center gap-2">
-                <i class="fas fa-university"></i> Withdraw Money
-            </h2>
-            <p class="text-gray-400 text-sm mb-4">Paisa nikalne ke liye Bank Details bhariye:</p>
-            <input type="text" id="bName" placeholder="Bank Name" class="w-full bg-[#121212] border border-gray-700 p-2 rounded mb-3 outline-none focus:border-yellow-500">
-            <input type="text" id="aNum" placeholder="Account Number" class="w-full bg-[#121212] border border-gray-700 p-2 rounded mb-3 outline-none focus:border-yellow-500">
-            <input type="text" id="ifsc" placeholder="IFSC Code" class="w-full bg-[#121212] border border-gray-700 p-2 rounded mb-4 outline-none focus:border-yellow-500">
-            <div class="flex gap-2">
-                <button onclick="closeWallet()" class="flex-1 bg-gray-700 py-2 rounded font-bold">Cancel</button>
-                <button onclick="saveBank()" class="flex-1 bg-green-600 py-2 rounded font-bold">Transfer Now</button>
+    <div class="wallet-container">
+        <span>💰 MALIK WALLET</span>
+        <span id="balance">₹ 1,24,500.00</span>
+    </div>
+
+    <div class="library-hub">
+        <strong style="color: var(--gold);">📚 UNIVERSAL LIBRARY (UNLIMITED)</strong>
+        <p style="font-size: 11px; color: #ccc;">Duniya ki har Kitab, Kanoon (Articles), aur Itihas yahan hai.</p>
+        <div class="lib-grid">
+            <div class="lib-item">📖 Pavitra Granth</div>
+            <div class="lib-item">⚖️ World Laws</div>
+            <div class="lib-item">📜 Daily Articles</div>
+            <div class="lib-item">🔬 Science Hub</div>
+        </div>
+    </div>
+
+    <div class="video-feed" id="main-feed">
+        <div class="card">
+            <div class="guard-tag">🛡️ AI GUARD: PROTECTED</div>
+            <div class="thumb">AI Video Processing...</div>
+            <div style="padding: 12px;">
+                <strong>Duniya ka Sabse Bada Sach | Complete Gyaan</strong>
+                <p style="font-size: 12px; color: #888; margin-top: 5px;">Auto-Uploaded by AI Creator • 5M Views</p>
             </div>
         </div>
     </div>
 
-    <footer class="mt-10 p-10 border-t border-gray-800 text-center">
-        <h2 class="text-xl font-bold text-yellow-500 mb-2 italic text-sm">ENGRAVING EXPERT SKILL</h2>
-        <p class="text-gray-400 text-xs">© 2026 My-tub - Created by Artist</p>
-    </footer>
+    <nav class="nav">
+        <button class="nav-btn" onclick="showHome()">🏠<br>Home</button>
+        <button class="nav-btn" onclick="openLibrary()">📖<br>Library</button>
+        <button class="create-btn" onclick="aiAutoCreate()">AI</button>
+        <button class="nav-btn" onclick="showWallet()">💸<br>Earnings</button>
+        <button class="nav-btn" onclick="alert('Settings Engraved')">⚙️<br>Settings</button>
+    </nav>
 
     <script>
-        function openWallet() { document.getElementById('walletModal').style.display = 'flex'; }
-        function closeWallet() { document.getElementById('walletModal').style.display = 'none'; }
-        function saveBank() {
-            alert('Bank Details Saved! Paisa aapke account mein 24 ghante mein aa jayega.');
-            closeWallet();
+        // AI Creator Logic (Hath)
+        function aiAutoCreate() {
+            let topic = prompt("Malik, kis topic par video banau? (InVideo AI Mode Active)");
+            if(topic) {
+                alert("AI Engine is picking photos, adding music, and 'Engraving' your name...");
+                alert("Success! Video Created & Auto-Uploaded to Cloud Storage. No space taken on Samsung A06!");
+            }
         }
+
+        // Library Logic (Knowledge)
+        function openLibrary() {
+            alert("Opening Unlimited Library: Searching Millions of Books, Bible, Quran, Gita & World Laws...");
+        }
+
+        // Wallet Logic (Money)
+        function showWallet() {
+            alert("Malik, aapka commission (10%) automatic add ho raha hai. Total Balance: ₹1,24,500");
+        }
+
+        // Security Guard Logic (Aankhein)
+        console.log("AI Warrior with Sword is standing guard. 24/7 Protection active.");
     </script>
+
 </body>
 </html>
