@@ -1,23 +1,72 @@
-
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Master Artist YouTube</title>
+    <title>My-tub | Artist Skill Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body { font-family: sans-serif; background-color: #0f0f0f; color: white; text-align: center; padding: 20px; }
-        .badge { background: gold; color: black; padding: 10px; border-radius: 5px; font-weight: bold; display: inline-block; margin: 10px; }
-        .video-box { margin-top: 20px; border: 2px solid #333; border-radius: 15px; overflow: hidden; background: #000; }
-        iframe { width: 100%; height: 300px; border: none; }
+        body { background-color: #0f0f0f; color: white; font-family: sans-serif; }
+        .video-card:hover { transform: scale(1.03); transition: 0.3s; }
     </style>
 </head>
 <body>
-    <h1>My YouTube Channel Site</h1>
-    <div class="badge">ENGRAVING EXPERT SKILL</div>
-    <div class="video-box">
-        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+    <nav class="flex items-center justify-between px-4 py-2 sticky top-0 bg-[#0f0f0f] z-50">
+        <div class="flex items-center gap-4 text-2xl font-bold text-red-600">
+            <i class="fab fa-youtube"></i> <span class="text-white">My-tub</span>
+        </div>
+        <div class="hidden md:flex flex-1 max-w-[600px] mx-10">
+            <input type="text" placeholder="Search Videos..." class="w-full bg-[#121212] border border-gray-700 px-4 py-2 rounded-l-full outline-none focus:border-blue-500">
+            <button class="bg-[#222222] px-6 py-2 rounded-r-full border border-gray-700 border-l-0"><i class="fa fa-search text-gray-400"></i></button>
+        </div>
+        <div class="flex items-center gap-4 text-xl">
+            <i class="fa fa-video"></i> <i class="fa fa-bell"></i>
+            <div class="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-sm">AS</div>
+        </div>
+    </nav>
+
+    <div class="flex gap-3 px-4 py-3 overflow-x-auto no-scrollbar border-b border-gray-800">
+        <span class="bg-white text-black px-3 py-1 rounded-lg text-sm font-medium cursor-pointer">All</span>
+        <span class="bg-[#272727] px-3 py-1 rounded-lg text-sm font-medium cursor-pointer">Artist Skill</span>
+        <span class="bg-[#272727] px-3 py-1 rounded-lg text-sm font-medium cursor-pointer">Engraving</span>
+        <span class="bg-[#272727] px-3 py-1 rounded-lg text-sm font-medium cursor-pointer">Tutorials</span>
     </div>
-    <p style="margin-top: 20px;">Bhai, aapki site ab GitHub par taiyaar hai!</p>
+
+    <main class="p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        
+        <div class="video-card cursor-pointer">
+            <div class="aspect-video bg-gray-800 rounded-xl overflow-hidden mb-3">
+                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="flex gap-3">
+                <div class="w-10 h-10 bg-blue-600 rounded-full flex-shrink-0"></div>
+                <div>
+                    <h3 class="font-bold text-sm mb-1 leading-tight">Mastering the Artist Skill: Part 1 - Engraving Basics</h3>
+                    <p class="text-gray-400 text-xs">My-tub Official • 1.2M views • 2 days ago</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="video-card cursor-pointer">
+            <div class="aspect-video bg-gray-800 rounded-xl overflow-hidden mb-3 text-center flex items-center justify-center border border-dashed border-gray-600">
+                <p class="text-gray-500">More Videos Coming Soon...</p>
+            </div>
+            <div class="flex gap-3">
+                <div class="w-10 h-10 bg-green-600 rounded-full flex-shrink-0"></div>
+                <div>
+                    <h3 class="font-bold text-sm mb-1 leading-tight">Amazing New Art Project - Teaser</h3>
+                    <p class="text-gray-400 text-xs">Artist Skill Hub • 500k views • 1 week ago</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="mt-10 p-10 border-t border-gray-800 text-center">
+        <h2 class="text-xl font-bold text-yellow-500 mb-2">ENGRAVING EXPERT SKILL</h2>
+        <p class="text-gray-400 text-sm">© 2026 My-tub - Created with Passion by a Master Artist</p>
+    </footer>
+
 </body>
 </html>
