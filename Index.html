@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="manifest" href="manifest.json">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My-Tub Master Edition</title>
@@ -67,111 +68,5 @@
         
         console.log("Master Artist System: Engraved and Operational.");
     </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My-Tub: Master Artist Edition</title>
-    <style>
-        :root { --gold: #ffd700; --dark: #0f0f0f; --gray: #202020; --green: #00ff00; }
-        body { background: var(--dark); color: white; font-family: 'Segoe UI', sans-serif; margin: 0; padding-bottom: 70px; overflow-x: hidden; }
-        
-        /* Header & Malik Info */
-        .header { background: var(--gray); padding: 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--gold); sticky: top; }
-        .ai-active { color: var(--green); font-size: 10px; animation: blink 1.5s infinite; }
-        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
-        
-        /* Wallet Section (The Heart) */
-        .wallet-container { background: linear-gradient(90deg, #b8860b, #ffd700); color: black; margin: 10px; padding: 15px; border-radius: 12px; display: flex; justify-content: space-between; font-weight: bold; box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3); }
-
-        /* Video Feed (The Muscles) */
-        .video-feed { padding: 10px; }
-        .card { background: var(--gray); border-radius: 15px; margin-bottom: 20px; overflow: hidden; border: 1px solid #333; position: relative; }
-        .thumb { width: 100%; height: 200px; background: #252525; display: flex; align-items: center; justify-content: center; font-style: italic; color: #555; }
-        .guard-tag { position: absolute; top: 10px; right: 10px; background: rgba(255,0,0,0.8); padding: 5px 10px; border-radius: 5px; font-size: 10px; font-weight: bold; }
-
-        /* Library Section (The Brain/Knowledge) */
-        .library-hub { background: #1a1a1a; margin: 10px; padding: 15px; border-radius: 12px; border-left: 5px solid var(--gold); }
-        .lib-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
-        .lib-item { background: #333; padding: 8px; border-radius: 5px; font-size: 12px; text-align: center; }
-
-        /* Navigation (The Hands/Legs) */
-        .nav { position: fixed; bottom: 0; width: 100%; background: var(--gray); display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid #444; }
-        .nav-btn { color: white; text-decoration: none; font-size: 12px; text-align: center; flex: 1; border: none; background: none; }
-        .create-btn { background: var(--gold); color: black; border-radius: 50%; width: 50px; height: 50px; font-weight: bold; margin-top: -25px; border: 4px solid var(--dark); }
-    </style>
-</head>
-<body>
-
-    <div class="header">
-        <div>
-            <div style="font-weight: bold; font-size: 20px; letter-spacing: 1px;">MY-TUB</div>
-            <div class="ai-active">● MULTIPLE AI CONNECTED</div>
-        </div>
-        <div style="text-align: right; font-size: 10px; color: var(--gold);">MASTER ARTIST SKILL<br>ENGRAVED EDITION</div>
-    </div>
-
-    <div class="wallet-container">
-        <span>💰 MALIK WALLET</span>
-        <span id="balance">₹ 1,24,500.00</span>
-    </div>
-
-    <div class="library-hub">
-        <strong style="color: var(--gold);">📚 UNIVERSAL LIBRARY (UNLIMITED)</strong>
-        <p style="font-size: 11px; color: #ccc;">Duniya ki har Kitab, Kanoon (Articles), aur Itihas yahan hai.</p>
-        <div class="lib-grid">
-            <div class="lib-item">📖 Pavitra Granth</div>
-            <div class="lib-item">⚖️ World Laws</div>
-            <div class="lib-item">📜 Daily Articles</div>
-            <div class="lib-item">🔬 Science Hub</div>
-        </div>
-    </div>
-
-    <div class="video-feed" id="main-feed">
-        <div class="card">
-            <div class="guard-tag">🛡️ AI GUARD: PROTECTED</div>
-            <div class="thumb">AI Video Processing...</div>
-            <div style="padding: 12px;">
-                <strong>Duniya ka Sabse Bada Sach | Complete Gyaan</strong>
-                <p style="font-size: 12px; color: #888; margin-top: 5px;">Auto-Uploaded by AI Creator • 5M Views</p>
-            </div>
-        </div>
-    </div>
-
-    <nav class="nav">
-        <button class="nav-btn" onclick="showHome()">🏠<br>Home</button>
-        <button class="nav-btn" onclick="openLibrary()">📖<br>Library</button>
-        <button class="create-btn" onclick="aiAutoCreate()">AI</button>
-        <button class="nav-btn" onclick="showWallet()">💸<br>Earnings</button>
-        <button class="nav-btn" onclick="alert('Settings Engraved')">⚙️<br>Settings</button>
-    </nav>
-
-    <script>
-        // AI Creator Logic (Hath)
-        function aiAutoCreate() {
-            let topic = prompt("Malik, kis topic par video banau? (InVideo AI Mode Active)");
-            if(topic) {
-                alert("AI Engine is picking photos, adding music, and 'Engraving' your name...");
-                alert("Success! Video Created & Auto-Uploaded to Cloud Storage. No space taken on Samsung A06!");
-            }
-        }
-
-        // Library Logic (Knowledge)
-        function openLibrary() {
-            alert("Opening Unlimited Library: Searching Millions of Books, Bible, Quran, Gita & World Laws...");
-        }
-
-        // Wallet Logic (Money)
-        function showWallet() {
-            alert("Malik, aapka commission (10%) automatic add ho raha hai. Total Balance: ₹1,24,500");
-        }
-
-        // Security Guard Logic (Aankhein)
-        console.log("AI Warrior with Sword is standing guard. 24/7 Protection active.");
-    </script>
-
 </body>
 </html>
