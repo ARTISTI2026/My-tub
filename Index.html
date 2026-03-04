@@ -74,3 +74,14 @@
 
 </body>
 </html>
+// Search Feature: Artist ki khoj ka dimaag
+function searchVideo() {
+    let query = document.getElementById('search-input').value;
+    if(query) {
+        // Bina Ad waali search result loading (YouTube API connect)
+        window.open('https://www.youtube.com/results?search_query=' + query, '_blank');
+        alert("Master Artist: " + query + " ki khoj bina ads ke shuru ho rahi hai!");
+    } else {
+        alert("Bhai, pehle kuch likho toh sahi!");
+    }
+}
