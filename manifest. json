@@ -13,3 +13,23 @@
   "background_color": "#ffffff",
   "theme_color": "#ff0000"
 }
+{
+  "name": "My-Tub Master Edition",
+  "short_name": "My-Tub",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#ff0000",
+  "icons": [
+    {
+      "src": "https://i.ibb.co/LzNf0zX/my-tub-logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://i.ibb.co/LzNf0zX/my-tub-logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
