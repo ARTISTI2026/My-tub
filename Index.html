@@ -1,108 +1,98 @@
 
+
 <!DOCTYPE html>
 <html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My-Tub Master Edition</title>
-    <link rel="manifest" href="manifest.json">
     <style>
-        body { background: #000; color: #fff; font-family: sans-serif; margin: 0; padding: 0; overflow-x: hidden; }
+        body { background: #000; color: #fff; font-family: sans-serif; margin: 0; padding: 0; }
         header { background: #202020; padding: 15px; display: flex; align-items: center; position: sticky; top: 0; z-index: 1000; }
-        .logo { color: #f00; font-size: 22px; font-weight: bold; flex: 1; }
+        .logo { color: #f00; font-size: 22px; font-weight: bold; flex: 1; margin-left: 10px; }
+        #mySidebar { height: 100%; width: 0; position: fixed; z-index: 2000; top: 0; left: 0; background-color: #111; overflow-x: hidden; transition: 0.5s; padding-top: 60px; }
+        #mySidebar a { padding: 15px; text-decoration: none; font-size: 20px; color: #fff; display: block; }
         .search-container { padding: 10px; background: #121212; display: flex; gap: 5px; }
         input { flex: 1; padding: 10px; border-radius: 20px; border: none; background: #333; color: #fff; }
         button.search-btn { padding: 10px 15px; border-radius: 20px; border: none; background: #f00; color: #fff; font-weight: bold; }
-        #main-player { width: 100%; aspect-ratio: 16/9; background: #000; display: none; margin-top: 5px; }
+        #main-player { width: 100%; aspect-ratio: 16/9; background: #000; display: none; }
+        .download-btn { display: none; width: 95%; margin: 10px auto; padding: 12px; background: #ffd700; color: #000; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; text-align: center; }
         .shorts-container { display: flex; overflow-x: auto; gap: 10px; padding: 15px; }
         .short-card { min-width: 120px; height: 180px; background: #333; border-radius: 12px; position: relative; cursor: pointer; }
-        .short-card img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; opacity: 0.6; }
-        .short-title { position: absolute; bottom: 8px; left: 8px; font-size: 11px; font-weight: bold; }
-        .download-btn { display: none; width: 90%; margin: 10px auto; padding: 12px; background: #ffd700; color: #000; border: none; border-radius: 8px; font-weight: bold; }
+        .short-card img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; opacity: 0.7; }
+        .trending-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px; }
+        .video-card { background: #1a1a1a; border-radius: 8px; overflow: hidden; cursor: pointer; }
+        .video-card img { width: 100%; }
     </style>
 </head>
 <body>
-<div id="mySidebar" style="height: 100%; width: 0; position: fixed; z-index: 2000; top: 0; left: 0; background-color: #111; overflow-x: hidden; transition: 0.5s; padding-top: 60px;">
-  <a href="javascript:void(0)" onclick="closeNav()" style="position: absolute; top: 10px; right: 25px; font-size: 36px; color: #f00; text-decoration: none;">&times;</a>
-  <a href="#" style="padding: 15px; text-decoration: none; font-size: 20px; color: #fff; display: block;">🔥 Trending</a>
-  <a href="#" style="padding: 15px; text-decoration: none; font-size: 20px; color: #fff; display: block;">🎵 Music</a>
-  <a href="#" style="padding: 15px; text-decoration: none; font-size: 20px; color: #fff; display: block;">⏬ Downloads</a>
-  <div style="padding: 15px; color: #ffd700; font-size: 14px; border-top: 1px solid #333;">Master Edition v2.0</div>
+
+<div id="mySidebar">
+  <a href="javascript:void(0)" onclick="closeNav()" style="color:#f00; font-size:30px;">&times;</a>
+  <a href="#">🔥 Trending</a>
+  <a href="#">🎵 Music</a>
+  <a href="#">⏬ Downloads</a>
 </div>
 
 <header>
-    <span style="font-size:25px; cursor:pointer; padding-right:15px; color:#fff;" onclick="openNav()">&#9776;</span>
-    <div class="logo">My-Tub...</div>
+    <span style="font-size:25px; cursor:pointer;" onclick="openNav()">&#9776;</span>
+    <div class="logo">My-Tub <span style="color:#fff; font-size:10px;">Master</span></div>
 </header>
 
-
-
 <div class="search-container">
-    <input type="text" id="search-input" placeholder="Video search karein...">
+    <input type="text" id="search-input" placeholder="Video khojein...">
     <button class="search-btn" onclick="searchVideo()">Search</button>
 </div>
 
 <div id="main-player"></div>
 <button id="dl-btn" class="download-btn" onclick="downloadAction()">📥 Download Video (HD)</button>
 
-<h3 style="padding: 10px 15px 0; color: #ffd700; font-size: 16px;">⚡ Shorts (Touch to Play)</h3>
+<h3 style="padding: 10px 15px 0; color: #ffd700;">⚡ Shorts</h3>
 <div class="shorts-container">
-    <div class="short-card" onclick="loadVideo('9bZkp7q19f0')"><img src="https://i.ibb.co/LzNf0zX/my-tub-logo.png"><div class="short-title">Trending #1</div></div>
-    <div class="short-card" onclick="loadVideo('jOTfBlTrQ_Q')"><img src="https://i.ibb.co/LzNf0zX/my-tub-logo.png"><div class="short-title">Tech Magic</div></div>
-    <div class="short-card" onclick="loadVideo('M7lc1UVf-VE')"><img src="https://i.ibb.co/LzNf0zX/my-tub-logo.png"><div class="short-title">AI Future</div></div>
+    <div class="short-card" onclick="loadVideo('9bZkp7q19f0')"><img src="https://img.youtube.com/vi/9bZkp7q19f0/mqdefault.jpg"></div>
+    <div class="short-card" onclick="loadVideo('jOTfBlTrQ_Q')"><img src="https://img.youtube.com/vi/jOTfBlTrQ_Q/mqdefault.jpg"></div>
+    <div class="short-card" onclick="loadVideo('M7lc1UVf-VE')"><img src="https://img.youtube.com/vi/M7lc1UVf-VE/mqdefault.jpg"></div>
 </div>
 
-    <h3 style="padding: 10px 15px 0; color: #fff;">📺 Recommended for You</h3>
-<div id="video-feed" style="padding: 10px;">
-    <div style="background: #1a1a1a; margin-bottom: 20px; border-radius: 8px; overflow: hidden; cursor: pointer;" onclick="loadVideo('dQw4w9WgXcQ')">
-        <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/mqdefault.jpg" style="width: 100%; height: 200px; object-fit: cover;">
-        <div style="padding: 12px; display: flex; gap: 10px;">
-            <div style="width: 40px; height: 40px; background: #ffd700; border-radius: 50%; flex-shrink: 0;"></div>
-            <div>
-                <h4 style="margin: 0; font-size: 14px; color: #fff;">Asli Master Skill: YouTube Killer App 2026</h4>
-                <p style="margin: 5px 0 0; font-size: 12px; color: #aaa;">Master Artist • 10M views</p>
-            </div>
-        </div>
-    </div>
-</div>
 <h3 style="padding: 10px 15px 0; color: #ffd700;">🔥 Trending Now</h3>
-<div style="padding: 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-    <div onclick="loadVideo('9bZkp7q19f0')" style="background: #1a1a1a; border-radius: 8px; overflow: hidden;">
-        <img src="https://img.youtube.com/vi/9bZkp7q19f0/mqdefault.jpg" style="width: 100%;">
-        <p style="padding: 5px; font-size: 11px; margin: 0;">GTA 6 Gameplay</p>
+<div class="trending-grid">
+    <div class="video-card" onclick="loadVideo('dQw4w9WgXcQ')">
+        <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/mqdefault.jpg">
+        <p style="padding:5px; font-size:12px; margin:0;">Master Artist: Global Hits</p>
     </div>
-    <div onclick="loadVideo('jOTfBlTrQ_Q')" style="background: #1a1a1a; border-radius: 8px; overflow: hidden;">
-        <img src="https://img.youtube.com/vi/jOTfBlTrQ_Q/mqdefault.jpg" style="width: 100%;">
-        <p style="padding: 5px; font-size: 11px; margin: 0;">2026 Hits</p>
+    <div class="video-card" onclick="loadVideo('9bZkp7q19f0')">
+        <img src="https://img.youtube.com/vi/9bZkp7q19f0/mqdefault.jpg">
+        <p style="padding:5px; font-size:12px; margin:0;">Gaming Evolution 2026</p>
     </div>
 </div>
 
 <script>
+let currentVideoId = "";
+
 function loadVideo(id) {
+    currentVideoId = id;
     const player = document.getElementById('main-player');
     const dlBtn = document.getElementById('dl-btn');
     player.style.display = 'block';
     dlBtn.style.display = 'block';
-    player.innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${id}?autoplay=1&rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
-    window.scrollTo({top: 60, behavior: 'smooth'});
+    player.innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${id}?autoplay=1" frameborder="0" allowfullscreen></iframe>`;
+    window.scrollTo({top: 50, behavior: 'smooth'});
 }
 
 function searchVideo() {
     let q = document.getElementById('search-input').value;
     if(q) { window.open('https://www.youtube.com/results?search_query=' + q, '_blank'); }
 }
+
 function downloadAction() {
-    alert("Master Artist: Download Link Taiyar Ho Raha Hai...");
+    if(currentVideoId) {
+        window.open(`https://www.y2mate.com/youtube/${currentVideoId}`, '_blank');
+    }
 }
 
-function openNav() { 
-    document.getElementById("mySidebar").style.width = "250px"; 
-}
-
-function closeNav() { 
-    document.getElementById("mySidebar").style.width = "0"; 
-}
+function openNav() { document.getElementById("mySidebar").style.width = "250px"; }
+function closeNav() { document.getElementById("mySidebar").style.width = "0"; }
 </script>
+
 </body>
 </html>
-
