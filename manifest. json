@@ -1,19 +1,4 @@
 {
-  "short_name": "My-Tub",
-  "name": "My-Tub",
-  "icons": [
-    {
-      "src": "https://i.ibb.co/LzNf0zX/my-tub-logo.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    }
-  ],
-  "start_url": ".",
-  "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#ff0000"
-}
-{
   "name": "My-Tub Master Edition",
   "short_name": "My-Tub",
   "start_url": "index.html",
