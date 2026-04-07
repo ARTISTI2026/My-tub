@@ -1,10 +1,6 @@
 {
-  "name": "My-Tub Master Edition",
   "short_name": "My-Tub",
-  "start_url": "index.html",
-  "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#ff0000",
+  "name": "My-Tub Master Edition",
   "icons": [
     {
       "src": "logo.jpg",
@@ -16,5 +12,10 @@
       "sizes": "512x512",
       "type": "image/jpeg"
     }
-  ]
+  ],
+  "start_url": "/index.html",
+  "background_color": "#050505",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#ff0000"
 }
