@@ -47,13 +47,15 @@
 
 <div class="status-bar" id="aiStatus">🛡️ AI SECURITY GUARD ACTIVE | 💰 AUTO-EARNING: ENABLED</div>
 
-<header>
-    <div class="logo-box">My<span>Tub</span> <small style="font-size: 10px; background: var(--gold); color: black; padding: 2px 4px; border-radius: 3px; margin-left: 5px;">V12 MASTER</small></div>
-    <div class="search-container">
+<header style="display: flex; align-items: center; padding: 10px 15px; background: #000;">
+    <img src="logo.jpg" alt="Logo" style="width: 35px; height: 35px; border-radius: 50%; margin-right: 10px; border: 1px solid #ff0000;">
+    <div class="logo-box">My<span>Tub</span><span small style="font-size: 10px; background: var(--gold); color: black; padding: 2px 4px; border-radius: 3px; margin-left: 5px;">V12 MASTER</span></div>
+    
+    <div class="search-container" style="flex: 1; margin-left: 15px;">
         <input type="text" id="aiSearch" placeholder="Ask AI to find content...">
-        <span onclick="triggerSearch()">🔍</span>
     </div>
 </header>
+
 
 <div id="player-overlay">
     <span class="close-btn" onclick="closePlayer()">×</span>
