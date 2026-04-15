@@ -80,90 +80,104 @@
 <header style="display: flex; align-items: center; padding: 10px 15px; background: #000;">
     <img src="logo.jpg" alt="Logo" style="width: 35px; height: 35px; border-radius: 50%; margin-right: 10px; border: 1px solid #ff0000;">
     <div class="logo-box">My<span>Tub</span><span small style="font-size: 10px; background: var(--gold); color: black; padding: 2px 4px; border-radius: 3px; margin-left: 5px;">V12 MASTER</span></div>
-    
-    <div class="search-container" style="flex: 1; margin-left: 15px;">
-        <input type="text" id="aiSearch" placeholder="Ask AI to find content...">
+  <header style="display: flex; align-items: center; padding: 10px; background: #000; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #333;">
+    <div style="color: #ff0000; font-weight: 900; font-size: 22px; flex: 1;">V12 MASTER</div>
+    <div style="display: flex; gap: 20px; align-items: center;">
+        <span onclick="triggerSearch('New Tech')" style="color: white; font-size: 20px;">🔍</span>
+        <span onclick="toggleMasterMenu()" style="color: white; font-size: 25px; cursor: pointer;">⋮</span>
     </div>
 </header>
 
-
-<div id="player-overlay">
-    <span class="close-btn" onclick="closePlayer()">×</span>
-    <div id="video-frame" style="width: 100%; height: 100%;"></div>
+<div id="player-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#000; z-index:5000;">
+    <span onclick="closePlayer()" style="position:absolute; top:20px; right:20px; color:white; font-size:30px; z-index:5001;">×</span>
+    <div id="video-frame" style="width:100%; height:100%;"></div>
 </div>
 
-<div class="video-feed" id="mainFeed">
-    </div>
 <div class="youtube-nav-container">
     <div class="nav-row">
         <div class="nav-item" onclick="location.reload()">🏠<br>Home</div>
-        <div class="nav-item">🩳<br>Shorts</div>
-        <div class="nav-item" style="font-size:22px;">⊕</div>
-        <div class="nav-item">📺<br>Subs</div>
-        <div class="nav-item" onclick="showHistory()">👤<br>You</div>
+        <div class="nav-item" onclick="triggerSearch('Shorts')">🩳<br>Shorts</div>
+        <div class="nav-item" style="font-size:25px; color:#ff0000;">⊕</div>
+        <div class="nav-item" onclick="toggleMasterMenu()">☰<br>Menu</div>
+        <div class="nav-item" onclick="toggleWallet()">💰<br>Wallet</div>
     </div>
-    <div class="nav-row" style="background: #222;">
-        <div class="nav-item" onclick="openMasterVideo('jOTfB1TrQ_Q')">🤖<br>Robotics</div>
-        <div class="nav-item" onclick="openMasterVideo('Dqw4w9WgXcQ')">🧪<br>Bio-Tech</div>
-        <div class="nav-item" onclick="openMasterVideo('M7lc1UVf-VE')">🚀<br>Tech News</div>
+    <div class="nav-row" style="background: #111; border-top: 1px solid #333;">
+        <div class="nav-item" onclick="triggerSearch('Robotics')">🤖<br>Robotics</div>
+        <div class="nav-item" onclick="triggerSearch('AI Tools')">🧪<br>AI Tools</div>
+        <div class="nav-item" onclick="triggerSearch('Tech News')">🚀<br>Tech News</div>
     </div>
 </div>
 
+<div id="walletOverlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#000; z-index:6000; color:white; padding:20px;">
+    <h2 style="text-align:center; color:#ffcc00;">My Earnings</h2>
+    <div style="background:#222; padding:20px; border-radius:10px; margin-top:20px;">
+        <p style="font-size:12px; color:#aaa;">Aapki Kamai (User):</p>
+        <h1 id="userDisplay" style="color:#00ff00;">₹0.00</h1>
+    </div>
+    <div id="ownerSection" style="display:none; background:#111; padding:20px; border-radius:10px; margin-top:20px; border:1px dashed #555;">
+        <p style="font-size:12px; color:#ff3333;">Owner Profit (Mera Hissa):</p>
+        <h1 id="ownerDisplay" style="color:#ff3333;">₹0.00</h1>
+        <button onclick="alert('Bank details link coming soon!')" style="background:#ff3333; color:white; width:100%; padding:10px; border:none; margin-top:10px;">🏦 Withdrawal</button>
+    </div>
+    <p onclick="showOwnerSecret()" style="text-align:center; font-size:10px; color:#222; margin-top:50px;">Admin Access</p>
+    <button onclick="toggleWallet()" style="width:100%; margin-top:20px; padding:15px; background:#444; color:white; border:none; border-radius:5px;">Piche Jayein</button>
+</div>
+
+<div id="masterOverlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:7000; color:white; padding:20px;">
+    <h2 style="text-align:center; color:#00ff00;">Settings & Control</h2>
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px; margin-top:20px;">
+        <div onclick="triggerSearch('Indian Law')" style="background:#333; padding:15px; border-radius:10px; text-align:center;">⚖️<br>Kanoon</div>
+        <div onclick="triggerSearch('Religious Granth')" style="background:#333; padding:15px; border-radius:10px; text-align:center;">📖<br>Granth</div>
+    </div>
+    <button onclick="toggleMasterMenu()" style="width:100%; margin-top:30px; padding:15px; background:red; color:white; border:none;">Band Karein</button>
+</div>
+
 <script>
-    /* --- 12 MASTER FEATURES & AI LOGIC --- */
-    const masterContent = [
-        { id: 'jOTfB1TrQ_Q', title: '6-Foot Robotic Unit: The Manufacturing Revolution', author: 'Master Engineering', views: '4.1M' },
-        { id: '9bZkp7q19f0', title: 'Adobe Express AI: High-End Graphic Secrets', author: 'Design Expert', views: '1.5M' },
-        { id: 'Dqw4w9WgXcQ', title: 'Bio-Shield & Human Growth Boosters 2026', author: 'Science Lab', views: '2.2M' },
-        { id: 'M7lc1UVf-VE', title: 'Starship Launch: Global Master Coverage', author: 'Tech News', views: '10M' }
-    ];
+let userBalance = 0; let ownerBalance = 0;
 
-    function initMasterApp() {
-        const feed = document.getElementById('mainFeed');
-        masterContent.forEach(item => {
-            feed.innerHTML += `
-                <div class="v-card" onclick="openMasterVideo('${item.id}')">
-                    <div class="thumb-wrapper">
-                        <img src="https://img.youtube.com/vi/${item.id}/maxresdefault.jpg" alt="Thumbnail">
-                    </div>
-                    <div class="v-details">
-                        <p class="v-title">${item.title}</p>
-                        <div class="v-meta">
-                            <span>${item.author}</span>
-                            <span>${item.views} views</span>
-                        </div>
-                    </div>
-                </div>`;
-        });
-        console.log("Suraksha Guard & 12 Features Online.");
-    }
+// Video chalane wala asli logic
+function openMasterVideo(id) {
+    const overlay = document.getElementById('player-overlay');
+    const frame = document.getElementById('video-frame');
+    overlay.style.display = 'block';
+    frame.innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${id}?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+    updateEarnings(); 
+}
 
-    function openMasterVideo(id) {
-        const overlay = document.getElementById('player-overlay');
-        const frame = document.getElementById('video-frame');
-        overlay.style.display = 'block';
-        frame.innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${id}?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
-        document.getElementById('aiStatus').innerText = "💰 EARNING TRACKED: MASTER PROFIT ACTIVE";
-    }
+function closePlayer() {
+    document.getElementById('player-overlay').style.display = 'none';
+    document.getElementById('video-frame').innerHTML = '';
+}
 
-    function closePlayer() {
-        document.getElementById('player-overlay').style.display = 'none';
-        document.getElementById('video-frame').innerHTML = '';
-        document.getElementById('aiStatus').innerText = "🛡️ AI SECURITY GUARD ACTIVE | 💰 EARNINGS SAVED";
-    }
+function triggerSearch(keyword) {
+    openMasterVideo('results?search_query=' + encodeURIComponent(keyword));
+}
 
-    function triggerSearch(term) {
-        let q = term || document.getElementById('aiSearch').value;
-        if(q) window.open(`https://www.youtube.com/results?search_query=${q}`, '_blank');
-    }
+function toggleMasterMenu() {
+    var x = document.getElementById("masterOverlay");
+    x.style.display = (x.style.display === "none") ? "block" : "none";
+}
 
-    function showHistory() {
-        alert("Pavitra Smriti (History) is encrypted and saved under Suraksha Guard.");
-    }
+function toggleWallet() {
+    var x = document.getElementById("walletOverlay");
+    x.style.display = (x.style.display === "none") ? "block" : "none";
+}
 
-    // Auto-Clean & Boot
-    window.onload = initMasterApp;
+function showOwnerSecret() {
+    document.getElementById("ownerSection").style.display = "block";
+    alert("Owner Dashboard Unlocked!");
+}
+
+function updateEarnings() {
+    userBalance += 1; ownerBalance += 9;
+    document.getElementById('userDisplay').innerText = "₹" + userBalance.toFixed(2);
+    document.getElementById('ownerDisplay').innerText = "₹" + ownerBalance.toFixed(2);
+}
+
+// Gangnam Style aur Robotics ke video ID connect karna
+window.onload = function() {
+    console.log("App Ready!");
+};
 </script>
-
-</body>
-</html>
+  
+    
