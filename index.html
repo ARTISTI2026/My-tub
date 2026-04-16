@@ -31,7 +31,10 @@
         .bottom-nav { position: fixed; bottom: 0; width: 100%; background: #0f0f0f; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #222; }
 #topLoader { position: fixed; top: 0; left: 0; height: 3px; background: red; width: 0%; z-index: 9999; transition: width 0.4s ease; }
 
-        
+ /* ISSE LINE 34 KE BAAD DALO */
+html { scroll-behavior: smooth; }
+body { -webkit-tap-highlight-color: transparent; }
+       
         .nav-item { text-align: center; font-size: 10px; color: white; }
         .nav-item span { font-size: 22px; display: block; }
     </style>
@@ -242,7 +245,24 @@ document.addEventListener('keydown', function(e) {
 setInterval(() => {
     console.log("Master Naina: Check plate engraving skills reminder active.");
 }, 300000); // Har 5 min mein reminder
+// 1. Double Click to Close Player
+document.getElementById('video-container').addEventListener('dblclick', function() {
+    closePage('playerPage');
+    alert("Master Naina: Player closed via shortcut.");
+});
 
+// 2. Active Button Highlight Fix
+const navItems = document.querySelectorAll('.nav-item');
+navItems.forEach(item => {
+    item.addEventListener('click', function() {
+        navItems.forEach(i => i.style.color = 'white');
+        this.style.color = 'red'; // Active button laal ho jayega
+    });
+});
+
+console.log("V12 Master: UI Optimization Complete for Samsung A06.");
+
+    
 </script>
 </body>
 </html>
