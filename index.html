@@ -3,140 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyTub V12 Master - Official</title>
+    <title>MyTub V12 Master - Final Edition</title>
     <style>
-        /* 1. CORE STYLES */
         * { box-sizing: border-box; }
-        body { background: #0f0f0f; color: white; font-family: Roboto, Arial, sans-serif; margin: 0; padding-bottom: 70px; overflow-x: hidden; }
+        body { background: #0f0f0f; color: white; font-family: Roboto, Arial; margin: 0; padding-bottom: 80px; }
         
         /* HEADER */
-        header { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: #0f0f0f; position: sticky; top: 0; z-index: 1000; }
-        .logo { font-weight: bold; font-size: 20px; letter-spacing: -1px; display: flex; align-items: center; gap: 5px; }
-        .yt-red { background: #ff0000; color: white; padding: 2px 6px; border-radius: 4px; }
+        header { display: flex; align-items: center; justify-content: space-between; padding: 10px 15px; background: #0f0f0f; position: sticky; top: 0; z-index: 1000; }
+        .search-box { background: #222; border-radius: 20px; padding: 5px 15px; display: flex; flex: 1; margin: 0 15px; border: 1px solid #333; }
+        .search-box input { background: none; border: none; color: white; width: 100%; outline: none; }
 
-        /* VIDEO FEED */
-        .video-card { width: 100%; margin-bottom: 15px; cursor: pointer; }
-        .thumb { width: 100%; aspect-ratio: 16/9; background: #222; position: relative; }
+        /* VIDEO CARDS */
+        .v-card { margin-bottom: 15px; width: 100%; }
+        .thumb { width: 100%; aspect-ratio: 16/9; background: #111; position: relative; }
         .thumb img { width: 100%; height: 100%; object-fit: cover; }
-        .v-info { display: flex; padding: 12px; gap: 12px; }
-        .pfp { width: 36px; height: 36px; border-radius: 50%; background: #444; flex-shrink: 0; }
-        .v-text h4 { margin: 0; font-size: 14px; font-weight: 500; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        .v-text p { margin: 4px 0; font-size: 12px; color: #aaa; }
+        .details { padding: 12px; display: flex; gap: 12px; }
+        .channel-icon { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(45deg, #ff0000, #550000); flex-shrink: 0; }
+        .v-text h4 { margin: 0; font-size: 15px; font-weight: 500; }
+        .v-text p { margin: 5px 0; color: #aaa; font-size: 12px; }
+
+        /* OVERLAYS */
+        .full-page { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0f0f0f; z-index: 5000; overflow-y: auto; }
+        .back-btn { padding: 15px; font-size: 24px; cursor: pointer; display: block; }
 
         /* BOTTOM NAV */
-        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: #0f0f0f; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #222; z-index: 2000; }
-        .nav-item { text-align: center; font-size: 10px; color: white; cursor: pointer; flex: 1; }
-        .nav-item span { font-size: 20px; display: block; margin-bottom: 2px; }
-
-        /* OVERLAYS (PLAYER, SHORTS, SETTINGS) */
-        .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0f0f0f; z-index: 5000; overflow-y: auto; }
-        .close-btn { position: absolute; top: 15px; right: 15px; font-size: 30px; color: white; z-index: 6000; cursor: pointer; }
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: #0f0f0f; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #222; }
+        .nav-item { text-align: center; font-size: 10px; color: white; }
+        .nav-item span { font-size: 22px; display: block; }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo"><span class="yt-red">▶</span> MyTub <small style="color:gold; font-size:10px;">V12</small></div>
-    <div style="display: flex; gap: 18px; font-size: 18px;">
-        <span>📺</span> <span>🔔</span> <span>🔍</span> <span onclick="openMenu()">⚙️</span>
+    <div style="font-weight:bold; color:red; font-size:22px;">▶</div>
+    <div class="search-box">
+        <input type="text" placeholder="Search MyTub..." id="searchInput">
     </div>
+    <div style="font-size:20px;" onclick="openPage('settingsPage')">👤</div>
 </header>
 
-<div id="feed">
-    <div class="video-card" onclick="playVid('jOTfB1TrQ_Q', '6-Foot Humanoid Robot: AI Integration Testing')">
+<div id="videoFeed">
+    <div class="v-card" onclick="playVideo('jOTfB1TrQ_Q', '6-Foot Robot: High Density Cluster Technique')">
         <div class="thumb"><img src="https://img.youtube.com/vi/jOTfB1TrQ_Q/maxresdefault.jpg"></div>
-        <div class="v-info">
-            <div class="pfp" style="background: red;"></div>
+        <div class="details">
+            <div class="channel-icon"></div>
             <div class="v-text">
-                <h4>6-Foot Humanoid Robot: The Future of AI Manufacturing in India</h4>
-                <p>Naina Robotics • 5.2M views • 2 hours ago</p>
-                <button style="background:#f1f1f1; border:none; border-radius:15px; padding:5px 12px; font-weight:bold; font-size:11px; margin-top:5px;">Subscribe</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="video-card" onclick="playVid('9bZkp7q19f0', 'Adobe Express AI: High-End Design Secrets')">
-        <div class="thumb"><img src="https://img.youtube.com/vi/9bZkp7q19f0/maxresdefault.jpg"></div>
-        <div class="v-info">
-            <div class="pfp" style="background: orange;"></div>
-            <div class="v-text">
-                <h4>Adobe Express AI: Professional Graphics in Seconds</h4>
-                <p>Tech Master • 1.1M views • 1 day ago</p>
-                <button style="background:#f1f1f1; border:none; border-radius:15px; padding:5px 12px; font-weight:bold; font-size:11px; margin-top:5px;">Subscribe</button>
+                <h4>6-Foot Humanoid Robot: Cotton Farm Automation Project</h4>
+                <p>Naina Master • 2.5M views • 1 hour ago</p>
+                <button style="background:white; border:none; border-radius:15px; padding:4px 12px; font-weight:bold; font-size:11px;">Subscribe</button>
             </div>
         </div>
     </div>
 </div>
 
-<div id="playerPage" class="overlay">
-    <div onclick="closePlayer()" class="close-btn">×</div>
-    <div id="main-frame" style="width:100%; aspect-ratio:16/9; background:#000;"></div>
+<div id="playerPage" class="full-page">
+    <span class="back-btn" onclick="closePage('playerPage')">←</span>
+    <div id="video-container" style="width:100%; aspect-ratio:16/9; background:#000;"></div>
     <div style="padding:15px;">
-        <h3 id="player-title" style="margin:0;">Title</h3>
-        <p style="color:#aaa; font-size:12px;">5.2M views • 2 hours ago</p>
-        <div style="display:flex; gap:10px; margin-top:15px; overflow-x:auto; padding-bottom:10px;">
-            <div style="background:#272727; padding:8px 15px; border-radius:20px;">👍 124K</div>
-            <div style="background:#272727; padding:8px 15px; border-radius:20px;">↪️ Share</div>
-            <div style="background:#272727; padding:8px 15px; border-radius:20px;">📥 Download</div>
+        <h3 id="videoTitle">Video Title</h3>
+        <p style="color:#aaa;">1.2M Likes • Real-time tracking active</p>
+        <div style="background:#222; padding:15px; border-radius:10px; margin-top:10px;">
+            <p style="margin:0; color:#00ff00; font-weight:bold;">Profit Earned: ₹9.00</p>
         </div>
     </div>
 </div>
 
-<div id="shortsPage" class="overlay" style="background:#000;">
-    <div onclick="closeShorts()" class="close-btn" style="left:15px; right:auto;">←</div>
-    <div id="shorts-frame" style="width:100%; height:100%;"></div>
-    <div style="position:absolute; bottom:50px; left:15px; color:white;">
-        <p style="font-weight:bold;">@v12_master_naina</p>
-        <p style="font-size:14px;">Mastering Robot Movements! #AI #V12</p>
-    </div>
-</div>
-
-<div id="menuPage" class="overlay">
-    <div style="padding:20px; border-bottom:1px solid #333; display:flex; align-items:center; gap:20px;">
-        <span onclick="closeMenu()" style="font-size:24px;">←</span>
-        <h2>Settings & You</h2>
-    </div>
+<div id="settingsPage" class="full-page">
+    <span class="back-btn" onclick="closePage('settingsPage')">←</span>
     <div style="padding:20px;">
-        <div onclick="alert('Master Naina Balance: ₹9.00')" style="background:#222; padding:20px; border-radius:15px; border-left:5px solid #00ff00;">
-            <h3 style="margin:0; color:#00ff00;">💰 My Wallet</h3>
-            <p style="margin:5px 0 0 0;">Earnings Tracked Successfully</p>
+        <h2>V12 Master Settings</h2>
+        <div style="background:#1a1a1a; padding:15px; border-radius:10px; margin-bottom:10px;">
+            <p>💰 **Wallet Balance:** ₹850.00</p>
         </div>
-        <div style="margin-top:20px; display:grid; gap:10px;">
-            <div style="background:#111; padding:15px; border-radius:10px;">🕒 History</div>
-            <div style="background:#111; padding:15px; border-radius:10px;">📥 Downloads</div>
-            <div style="background:#111; padding:15px; border-radius:10px;">⚙️ Artist & Engraving Skills</div>
+        <div style="background:#1a1a1a; padding:15px; border-radius:10px; margin-bottom:10px;">
+            <p>🎨 **Artist Skill Reminder:** Engraving on plates is pending. (Auto-Remind Active)</p>
         </div>
+        <p style="color:#555; font-size:12px;">App Version: 12.0.1 (Samsung Galaxy A06 Optimized)</p>
     </div>
 </div>
 
 <nav class="bottom-nav">
     <div class="nav-item" onclick="location.reload()"><span>🏠</span>Home</div>
-    <div class="nav-item" onclick="openShorts()"><span>🩳</span>Shorts</div>
-    <div class="nav-item" style="font-size:30px; color:red;">⊕</div>
+    <div class="nav-item"><span>🩳</span>Shorts</div>
+    <div class="nav-item"><span style="color:red; font-size:30px;">⊕</span></div>
     <div class="nav-item"><span>🔔</span>Subs</div>
-    <div class="nav-item" onclick="openMenu()"><span>👤</span>You</div>
+    <div class="nav-item" onclick="openPage('settingsPage')"><span>👤</span>You</div>
 </nav>
 
 <script>
-    function playVid(id, title) {
-        document.getElementById('playerPage').style.display = 'block';
-        document.getElementById('main-frame').innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${id}?autoplay=1" frameborder="0" allow="autoplay" allowfullscreen></iframe>`;
-        document.getElementById('player-title').innerText = title;
+    function openPage(id) { document.getElementById(id).style.display = 'block'; }
+    function closePage(id) { 
+        document.getElementById(id).style.display = 'none'; 
+        if(id === 'playerPage') document.getElementById('video-container').innerHTML = '';
     }
-    function closePlayer() {
-        document.getElementById('playerPage').style.display = 'none';
-        document.getElementById('main-frame').innerHTML = '';
+
+    function playVideo(id, title) {
+        openPage('playerPage');
+        document.getElementById('videoTitle').innerText = title;
+        document.getElementById('video-container').innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${id}?autoplay=1" frameborder="0" allowfullscreen></iframe>`;
     }
-    function openShorts() {
-        document.getElementById('shortsPage').style.display = 'block';
-        document.getElementById('shorts-frame').innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/jOTfB1TrQ_Q?autoplay=1&controls=0&loop=1" frameborder="0" allow="autoplay"></iframe>`;
-    }
-    function closeShorts() {
-        document.getElementById('shortsPage').style.display = 'none';
-        document.getElementById('shorts-frame').innerHTML = '';
-    }
-    function openMenu() { document.getElementById('menuPage').style.display = 'block'; }
-    function closeMenu() { document.getElementById('menuPage').style.display = 'none'; }
 </script>
 
 </body>
