@@ -189,6 +189,27 @@
     document.getElementById('searchInput').addEventListener('keypress', function (e) {
         if (e.key === 'Enter') { alert("Searching V12 for: " + this.value); }
     });
+    // --- NEW: HISTORY & LIBRARY LOGIC ---
+    let watchHistory = [];
+
+    function addToHistory(title) {
+        if(!watchHistory.includes(title)) {
+            watchHistory.unshift(title); // Naya video list mein sabse upar
+            console.log("History Updated: " + title);
+        }
+    }
+
+    // Purane playVideo function ko 'Smart' banate hain
+    const originalPlay = playVideo;
+    playVideo = function(id, title) {
+        originalPlay(id, title); // Video play hoga
+        addToHistory(title);     // History mein naam jud jayega
+    };
+
+    function openLibrary() {
+        alert("Master Naina, Your History:\n" + (watchHistory.length > 0 ? watchHistory.join("\n") : "No videos watched yet."));
+    }
+
 </script>
 </body>
 </html>
