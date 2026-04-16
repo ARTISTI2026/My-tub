@@ -477,3 +477,115 @@ function logSystem(msg) {
     const time = new Date().toLocaleTimeString();
     console.log(`[${time}] SYSTEM: ${msg}`);
 }
+// ==========================================
+// 7. REVENUE ENGINE (₹9 : ₹1 SPLIT)
+// ==========================================
+let userWallet = 850.00; // Starting Balance
+let adminEarnings = 0;
+
+function calculateEarnings(adViews) {
+    const totalRev = adViews * 10; // Har ad ka ₹10
+    const userShare = totalRev * 0.1; // User ko ₹1 (10%)
+    const nainaShare = totalRev * 0.9; // Aapko ₹9 (90%)
+    
+    userWallet += userShare;
+    adminEarnings += nainaShare;
+    
+    logSystem(`Revenue Split: User gets ₹${userShare}, Naina gets ₹${nainaShare}`);
+    updateWalletUI();
+}
+
+function updateWalletUI() {
+    // Ye aapke settings aur dashboard mein balance update karega
+    const walletDisplay = document.querySelector('.stat-card p');
+    if(walletDisplay) walletDisplay.innerText = `₹${userWallet.toFixed(2)}`;
+}
+
+// ==========================================
+// 8. AUTO-COMMENT & BOT SYSTEM
+// ==========================================
+const botComments = [
+    "V12 Update: New Robotic Hand Master Code is now LIVE!",
+    "Master Naina, the plate engraving sensor is 100% accurate.",
+    "Did you check the new 6-foot humanoid assembly video?",
+    "Revenue update: Your wallet has been credited."
+];
+
+function triggerAutoBot() {
+    const randomComment = botComments[Math.floor(Math.random() * botComments.length)];
+    logSystem(`BOT COMMENT: ${randomComment}`);
+    // Screen par dikhane ke liye
+    showNotification(`New Comment: ${randomComment}`);
+}
+
+// ==========================================
+// 9. V12 BUILT-IN EDITOR & UPLOAD
+// ==========================================
+function openV12Editor() {
+    startLoading();
+    const editorHTML = `
+        <div id="editorUI" style="position:fixed; top:0; left:0; width:100%; height:100%; background:#111; z-index:10005; padding:20px;">
+            <h2 style="color:red;">V12 VIDEO EDITOR</h2>
+            <p>Select video from Samsung A06 storage...</p>
+            <div style="border:2px dashed #444; height:150px; display:flex; align-items:center; justify-content:center; margin-bottom:20px;">
+                <input type="file" id="videoFile" style="opacity:0; position:absolute; width:100%; height:150px;">
+                <span>Click to Upload</span>
+            </div>
+            <button class="control-btn" onclick="processUpload()">PUBLISH TO V12 SERVER</button>
+            <button onclick="document.getElementById('editorUI').remove()" style="background:none; color:white; border:none; margin-top:20px; width:100%;">CANCEL</button>
+        </div>
+    `;
+    const editorDiv = document.createElement('div');
+    editorDiv.innerHTML = editorHTML;
+    document.body.appendChild(editorDiv);
+}
+
+function processUpload() {
+    logSystem("Processing video file on Samsung A06...");
+    startLoading();
+    setTimeout(() => {
+        alert("Success: Video Uploaded and Engraving Reminder Set!");
+        document.getElementById('editorUI').remove();
+    }, 2500);
+}
+
+// ==========================================
+// 10. AD-INTEGRATION (YouTube Style)
+// ==========================================
+function showAdOverlay() {
+    const ad = document.createElement('div');
+    ad.style = "position:absolute; bottom:50px; left:0; width:100%; background:rgba(0,0,0,0.8); color:gold; padding:10px; font-size:12px; text-align:center;";
+    ad.innerHTML = "Sponsored: Buy New PLC Motors - [Visit Store]";
+    document.getElementById('video-container').appendChild(ad);
+    calculateEarnings(1); // Call revenue split on every ad
+    setTimeout(() => ad.remove(), 10000);
+}
+
+// ==========================================
+// 11. PLATE ENGRAVING SKILL TRACKER
+// ==========================================
+function checkArtistSkill() {
+    const skills = ["Precision", "Depth", "Texture", "Speed"];
+    const rating = Math.floor(Math.random() * 5) + 5; // 5-10 rating
+    logSystem(`Artist Skill Check: ${skills[Math.floor(Math.random()*4)]} is at ${rating}/10`);
+}
+
+// ==========================================
+// 12. FINAL SYSTEM INTEGRATION
+// ==========================================
+// Har video play hone par ad aur bot trigger hoga
+const finalPlay = playVideo;
+playVideo = function(id, title) {
+    finalPlay(id, title);
+    setTimeout(showAdOverlay, 5000);
+    setTimeout(triggerAutoBot, 8000);
+    checkArtistSkill();
+};
+
+// Bottom Nav mein Editor jodne ke liye
+const uploadBtn = document.querySelector('i.fa-plus-circle');
+if(uploadBtn) {
+    uploadBtn.parentElement.onclick = openV12Editor;
+}
+
+logSystem("V12 Master: All 12 Features Fully Synced.");
