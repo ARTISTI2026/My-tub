@@ -808,3 +808,91 @@ window.addEventListener('online', () => {
 // Initializing Network Engine
 optimizeForNetwork();
 logSystem("V12 Master: Network Engine Fully Synchronized.");
+// ==========================================
+// 24. INTERACTIVE ENGAGEMENT (Like, Dislike, Sub)
+// ==========================================
+let isSubscribed = false;
+let likeCount = 1200;
+
+function toggleLike() {
+    likeCount++;
+    document.getElementById('like-count').innerText = (likeCount/1000).toFixed(1) + "K";
+    logSystem("User Liked the video. Revenue engagement +1.");
+    showNotification("Added to Liked Videos");
+}
+
+function toggleSubscribe() {
+    isSubscribed = !isSubscribed;
+    const btn = document.getElementById('sub-btn');
+    if(isSubscribed) {
+        btn.innerText = "SUBSCRIBED";
+        btn.style.background = "#333";
+        showNotification("Subscribed to Naina Robotics!");
+    } else {
+        btn.innerText = "SUBSCRIBE";
+        btn.style.background = "red";
+    }
+}
+
+// ==========================================
+// 25. DYNAMIC COMMENT SECTION (Real UI)
+// ==========================================
+function renderComments() {
+    const commentSection = document.createElement('div');
+    commentSection.style = "padding:15px; border-top:1px solid #333; margin-top:10px;";
+    commentSection.innerHTML = `
+        <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+            <b>Comments</b>
+            <span style="color:#aaa;">428</span>
+        </div>
+        <div style="display:flex; gap:10px; align-items:center; margin-bottom:15px;">
+            <div style="width:30px; height:30px; background:gold; border-radius:50%; display:flex; align-items:center; justify-content:center; color:black; font-weight:bold;">N</div>
+            <input type="text" id="newComment" placeholder="Add a comment..." style="flex:1; background:none; border:none; border-bottom:1px solid #444; color:white; font-size:13px;">
+            <button onclick="postUserComment()" style="background:none; color:cyan; border:none; font-weight:bold;">Post</button>
+        </div>
+        <div id="commentList">
+            <p style="font-size:12px; margin-bottom:10px;"><b>@Bot_V12:</b> This robotic hand code is amazing, Naina!</p>
+        </div>
+    `;
+    document.getElementById('playerPage').appendChild(commentSection);
+}
+
+function postUserComment() {
+    const input = document.getElementById('newComment');
+    if(input.value.trim() !== "") {
+        const list = document.getElementById('commentList');
+        const newC = document.createElement('p');
+        newC.style = "font-size:12px; margin-bottom:10px;";
+        newC.innerHTML = `<b>@Master_Naina:</b> ${input.value}`;
+        list.prepend(newC);
+        input.value = "";
+        logSystem("User Comment Posted.");
+    }
+}
+
+// ==========================================
+// 26. THE "ULTIMATE" PLAYER UI FIX
+// ==========================================
+// Isse player page bilkul asli YouTube jaisa dikhega
+function upgradePlayerUI() {
+    const info = document.querySelector('.v-info');
+    if(info) {
+        info.innerHTML = `
+            <h3 id="video-title" style="font-size:16px; margin-bottom:5px;"></h3>
+            <p style="font-size:12px; color:#aaa; margin-bottom:10px;">1.2M views • 2 hours ago</p>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+                <div style="display:flex; gap:15px;">
+                    <span onclick="toggleLike()" style="cursor:pointer;">👍 <span id="like-count">1.2K</span></span>
+                    <span>👎 Dislike</span>
+                    <span>🔗 Share</span>
+                </div>
+                <button id="sub-btn" onclick="toggleSubscribe()" style="background:red; color:white; border:none; padding:8px 15px; border-radius:20px; font-weight:bold; font-size:12px;">SUBSCRIBE</button>
+            </div>
+        `;
+        renderComments();
+    }
+}
+
+// Initializing Perfection
+upgradePlayerUI();
+logSystem("V12 Master: YouTube Perfection Suite Integrated.");
