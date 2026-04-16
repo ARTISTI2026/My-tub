@@ -147,12 +147,21 @@
 </div>
 
 <nav class="bottom-nav" style="position:fixed; bottom:0; width:100%; background:#0f0f0f; display:flex; justify-content:space-around; padding:10px 0; border-top:1px solid #222; z-index:4000;">
-    <div class="nav-item" onclick="location.reload()" style="text-align:center; color:white; cursor:pointer;"><span>🏠</span>Home</div>
-    <div class="nav-item" onclick="openShorts()" style="text-align:center; color:white; cursor:pointer;"><span>🩳</span>Shorts</div>
-    <div class="nav-item" style="text-align:center; color:red; font-size:30px; cursor:pointer;">⊕</div>
-    <div class="nav-item" onclick="alert('🔔 No new notifications for Master Naina')" style="text-align:center; color:white; cursor:pointer;"><span>🔔</span>Subs</div>
-    <div class="nav-item" onclick="openPage('settingsPage')" style="text-align:center; color:white; cursor:pointer;"><span>👤</span>You</div>
+    <div class="nav-item" onclick="location.reload()" style="text-align:center; color:white; cursor:pointer; flex:1;"><span>🏠</span><small>Home</small></div>
+    <div class="nav-item" onclick="openShorts()" style="text-align:center; color:white; cursor:pointer; flex:1;"><span>🩳</span><small>Shorts</small></div>
+    <div class="nav-item" style="text-align:center; color:red; font-size:30px; cursor:pointer; flex:1;">⊕</div>
+    <div class="nav-item" onclick="openSubs()" style="text-align:center; color:white; cursor:pointer; flex:1;"><span>🔔</span><small>Subs</small></div>
+    <div class="nav-item" onclick="openPage('settingsPage')" style="text-align:center; color:white; cursor:pointer; flex:1;"><span>👤</span><small>You</small></div>
 </nav>
+
+<div id="subsPage" class="full-page" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#0f0f0f; z-index:7000; overflow-y:auto;">
+    <span style="padding:15px; font-size:24px; display:block; cursor:pointer;" onclick="closePage('subsPage')">← Subscriptions</span>
+    <div style="padding:20px; text-align:center; border-top:1px solid #333;">
+        <p style="color:#aaa;">Master Naina, your robot tech channels are active!</p>
+        <div style="width:60px; height:60px; background:red; border-radius:50%; margin:20px auto; border:2px solid gold;"></div>
+        <p><b>Naina Robotics Official</b></p>
+    </div>
+</div>
 
 <script>
     function openPage(id) { document.getElementById(id).style.display = 'block'; }
@@ -160,6 +169,8 @@
         document.getElementById(id).style.display = 'none'; 
         if(id === 'playerPage') document.getElementById('video-container').innerHTML = '';
     }
+    
+    function openSubs() { openPage('subsPage'); }
 
     function playVideo(id, title) {
         openPage('playerPage');
@@ -168,13 +179,16 @@
     }
 
     function openShorts() {
-        // Shorts ke liye random robotic video load karega
         let shorts = ['jOTfB1TrQ_Q', '9bZkp7q19f0'];
         let picked = shorts[Math.floor(Math.random() * shorts.length)];
         playVideo(picked, "V12 Master Shorts Feed");
         alert("Shorts Mode Active! ⚡");
     }
+    
+    // Search Trigger
+    document.getElementById('searchInput').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') { alert("Searching V12 for: " + this.value); }
+    });
 </script>
-
 </body>
 </html>
