@@ -31,6 +31,7 @@
         .bottom-nav { position: fixed; bottom: 0; width: 100%; background: #0f0f0f; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #222; }
 #topLoader { position: fixed; top: 0; left: 0; height: 3px; background: red; width: 0%; z-index: 9999; transition: width 0.4s ease; }
 
+        
         .nav-item { text-align: center; font-size: 10px; color: white; }
         .nav-item span { font-size: 22px; display: block; }
     </style>
@@ -228,6 +229,19 @@ openPage = function(id) {
     startLoading();
     originalOpenPage(id);
 };
+// Smart Back Button & UI Fixes
+document.addEventListener('keydown', function(e) {
+    if (e.key === "Escape") {
+        closePage('playerPage');
+        closePage('settingsPage');
+        closePage('subsPage');
+    }
+});
+
+// Auto-Reminder for Artist Skill & Engraving
+setInterval(() => {
+    console.log("Master Naina: Check plate engraving skills reminder active.");
+}, 300000); // Har 5 min mein reminder
 
 </script>
 </body>
