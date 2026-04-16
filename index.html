@@ -3,193 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My-Tub Master Edition: The Future</title>
-    <link rel="icon" type="image/jpeg" href="logo.jpg">
-    <link rel="manifest" href="manifest.json">
+    <title>V12 Master - MyTub Edition</title>
     <style>
-        /* Adobe Express Inspired Artist Layout */
-        :root { --master-red: #ff0000; --gold: #ffd700; --bg: #050505; --card-bg: #121212; }
-        body { background: var(--bg); color: white; font-family: 'Segoe UI', Roboto, sans-serif; margin: 0; padding-bottom: 70px; }
+        body { background: #000; color: white; font-family: Roboto, Arial; margin: 0; padding-bottom: 80px; }
+        header { display: flex; align-items: center; justify-content: space-between; padding: 10px; background: #000; position: sticky; top: 0; z-index: 1000; }
+        .logo { display: flex; align-items: center; gap: 5px; font-weight: bold; font-size: 20px; }
+        .v-card { margin-bottom: 20px; width: 100%; }
+        .thumb { width: 100%; aspect-ratio: 16/9; background: #222; object-fit: cover; }
+        .v-details { padding: 12px; display: flex; gap: 12px; }
+        .pfp { width: 40px; height: 40px; background: #555; border-radius: 50%; flex-shrink: 0; }
+        .v-info { flex-grow: 1; }
+        .v-title { font-size: 16px; font-weight: 500; margin: 0 0 5px 0; }
+        .v-meta { font-size: 12px; color: #aaa; }
+        .sub-btn { background: white; color: black; padding: 6px 15px; border-radius: 20px; font-size: 12px; font-weight: bold; border: none; float: right; margin-top: -30px; }
         
-        /* Suraksha Guard Header */
-        header { background: rgba(0,0,0,0.9); padding: 12px 15px; display: flex; align-items: center; position: sticky; top: 0; z-index: 1000; border-bottom: 2px solid var(--gold); }
-        .logo-box { font-size: 22px; font-weight: 900; letter-spacing: -1px; display: flex; align-items: center; }
-        .logo-box span { color: var(--master-red); }
+        /* Bottom Navigation */
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: #000; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #222; z-index: 2000; }
+        .nav-item { text-align: center; font-size: 10px; color: white; cursor: pointer; }
         
-        /* AI Search Bar */
-        .search-container { flex: 1; margin: 0 15px; background: #1e1e1e; border-radius: 25px; padding: 6px 15px; display: flex; border: 1px solid #333; }
-        .search-container input { background: transparent; border: none; color: white; width: 100%; outline: none; font-size: 14px; }
-
-        /* Status Bar (Earning & Security) */
-        .status-bar { background: linear-gradient(90deg, #004d40, #00241a); color: #1de9b6; font-size: 11px; padding: 4px; text-align: center; font-weight: bold; border-bottom: 1px solid #00c853; }
-
-        /* Video Grid - Precision Engraving Style */
-        .video-feed { padding: 15px; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
-        .v-card { background: var(--card-bg); border-radius: 15px; overflow: hidden; transition: 0.3s; border: 1px solid #222; }
-        .v-card:hover { transform: translateY(-5px); border-color: var(--gold); }
-        .thumb-wrapper { width: 100%; aspect-ratio: 16/9; position: relative; }
-        .thumb-wrapper img { width: 100%; height: 100%; object-fit: cover; }
-        .v-details { padding: 12px; }
-        .v-title { font-size: 15px; font-weight: 600; line-height: 1.4; margin: 0; }
-        .v-meta { color: #aaa; font-size: 12px; margin-top: 6px; display: flex; justify-content: space-between; }
-
-        /* Global Bottom Nav */
-        nav { position: fixed; bottom: 0; width: 100%; background: #000; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #222; }
-        .nav-link { color: #888; text-decoration: none; text-align: center; font-size: 11px; cursor: pointer; }
-        .nav-link.active { color: var(--gold); }
-        
-        /* Video Player Overlay */
-.youtube-nav-container {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 70px;
-    background: #0f0f0f;
-    overflow-y: scroll;
-    scroll-snap-type: y mandatory;
-    z-index: 2000;
-    scrollbar-width: none;
-    border-top: 1px solid #222;
-}
-.youtube-nav-container::-webkit-scrollbar { display: none; }
-.nav-row {
-    height: 70px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    scroll-snap-align: start;
-    width: 100%;
-    flex-shrink: 0;
-}
-.nav-item {
-    color: white;
-    font-size: 10px;
-    text-align: center;
-    flex: 1;
-    cursor: pointer;
-}
-        #player-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 2000; }
-        .close-btn { position: absolute; top: 20px; right: 20px; color: white; font-size: 30px; cursor: pointer; z-index: 2001; }
+        /* Player Overlay */
+        #player-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#000; z-index:5000; }
     </style>
 </head>
 <body>
 
-<div class="status-bar" id="aiStatus">🛡️ AI SECURITY GUARD ACTIVE | 💰 AUTO-EARNING: ENABLED</div>
-<header style="display: flex; align-items: center; justify-content: space-between; padding: 10px; background: #0f0f0f; border-bottom: 1px solid #333; position: sticky; top: 0; z-index: 1000;">
-    <div style="display: flex; align-items: center; gap: 10px;">
-        <div style="background: red; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: white;">▲</div>
-        <span style="color: white; font-weight: bold; font-size: 18px;">My<span style="background: red; padding: 2px 5px; border-radius: 4px; margin-left: 2px;">Tub</span> <small style="font-size: 10px; color: gold;">V12 MASTER</small></span>
+<header>
+    <div class="logo">
+        <span style="color:red; font-size:24px;">▲</span> My<span style="background:red; padding:2px 5px; border-radius:4px;">Tub</span>
+        <span style="font-size:10px; color:gold; margin-left:5px;">V12 MASTER</span>
     </div>
-    <div style="display: flex; gap: 15px; color: white; font-size: 20px;">
-        <span>🔍</span>
-        <span onclick="toggleMasterMenu()" style="cursor: pointer;">⚙️</span> </div>
+    <div style="display:flex; gap:15px; font-size:20px;">
+        <span onclick="alert('Search Active')">🔍</span>
+        <span onclick="toggleSettings()" style="cursor:pointer;">⚙️</span>
+    </div>
 </header>
 
-<div id="masterOverlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#0f0f0f; z-index:9999; overflow-y: auto;">
-    <div style="padding: 15px; display: flex; align-items: center; border-bottom: 1px solid #333;">
-        <span onclick="toggleMasterMenu()" style="color: white; font-size: 24px; margin-right: 20px;">←</span>
-        <h2 style="color: white; margin: 0; font-size: 20px;">Settings</h2>
+<div id="mainFeed">
+    <div class="v-card" onclick="openVideo('jOTfB1TrQ_Q')">
+        <img class="thumb" src="https://img.youtube.com/vi/jOTfB1TrQ_Q/maxresdefault.jpg">
+        <div class="v-details">
+            <div class="pfp"></div>
+            <div class="v-info">
+                <p class="v-title">6-Foot Robotic Unit: The Manufacturing Revolution</p>
+                <p class="v-meta">Master Engineering • 4.1M views • 2 days ago</p>
+                <button class="sub-btn">Subscribe</button>
+            </div>
+        </div>
     </div>
-    
-    <div style="color: white; padding: 10px;">
-        <p style="color: #aaa; font-size: 12px; font-weight: bold; margin: 15px 10px 5px 10px;">ACCOUNT</p>
-        <div class="s-item" onclick="toggleWallet()">💰 Wallet & Earnings (₹1 / ₹9)</div>
-        <div class="s-item">⚙️ General</div>
-        <div class="s-item">👥 Switch or manage account</div>
-        <div class="s-item">👨‍👩‍👧 Family Centre</div>
-        
-        <p style="color: #aaa; font-size: 12px; font-weight: bold; margin: 25px 10px 5px 10px;">VIDEO AND AUDIO PREFERENCES</p>
-        <div class="s-item">🎬 Video quality preferences</div>
-        <div class="s-item">▶️ Playback</div>
-        <div class="s-item">💬 Captions</div>
-        <div class="s-item">📊 Data saving</div>
-        <div class="s-item">📥 Downloads</div>
+
+    <div class="v-card" onclick="openVideo('9bZkp7q19f0')">
+        <img class="thumb" src="https://img.youtube.com/vi/9bZkp7q19f0/maxresdefault.jpg">
+        <div class="v-details">
+            <div class="pfp" style="background:url('https://yt3.ggpht.com/ytc/AIdro_nO...')"></div>
+            <div class="v-info">
+                <p class="v-title">Adobe Express AI: High-End Graphic Secrets</p>
+                <p class="v-meta">Design Expert • 1.5M views • 1 month ago</p>
+                <button class="sub-btn">Subscribe</button>
+            </div>
+        </div>
     </div>
-    <button onclick="toggleMasterMenu()" style="width: 90%; margin: 20px 5%; padding: 12px; background: #333; color: white; border: none; border-radius: 20px;">Close Settings</button>
 </div>
 
-<style>
-.s-item {
-    padding: 15px 10px;
-    font-size: 16px;
-    border-bottom: 0.1px solid #222;
-    cursor: pointer;
-}
-.s-item:active { background: #333; }
-</style>
-
-
-<div id="walletOverlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#000; z-index:6000; color:white; padding:20px;">
-    <h2 style="text-align:center; color:#ffcc00;">My Earnings</h2>
-    <div style="background:#222; padding:20px; border-radius:10px; margin-top:20px;">
-        <p style="font-size:12px; color:#aaa;">Aapki Kamai (User):</p>
-        <h1 id="userDisplay" style="color:#00ff00;">₹0.00</h1>
-    </div>
-    <div id="ownerSection" style="display:none; background:#111; padding:20px; border-radius:10px; margin-top:20px; border:1px dashed #555;">
-        <p style="font-size:12px; color:#ff3333;">Owner Profit (Mera Hissa):</p>
-        <h1 id="ownerDisplay" style="color:#ff3333;">₹0.00</h1>
-        <button onclick="alert('Bank details link coming soon!')" style="background:#ff3333; color:white; width:100%; padding:10px; border:none; margin-top:10px;">🏦 Withdrawal</button>
-    </div>
-    <p onclick="showOwnerSecret()" style="text-align:center; font-size:10px; color:#222; margin-top:50px;">Admin Access</p>
-    <button onclick="toggleWallet()" style="width:100%; margin-top:20px; padding:15px; background:#444; color:white; border:none; border-radius:5px;">Piche Jayein</button>
+<div id="player-overlay">
+    <span onclick="closePlayer()" style="position:absolute; top:20px; right:20px; font-size:30px;">×</span>
+    <div id="video-frame" style="width:100%; height:300px; margin-top:100px;"></div>
 </div>
 
-<div id="masterOverlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:7000; color:white; padding:20px;">
-    <h2 style="text-align:center; color:#00ff00;">Settings & Control</h2>
-    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px; margin-top:20px;">
-        <div onclick="triggerSearch('Indian Law')" style="background:#333; padding:15px; border-radius:10px; text-align:center;">⚖️<br>Kanoon</div>
-        <div onclick="triggerSearch('Religious Granth')" style="background:#333; padding:15px; border-radius:10px; text-align:center;">📖<br>Granth</div>
-    </div>
-    <button onclick="toggleMasterMenu()" style="width:100%; margin-top:30px; padding:15px; background:red; color:white; border:none;">Band Karein</button>
-</div>
+<nav class="bottom-nav">
+    <div class="nav-item" onclick="location.reload()">🏠<br>Home</div>
+    <div class="nav-item">🩳<br>Shorts</div>
+    <div class="nav-item" style="font-size:24px;">⊕</div>
+    <div class="nav-item">🔔<br>Subs</div>
+    <div class="nav-item" onclick="toggleSettings()">👤<br>You</div>
+</nav>
 
 <script>
-let userBalance = 0; let ownerBalance = 0;
-
-// Video chalane wala asli logic
-function openMasterVideo(id) {
-    const overlay = document.getElementById('player-overlay');
-    const frame = document.getElementById('video-frame');
-    overlay.style.display = 'block';
-    frame.innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${id}?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
-    updateEarnings(); 
-}
-
-function closePlayer() {
-    document.getElementById('player-overlay').style.display = 'none';
-    document.getElementById('video-frame').innerHTML = '';
-}
-
-function triggerSearch(keyword) {
-    openMasterVideo('results?search_query=' + encodeURIComponent(keyword));
-}
-
-function toggleMasterMenu() {
-    var x = document.getElementById("masterOverlay");
-    x.style.display = (x.style.display === "none") ? "block" : "none";
-}
-
-function toggleWallet() {
-    var x = document.getElementById("walletOverlay");
-    x.style.display = (x.style.display === "none") ? "block" : "none";
-}
-
-function showOwnerSecret() {
-    document.getElementById("ownerSection").style.display = "block";
-    alert("Owner Dashboard Unlocked!");
-}
-
-function updateEarnings() {
-    userBalance += 1; ownerBalance += 9;
-    document.getElementById('userDisplay').innerText = "₹" + userBalance.toFixed(2);
-    document.getElementById('ownerDisplay').innerText = "₹" + ownerBalance.toFixed(2);
-}
-
-// Gangnam Style aur Robotics ke video ID connect karna
-window.onload = function() {
-    console.log("App Ready!");
-};
+    function openVideo(id) {
+        document.getElementById('player-overlay').style.display = 'block';
+        document.getElementById('video-frame').innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${id}?autoplay=1" frameborder="0" allowfullscreen></iframe>`;
+    }
+    function closePlayer() {
+        document.getElementById('player-overlay').style.display = 'none';
+        document.getElementById('video-frame').innerHTML = '';
+    }
+    function toggleSettings() {
+        alert("Wallet & Settings Unlocked! Earnings: ₹1 tracked.");
+    }
 </script>
-  
-    
+
+</body>
+</html>
