@@ -30,8 +30,15 @@
         /* BOTTOM NAV */
         .bottom-nav { position: fixed; bottom: 0; width: 100%; background: #0f0f0f; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #222; }
 #topLoader { position: fixed; top: 0; left: 0; height: 3px; background: red; width: 0%; z-index: 9999; transition: width 0.4s ease; }
+/* Industrial Dashboard Styling */
+.dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 15px; }
+.stat-card { background: #1a1a1a; border-radius: 12px; padding: 15px; border-left: 4px solid red; }
+.stat-card h3 { font-size: 12px; color: #aaa; margin: 0; }
+.stat-card p { font-size: 18px; font-weight: bold; margin: 5px 0 0 0; }
+.farm-alert { background: rgba(255,0,0,0.1); border: 1px solid red; color: red; padding: 10px; border-radius: 8px; margin: 10px; font-size: 12px; }
 
- /* ISSE LINE 34 KE BAAD DALO */
+
+        /* ISSE LINE 34 KE BAAD DALO */
 html { scroll-behavior: smooth; }
 body { -webkit-tap-highlight-color: transparent; }
        
@@ -131,6 +138,10 @@ body { -webkit-tap-highlight-color: transparent; }
         <div style="display:flex; gap:15px; margin-top:20px; overflow-x:auto;">
             <div style="background:#272727; padding:8px 15px; border-radius:20px; font-size:13px;">👍 124K</div>
             <div style="background:#272727; padding:8px 15px; border-radius:20px; font-size:13px;">↪️ Share</div>
+<div style="background:#333; padding:15px; border-radius:10px; margin-top:10px; text-align:center;" onclick="openPage('dashboardPage')">
+    📊 Open Industrial Dashboard
+</div>
+
             <div style="background:#272727; padding:8px 15px; border-radius:20px; font-size:13px;">📥 Download</div>
         </div>
     </div>
@@ -141,6 +152,21 @@ body { -webkit-tap-highlight-color: transparent; }
     <div style="padding:20px;">
         <h2 style="border-bottom:1px solid #333; padding-bottom:10px;">V12 Master Settings</h2>
         <div style="background:#222; padding:20px; border-radius:15px; margin-top:10px;">
+<div id="dashboardPage" class="full-page" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#0f0f0f; z-index:9500; overflow-y:auto;">
+    <span style="padding:15px; font-size:24px; display:block; cursor:pointer;" onclick="closePage('dashboardPage')">← Dashboard</span>
+    <div style="padding:20px;">
+        <h2>V12 Control Center</h2>
+        <div class="farm-alert">⚠️ Attention: Cotton Farm (0.5 Acre) needs high-density check!</div>
+        <div class="dashboard-grid">
+            <div class="stat-card"><h3>Robotic Hand</h3><p>Online 🟢</p></div>
+            <div class="stat-card"><h3>Wallet</h3><p>₹850.00</p></div>
+            <div class="stat-card"><h3>PLC Status</h3><p>Active</p></div>
+            <div class="stat-card"><h3>Yield Target</h3><p>High</p></div>
+        </div>
+        <button onclick="alert('Master Naina, sending signal to Robot...')" style="width:100%; padding:15px; background:white; color:black; border-radius:10px; margin-top:20px; font-weight:bold;">SYNC HARDWARE</button>
+    </div>
+</div>
+
             <p style="margin:0; color:#aaa;">Wallet Balance</p>
             <h1 style="margin:5px 0; color:#00ff00;">₹859.00</h1>
         </div>
