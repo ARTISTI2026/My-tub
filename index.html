@@ -79,15 +79,48 @@
             <p>🎨 **Artist Skill Reminder:** Engraving on plates is pending. (Auto-Remind Active)</p>
         </div>
         <p style="color:#555; font-size:12px;">App Version: 12.0.1 (Samsung Galaxy A06 Optimized)</p>
+    <div id="playerPage" class="full-page" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#0f0f0f; z-index:5000; overflow-y:auto;">
+    <span style="padding:15px; font-size:24px; cursor:pointer; display:block;" onclick="closePage('playerPage')">←</span>
+    <div id="video-container" style="width:100%; aspect-ratio:16/9; background:#000;"></div>
+    <div style="padding:15px;">
+        <h3 id="videoTitle">Video Title</h3>
+        <p style="color:#aaa; font-size:12px;">5.2M views • Real-time Profit Tracking Active</p>
+        <div style="background:#222; padding:15px; border-radius:10px; margin-top:10px; border-left:4px solid #00ff00;">
+            <p style="margin:0; color:#00ff00; font-weight:bold;">Profit Earned: ₹9.00 ✅</p>
+        </div>
+        <div style="display:flex; gap:15px; margin-top:20px; overflow-x:auto;">
+            <div style="background:#272727; padding:8px 15px; border-radius:20px; font-size:13px;">👍 124K</div>
+            <div style="background:#272727; padding:8px 15px; border-radius:20px; font-size:13px;">↪️ Share</div>
+            <div style="background:#272727; padding:8px 15px; border-radius:20px; font-size:13px;">📥 Download</div>
+        </div>
     </div>
 </div>
 
-<nav class="bottom-nav">
-    <div class="nav-item" onclick="location.reload()"><span>🏠</span>Home</div>
-    <div class="nav-item"><span>🩳</span>Shorts</div>
-    <div class="nav-item"><span style="color:red; font-size:30px;">⊕</span></div>
-    <div class="nav-item"><span>🔔</span>Subs</div>
-    <div class="nav-item" onclick="openPage('settingsPage')"><span>👤</span>You</div>
+<div id="settingsPage" class="full-page" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#0f0f0f; z-index:6000; overflow-y:auto;">
+    <span style="padding:15px; font-size:24px; cursor:pointer; display:block;" onclick="closePage('settingsPage')">←</span>
+    <div style="padding:20px;">
+        <h2 style="border-bottom:1px solid #333; padding-bottom:10px;">V12 Master Settings</h2>
+        <div style="background:#222; padding:20px; border-radius:15px; margin-top:10px;">
+            <p style="margin:0; color:#aaa;">Wallet Balance</p>
+            <h1 style="margin:5px 0; color:#00ff00;">₹859.00</h1>
+        </div>
+        <div style="background:#1a1a1a; padding:15px; border-radius:10px; margin-top:20px; border: 1px dashed gold;" onclick="alert('Naina, yaad rakhna: Plates par engraving aur artist ki skill ka kaam check karna hai!')">
+            <p style="margin:0;">🛠️ **Urgent Task:** Plate Engraving Skill Check</p>
+            <small style="color:gold;">(Auto-Reminder Active)</small>
+        </div>
+        <div style="margin-top:20px; display:grid; gap:10px;">
+            <div style="background:#111; padding:15px; border-radius:10px;">🕒 Watch History</div>
+            <div style="background:#111; padding:15px; border-radius:10px;">⚙️ App Settings (A06 Optimized)</div>
+        </div>
+    </div>
+</div>
+
+<nav class="bottom-nav" style="position:fixed; bottom:0; width:100%; background:#0f0f0f; display:flex; justify-content:space-around; padding:10px 0; border-top:1px solid #222; z-index:4000;">
+    <div class="nav-item" onclick="location.reload()" style="text-align:center; color:white; cursor:pointer;"><span>🏠</span>Home</div>
+    <div class="nav-item" onclick="openShorts()" style="text-align:center; color:white; cursor:pointer;"><span>🩳</span>Shorts</div>
+    <div class="nav-item" style="text-align:center; color:red; font-size:30px; cursor:pointer;">⊕</div>
+    <div class="nav-item" onclick="alert('🔔 No new notifications for Master Naina')" style="text-align:center; color:white; cursor:pointer;"><span>🔔</span>Subs</div>
+    <div class="nav-item" onclick="openPage('settingsPage')" style="text-align:center; color:white; cursor:pointer;"><span>👤</span>You</div>
 </nav>
 
 <script>
@@ -100,7 +133,15 @@
     function playVideo(id, title) {
         openPage('playerPage');
         document.getElementById('videoTitle').innerText = title;
-        document.getElementById('video-container').innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${id}?autoplay=1" frameborder="0" allowfullscreen></iframe>`;
+        document.getElementById('video-container').innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${id}?autoplay=1" frameborder="0" allow="autoplay" allowfullscreen></iframe>`;
+    }
+
+    function openShorts() {
+        // Shorts ke liye random robotic video load karega
+        let shorts = ['jOTfB1TrQ_Q', '9bZkp7q19f0'];
+        let picked = shorts[Math.floor(Math.random() * shorts.length)];
+        playVideo(picked, "V12 Master Shorts Feed");
+        alert("Shorts Mode Active! ⚡");
     }
 </script>
 
