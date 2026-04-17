@@ -2578,7 +2578,39 @@ function saveBankDetailsSecurely(role) {
     
     if(role === 'ADMIN') {
         localStorage.setItem('naina_master_bank', secureData);
-        logSystem("Security: Master Naina's Bank Details Encrypted & Locked.");
+
+    // ==========================================
+// YOUTUBE 1:1 MIRROR & ACTION TRIGGER
+// ==========================================
+const YouTubeMirror = {
+    activeLayout: "YouTube_2026_Standard",
+    
+    // Sabhi buttons ko "Zinda" karne ke liye
+    initializeButtons: function() {
+        document.querySelectorAll('.yt-icon').forEach(button => {
+            button.onclick = function() {
+                console.log("Opening " + this.id + " exactly like YouTube...");
+                loadModule(this.id); // Ye har button ka menu kholega
+            };
+        });
+    },
+
+    // Front Page par videos laane ka logic
+    loadFrontPage: function() {
+        if (!userLoggedIn) {
+            this.showGuestFeed(); // Guest ke liye standard videos
+        } else {
+            this.showPersonalizedFeed(); // Naina ke liye unka favourite content
+        }
+    }
+};
+
+// Bekar lines delete karne ke liye system clean-up
+function cleanSystem() {
+    delete old_trash_features;
+    console.log("System Cleaned. Only YouTube Mirror Active.");
+}
+    logSystem("Security: Master Naina's Bank Details Encrypted & Locked.");
     } else {
         localStorage.setItem('user_bank_data', secureData);
         logSystem("Security: User Bank Details Saved in Secure Vault.");
