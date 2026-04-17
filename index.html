@@ -2570,3 +2570,28 @@ setInterval(() => {
         localStorage.removeItem('user_bank_data'); // Data delete kar dega hackers ke liye
     }
 }, 10000);
+// ==========================================
+// V12 MASTER: INSTANT 50-50 PARTNERSHIP 
+// ==========================================
+function processInstantSplit(totalEarned) {
+    // Agar 1 rupaya kamaya hai, toh turant batwara
+    let nainaShare = totalEarned * 0.50; // 50% Owner (Naina)
+    let userShare = totalEarned * 0.50;  // 50% User
+
+    // 1. Owner's Vault Update
+    logSystem(`V12 Split: ₹${nainaShare.toFixed(2)} added to Master Naina's Global Account.`);
+    saveToNainaPermanentVault(nainaShare);
+
+    // 2. User's Wallet Update
+    logSystem(`V12 Split: ₹${userShare.toFixed(2)} added to User's Wallet.`);
+    updateUserWallet(userShare);
+
+    // Ye har video ke khatam hote hi chalega
+    showNotification(`Earning Split: You got 50% | Owner got 50%`);
+}
+
+// Ye function hamesha background mein check karega
+function saveToNainaPermanentVault(amount) {
+    let currentBalance = parseFloat(localStorage.getItem('naina_total_wealth') || "0");
+    localStorage.setItem('naina_total_wealth', (currentBalance + amount).toFixed(2));
+}
