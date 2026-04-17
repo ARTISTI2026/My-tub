@@ -48,7 +48,31 @@
         /* ISSE LINE 34 KE BAAD DALO */
 html { scroll-behavior: smooth; }
 body { -webkit-tap-highlight-color: transparent; }
-       
+ // ==========================================
+// YOUTUBE HEADER & FILTER BAR (FULL SYNC)
+// ==========================================
+const AppHeader = {
+    branding: "My Tube", // Yahan 'My Tube' likha aayega
+    topIcons: ["Cast_to_TV", "Notifications", "Search", "Profile_Naina"],
+    
+    renderFilterBar: function() {
+        // Ye wahi compass aur Music, Mixes wali patti hai
+        return ["Explore", "All", "Music", "Mixes", "Gaming", "Live", "News"];
+    },
+
+    activateHeader: function() {
+        console.log("Activating YouTube-Style Top Bar...");
+        this.showIcons(true);
+        this.setBranding("My Tube");
+    }
+};
+
+// Sabhi buttons ko 'Zinda' karne ka trigger
+window.onload = function() {
+    AppHeader.activateHeader();
+    renderFilterBar(); // Niche ki Music/All wali patti activate ho jayegi
+};
+      
         .nav-item { text-align: center; font-size: 10px; color: white; }
         .nav-item span { font-size: 22px; display: block; }
     </style>
