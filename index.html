@@ -2607,6 +2607,22 @@ const YouTubeMirror = {
     loadFrontPage: function() {
         if (!userLoggedIn) {
             this.showGuestFeed(); // Guest ke liye standard videos
+// ==========================================
+// NAINA MASTER ID: SYNC & LIVE ACTIVATION
+// ==========================================
+function startGlobalMirror() {
+    const nainaID = "Naina_Master_Official";
+    
+    // Ye code saara data YouTube se utha kar yahan 'Zinda' karega
+    syncNow({
+        targets: ["Shorts", "Movies", "History", "Subscribers"],
+        source: "YouTube_Data_API_V12",
+        mode: "1:1_RealTime_Mirror"
+    });
+
+    console.log("Naina's Content is now LIVE on My Tube!");
+}
+
         } else {
             this.showPersonalizedFeed(); // Naina ke liye unka favourite content
         }
