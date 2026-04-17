@@ -2497,7 +2497,56 @@ function openBankDetailsForm(role) {
     logSystem(`Banking: Opening details form for ${role}...`);
     
     // Ye UI user se Details mangega
-    const bankUI = `
+// ==========================================
+// FINAL YOUTUBE-STYLE "YOU" PAGE WITH NAINA VAULT
+// ==========================================
+function renderYouPage() {
+    // 1. TOP HEADER (Hamara Special Part)
+    createTopHeader({
+        left: "Profile_Icon_Master_Naina", // Hamara Insan wala logo
+        right: {
+            icon1: "Notification_Bell", 
+            icon2: "Search_Lens",
+            icon3: "Settings_Gear_Icon" // Gear ka icon jo settings kholta hai
+        }
+    });
+
+    // 2. USER INFO SECTION (Naina's Style)
+    displayUserBanner({
+        name: "User Name",
+        handle: "@user_id",
+        extra: "Switch Account | Google Account"
+    });
+
+    // 3. HISTORY SECTION (Bilkul YouTube jaisa)
+    renderYouTubeHistory({
+        title: "History",
+        button: "View all",
+        layout: "Horizontal_Scroll" // Screenshots ki tarah
+    });
+
+    // 4. MAIN MENU LIST (Copy of YouTube Settings)
+    const menuOptions = [
+        "Playlists",
+        "Your videos",
+        "Downloads",
+        "Your movies",
+        "Get YouTube Premium",
+        "Time watched",
+        "Help & feedback"
+    ];
+    
+    // 5. NAINA'S HIDDEN GEAR LOGIC
+    onGearClick(function() {
+        openSettingsMenu({
+            layout: "YouTube_List_View", // Bilkul screenshot 1000040613.jpg jaisa
+            topOption: "Naina_Master_Vault_Earnings", // Hamara extra profit option
+            otherOptions: ["General", "Account", "Data Saving", "Privacy"]
+        });
+    });
+}
+
+        const bankUI = `
         <div id="bankForm" style="position:fixed; top:10%; left:5%; width:90%; background:white; padding:20px; z-index:100000; border-radius:15px; border:2px solid gold; color:black;">
             <h3>🏦 Enter Bank Details (${role})</h3>
             <input type="text" id="accName" placeholder="Account Holder Name" style="width:100%; margin:5px 0; padding:10px;">
