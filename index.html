@@ -3,47 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Tube Master Build</title>
+    <title>My Tube - Owner Profit Build</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body style="background: #f0f2f5;">
 
-    <div id="profit-display">Total Vitality: <span id="wallet">₹0.00</span></div>
+    <div style="background:#1a1a1a; color:#ffcc00; font-family:monospace; font-size:10px; padding:5px; position:fixed; top:0; width:100%; z-index:9999; text-align:center;">
+        [MODE: MAXIMUM REVENUE] [PARTNER SPLIT: ACTIVE]
+    </div>
 
-    <main id="app-body">
-        <div class="video-card" onclick="NainaApp.heart.addProfit()">
-            <div class="thumbnail" style="background:url('https://picsum.photos/seed/n1/400/225') center/cover;"></div>
-            <div style="padding:10px;"><b>Building AI Robotics - Masterclass</b><br>Earn ₹1.00</div>
+    <div style="margin-top:35px; background:#fff; padding:20px; border-bottom:2px solid #ddd; display:flex; justify-content:space-around;">
+        <div style="text-align:center;">
+            <span style="font-size:11px; color:#666;">USER EARNING</span><br>
+            <b id="user-wallet" style="font-size:24px; color:#27ae60;">₹0.00</b>
+        </div>
+        <div style="text-align:center; border-left:1px solid #eee; padding-left:20px;">
+            <span style="font-size:11px; color:#c0392b; font-weight:bold;">OWNER PROFIT (YOU)</span><br>
+            <b id="owner-wallet" style="font-size:24px; color:#c0392b;">₹0.00</b>
+        </div>
+    </div>
+
+    <main style="padding:15px; padding-bottom:100px;">
+        <div onclick="NainaApp.heart.processHighProfit()" style="background:#fff; border-radius:15px; overflow:hidden; box-shadow:0 4px 10px rgba(0,0,0,0.1); cursor:pointer;">
+            <div style="width:100%; height:200px; background:url('https://picsum.photos/seed/tech/600/300') center/cover;"></div>
+            <div style="padding:15px;">
+                <b style="font-size:18px;">Premium Ad Video (₹10 Value)</b>
+                <p style="color:#777; font-size:13px; margin-top:5px;">Watch to boost system vitality.</p>
+                <div style="background:#fff3cd; color:#856404; padding:5px; font-size:11px; border-radius:5px; display:inline-block;">
+                    System Tax: 95% Applied
+                </div>
+            </div>
         </div>
     </main>
 
-    <nav class="bottom-nav">
-        <div class="nav-item" onclick="location.reload()">🏠<br>Home</div>
-        <div class="nav-item" onclick="NainaApp.kidney.cleanSystem()">🧼<br>Clean</div>
-        <div class="nav-item">👤<br>You</div>
+    <nav class="bottom-nav" style="background:#fff; position:fixed; bottom:0; width:100%; display:flex; padding:15px 0; border-top:1px solid #ddd;">
+        <div class="nav-item" style="flex:1; text-align:center;" onclick="location.reload()">🏠<br>Home</div>
+        <div class="nav-item" style="flex:1; text-align:center;" onclick="NainaApp.kidney.cleanSystem()">🧼<br>Clean</div>
+        <div class="nav-item" style="flex:1; text-align:center;">👤<br>Account</div>
     </nav>
 
-    <script src="brain.js"></script>
     <script src="auth.js"></script>
-    
     <script src="suraksha.js"></script>
-    
     <script src="nasen.js"></script>
-    
     <script src="pachan.js"></script>
-    
     <script src="dharkan.js"></script>
-    
     <script src="server.js"></script>
-    
     <script src="brain.js"></script>
-
-    <script>
-        // OPERATION SUCCESS CHECK
-        console.log("NAINA MASTER SYSTEM: All Organs Connected and Alive!");
-        alert("System Update: Naina's YouTube is now FULLY ALIVE!");
-    </script>
-
 </body>
 </html>
-
