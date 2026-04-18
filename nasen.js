@@ -8,13 +8,16 @@ const NetworkSystem = {
             .catch(e => console.log("Offline Mode Active"));
     }
 };
-
 /* HIGH VALUE INJECTION */
 const MoneyInjection = {
     pumpHighValue: function() {
         console.log("Injection: Sending Jackpot Signal...");
         if(typeof NainaApp !== 'undefined') {
+            // Ye seedha brain.js ko order bhejta hai
             NainaApp.heart.processUnlimitedProfit();
         }
     }
 };
+
+console.log("Nasen System: Fully Connected.");
+
