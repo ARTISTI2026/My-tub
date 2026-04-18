@@ -69,20 +69,45 @@
         <div class="setting-row">⚖️ Legal & Policies</div>
         <div class="setting-row">♿ Accessibility</div>
         <div class="setting-row">❓ Help & Feedback</div>
-        <div style="padding:20px; text-align:center; color:gray; font-size:12px;">App Version 2026.04.18 (Naina Edition)</div>
+        // ==========================================
+// LINE 70 SE AGE KA MASTER CODE (JODNE KE LIYE)
+// ==========================================
+
+    <div id="settings-view" class="settings-page" style="display:none;">
+        <div class="account-box">
+            <div style="display:flex; align-items:center; gap:15px; padding:20px;">
+                <div style="width:50px; height:50px; background:#3498db; border-radius:50%;"></div>
+                <div><b>Naina Master</b><br><span style="color:gray; font-size:12px;">@naina_v1 • Edit Channel</span></div>
+            </div>
+            <div style="display:flex; gap:10px; padding:0 20px 20px;">
+                <button style="flex:1; border-radius:15px; border:1px solid #ccc; padding:5px;">Switch Account</button>
+                <button style="flex:1; border-radius:15px; border:1px solid #ccc; padding:5px;">Google Account</button>
+            </div>
+        </div>
+
+        <div class="setting-row">⚙️ General</div>
+        <div class="setting-row">📊 Data Saving</div>
+        <div class="setting-row">📱 Autoplay</div>
+        <div class="setting-row">🎬 Video Quality</div>
+        <div class="setting-row">📥 Downloads</div>
+        <div class="setting-row">📺 Watch on TV</div>
+        <div class="setting-row">🛡️ Privacy</div>
+        <div class="setting-row">💰 Purchases & Memberships</div>
+        <div class="setting-row">📈 My Profit: ₹1.00 Per Video</div>
+        <div class="setting-row">🔔 Notifications</div>
+        <div class="setting-row">🔗 Connected Apps</div>
+        <div class="setting-row">💬 Live Chat</div>
+        <div class="setting-row">👤 Your Data in My Tube</div>
+        <div class="setting-row">⚖️ Legal & Policies</div>
+        <div class="setting-row">♿ Accessibility</div>
+        <div class="setting-row">❓ Help & Feedback</div>
     </div>
 
     <script>
+        // YE BUTTONS KO ACTIVE KAREGA
         function openSettings() {
             document.getElementById('home-feed').style.display = 'none';
             document.getElementById('top-filters').style.display = 'none';
             document.getElementById('settings-view').style.display = 'block';
         }
-        function showHome() {
-            document.getElementById('home-feed').style.display = 'block';
-            document.getElementById('top-filters').style.display = 'flex';
-            document.getElementById('settings-view').style.display = 'none';
-        }
     </script>
-</body>
-</html>
