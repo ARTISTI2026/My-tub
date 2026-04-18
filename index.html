@@ -3,111 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Tube - Master Sync</title>
+    <title>My Tube - Master Professional</title>
     <style>
-        body { margin: 0; font-family: Roboto, Arial; background: #fff; }
-        .header { display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid #ddd; position: sticky; top: 0; background: #fff; z-index: 100; }
-        .logo { color: red; font-weight: bold; font-size: 20px; }
-        .filter-bar { display: flex; overflow-x: auto; padding: 10px; gap: 10px; border-bottom: 1px solid #eee; }
-        .filter-item { background: #f2f2f2; padding: 6px 12px; border-radius: 20px; white-space: nowrap; font-size: 14px; }
+        body { margin: 0; font-family: Roboto, Arial, sans-serif; background: #fff; padding-bottom: 60px; }
         
-        /* SETTINGS & YOU PAGE STYLE */
-        .settings-page { display: none; background: #fff; height: 100vh; overflow-y: auto; }
-        .setting-row { display: flex; align-items: center; padding: 15px; border-bottom: 1px solid #f9f9f9; cursor: pointer; font-size: 16px; }
-        .setting-row:hover { background: #f2f2f2; }
-        .account-box { padding: 20px; border-bottom: 8px solid #f2f2f2; }
+        /* 1. TOP HEADER (Logo + Icons) */
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 10px 15px; position: sticky; top: 0; background: #fff; z-index: 1000; }
+        .logo-box { display: flex; align-items: center; gap: 5px; }
+        .logo-text { color: #ff0000; font-weight: bold; font-size: 22px; letter-spacing: -1px; }
+        .header-icons { display: flex; gap: 18px; font-size: 20px; }
+
+        /* 2. COMPASS & FILTERS (30+ Options) */
+        .filter-wrapper { display: flex; align-items: center; padding: 10px; border-bottom: 1px solid #eee; overflow-x: auto; gap: 10px; scrollbar-width: none; }
+        .compass-icon { font-size: 20px; padding-right: 10px; border-right: 1px solid #ddd; }
+        .filter-item { background: #f2f2f2; padding: 6px 15px; border-radius: 20px; white-space: nowrap; font-size: 14px; cursor: pointer; }
+        .filter-active { background: #000; color: #fff; }
+
+        /* 3. "YOU" PAGE & SETTINGS (30+ OPTIONS) */
+        #you-page { display: none; padding-bottom: 80px; }
+        .account-section { padding: 20px; border-bottom: 8px solid #f2f2f2; }
+        .menu-row { display: flex; align-items: center; padding: 15px; font-size: 16px; border-bottom: 1px solid #f9f9f9; cursor: pointer; gap: 15px; }
+        .menu-row:hover { background: #f2f2f2; }
+
+        /* 4. BOTTOM NAVIGATION PATTI (Vahi 5 Buttons) */
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; display: flex; justify-content: space-around; background: #fff; padding: 10px 0; border-top: 1px solid #ddd; z-index: 1000; }
+        .nav-item { text-align: center; font-size: 11px; color: #606060; cursor: pointer; }
+        .nav-item span { font-size: 20px; display: block; color: #000; }
+
+        /* VIDEO FEED */
+        #home-feed { padding: 10px; }
+        .v-card { width: 100%; height: 200px; background: #ddd; border-radius: 12px; margin-bottom: 15px; }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <div class="logo">My Tube</div>
-        <div style="font-size: 20px;">📺 🔔 🔍 <span onclick="openSettings()" style="cursor:pointer;">👤</span></div>
+        <div class="logo-box">
+            <span style="font-size: 24px; color:red;">▶️</span>
+            <span class="logo-text">My Tube</span>
+        </div>
+        <div class="header-icons">
+            <span>📺</span> <span>🔔</span> <span>🔍</span> <span onclick="showYou()">👤</span>
+        </div>
     </div>
 
-    <div class="filter-bar" id="top-filters">
-        <div class="filter-item" style="background:#000; color:#fff;">All</div>
+    <div id="filter-bar" class="filter-wrapper">
+        <span class="compass-icon">🧭</span>
+        <div class="filter-item filter-active">All</div>
         <div class="filter-item">Music</div>
         <div class="filter-item">Mixes</div>
         <div class="filter-item">Gaming</div>
         <div class="filter-item">Live</div>
         <div class="filter-item">Trending</div>
         <div class="filter-item">News</div>
+        <div class="filter-item">Naina's Hits</div>
+        <div class="filter-item">Comedy</div>
         <div class="filter-item">Podcasts</div>
+        <div class="filter-item">Technology</div>
     </div>
 
-    <div id="home-feed" style="padding: 10px;">
-        <div style="width:100%; height:200px; background:#eee; margin-bottom:10px;"></div>
-        <p><b>Video: How to earn ₹1 per view</b></p>
+    <div id="home-feed">
+        <div class="v-card"></div>
+        <p><b>Master Course: How to scale My Tube Profit</b></p>
     </div>
 
-    <div id="settings-view" class="settings-page">
-        <div class="account-box">
-            <div style="display:flex; align-items:center; gap:15px;">
-                <div style="width:50px; height:50px; background:#3498db; border-radius:50%;"></div>
-                <div><b>Naina Master</b><br><span style="color:gray; font-size:12px;">@naina_v1 • Edit Channel</span></div>
+    <div id="you-page">
+        <div class="account-section">
+            <div style="display:flex; align-items:center; gap:20px;">
+                <div style="width:60px; height:60px; background:linear-gradient(45deg, #3498db, #8e44ad); border-radius:50%;"></div>
+                <div><h2 style="margin:0;">Naina Master</h2><p style="margin:0; color:gray;">@naina_v1 • Edit Channel ></p></div>
             </div>
-            <div style="display:flex; gap:10px; margin-top:15px;">
-                <button style="flex:1; border-radius:15px; border:1px solid #ccc; padding:5px;">Switch Account</button>
-                <button style="flex:1; border-radius:15px; border:1px solid #ccc; padding:5px;">Google Account</button>
+            <div style="display:flex; gap:10px; margin-top:20px;">
+                <button style="flex:1; border-radius:20px; border:1px solid #ccc; padding:8px; background:none;">Switch Account</button>
+                <button style="flex:1; border-radius:20px; border:1px solid #ccc; padding:8px; background:none;">Google Account</button>
             </div>
         </div>
 
-        <div class="setting-row">⚙️ General</div>
-        <div class="setting-row">📊 Data Saving</div>
-        <div class="setting-row">📱 Autoplay</div>
-        <div class="setting-row">🎬 Video Quality</div>
-        <div class="setting-row">📥 Downloads</div>
-        <div class="setting-row">📺 Watch on TV</div>
-        <div class="setting-row">🛡️ Privacy</div>
-        <div class="setting-row">💰 Purchases & Memberships</div>
-        <div class="setting-row">📈 My Profit: ₹10.50</div>
-        <div class="setting-row">🔔 Notifications</div>
-        <div class="setting-row">🔗 Connected Apps</div>
-        <div class="setting-row">💬 Live Chat</div>
-        <div class="setting-row">👤 Your Data in My Tube</div>
-        <div class="setting-row">⚖️ Legal & Policies</div>
-        <div class="setting-row">♿ Accessibility</div>
-        <div class="setting-row">❓ Help & Feedback</div>
-        // ==========================================
-// LINE 70 SE AGE KA MASTER CODE (JODNE KE LIYE)
-// ==========================================
+        <div class="menu-row">⚙️ General</div>
+        <div class="menu-row">📊 Data Saving</div>
+        <div class="menu-row">📱 Autoplay</div>
+        <div class="menu-row">🎬 Video Quality</div>
+        <div class="menu-row">📥 Downloads</div>
+        <div class="menu-row">📺 Watch on TV</div>
+        <div class="menu-row">🛡️ Privacy</div>
+        <div class="menu-row">💰 Purchases & Memberships</div>
+        <div class="menu-row">💹 Your Profit: ₹1.00 Active</div>
+        <div class="menu-row">🔔 Notifications</div>
+        <div class="menu-row">🔗 Connected Apps</div>
+        <div class="menu-row">💬 Live Chat</div>
+        <div class="menu-row">👤 Your Data in My Tube</div>
+        <div class="menu-row">⚖️ Legal & Policies</div>
+        <div class="menu-row">♿ Accessibility</div>
+        <div class="menu-row">❓ Help & Feedback</div>
+        <div class="menu-row">🚪 Sign Out</div>
+    </div>
 
-    <div id="settings-view" class="settings-page" style="display:none;">
-        <div class="account-box">
-            <div style="display:flex; align-items:center; gap:15px; padding:20px;">
-                <div style="width:50px; height:50px; background:#3498db; border-radius:50%;"></div>
-                <div><b>Naina Master</b><br><span style="color:gray; font-size:12px;">@naina_v1 • Edit Channel</span></div>
-            </div>
-            <div style="display:flex; gap:10px; padding:0 20px 20px;">
-                <button style="flex:1; border-radius:15px; border:1px solid #ccc; padding:5px;">Switch Account</button>
-                <button style="flex:1; border-radius:15px; border:1px solid #ccc; padding:5px;">Google Account</button>
-            </div>
-        </div>
-
-        <div class="setting-row">⚙️ General</div>
-        <div class="setting-row">📊 Data Saving</div>
-        <div class="setting-row">📱 Autoplay</div>
-        <div class="setting-row">🎬 Video Quality</div>
-        <div class="setting-row">📥 Downloads</div>
-        <div class="setting-row">📺 Watch on TV</div>
-        <div class="setting-row">🛡️ Privacy</div>
-        <div class="setting-row">💰 Purchases & Memberships</div>
-        <div class="setting-row">📈 My Profit: ₹1.00 Per Video</div>
-        <div class="setting-row">🔔 Notifications</div>
-        <div class="setting-row">🔗 Connected Apps</div>
-        <div class="setting-row">💬 Live Chat</div>
-        <div class="setting-row">👤 Your Data in My Tube</div>
-        <div class="setting-row">⚖️ Legal & Policies</div>
-        <div class="setting-row">♿ Accessibility</div>
-        <div class="setting-row">❓ Help & Feedback</div>
+    <div class="bottom-nav">
+        <div class="nav-item" onclick="showHome()"><span>🏠</span>Home</div>
+        <div class="nav-item"><span>🩳</span>Shorts</div>
+        <div class="nav-item"><span style="font-size:35px; margin-top:-5px;">⊕</span></div>
+        <div class="nav-item"><span>🔔</span>Subs</div>
+        <div class="nav-item" onclick="showYou()"><span>👤</span>You</div>
     </div>
 
     <script>
-        // YE BUTTONS KO ACTIVE KAREGA
-        function openSettings() {
+        function showYou() {
             document.getElementById('home-feed').style.display = 'none';
-            document.getElementById('top-filters').style.display = 'none';
-            document.getElementById('settings-view').style.display = 'block';
+            document.getElementById('filter-bar').style.display = 'none';
+            document.getElementById('you-page').style.display = 'block';
+        }
+        function showHome() {
+            document.getElementById('home-feed').style.display = 'block';
+            document.getElementById('filter-bar').style.display = 'flex';
+            document.getElementById('you-page').style.display = 'none';
         }
     </script>
+</body>
+</html>
