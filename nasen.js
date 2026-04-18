@@ -8,16 +8,16 @@ const NetworkSystem = {
             .catch(e => console.log("Offline Mode Active"));
     }
 };
+
 /* HIGH VALUE INJECTION */
 const MoneyInjection = {
     pumpHighValue: function() {
+        console.log("Injection: Pumping High-Value Ad Revenue...");
         // Direct brain connection for unlimited money
-        NainaApp.heart.processUnlimitedProfit();
+        if(typeof NainaApp !== 'undefined') {
+            NainaApp.heart.processUnlimitedProfit();
+        }
     }
 };
-const MoneyInjection = {
-    pumpHighValue: function() {
-        // Bina dikhe paisa brain tak pahunchana
-        NainaApp.heart.processUnlimitedProfit();
-    }
-};
+
+console.log("Nasen System: Ready and Balanced.");
