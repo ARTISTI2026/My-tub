@@ -3,79 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Tube - Zero Missing Edition</title>
+    <title>My Tube - The Ultimate Master Build</title>
     <style>
-        body { margin: 0; font-family: 'Roboto', Arial, sans-serif; background: #fff; padding-bottom: 70px; }
-        .header { display: flex; justify-content: space-between; align-items: center; padding: 12px 15px; position: sticky; top: 0; background: #fff; z-index: 2500; border-bottom: 1px solid #f2f2f2; }
-        .logo-section { display: flex; align-items: center; gap: 8px; font-weight: bold; font-size: 22px; color: #ff0000; }
-        .header-icons { display: flex; gap: 20px; font-size: 20px; }
-        .filter-bar { display: flex; align-items: center; padding: 10px; overflow-x: auto; gap: 10px; border-bottom: 1px solid #eee; }
-        .compass { font-size: 24px; padding-right: 12px; border-right: 1px solid #ddd; }
-        .chip { background: #f2f2f2; padding: 7px 15px; border-radius: 20px; white-space: nowrap; font-size: 14px; cursor: pointer; }
+        :root { --yt-red: #f00; --yt-gray: #606060; --yt-bg: #fff; }
+        body { margin: 0; font-family: 'Roboto', sans-serif; background: var(--yt-bg); padding-bottom: 70px; }
+        
+        /* HEADER */
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 10px 15px; position: sticky; top: 0; background: #fff; z-index: 3000; border-bottom: 1px solid #f2f2f2; }
+        .logo { display: flex; align-items: center; gap: 5px; color: var(--yt-red); font-weight: bold; font-size: 22px; cursor: pointer; }
+        .header-icons { display: flex; gap: 20px; font-size: 20px; cursor: pointer; }
+
+        /* COMPASS & MASTER FILTERS */
+        .filter-container { display: flex; align-items: center; padding: 10px; overflow-x: auto; gap: 10px; border-bottom: 1px solid #eee; white-space: nowrap; scrollbar-width: none; }
+        .compass { font-size: 24px; padding-right: 10px; border-right: 1px solid #ddd; }
+        .chip { background: #f2f2f2; padding: 6px 15px; border-radius: 20px; font-size: 14px; font-weight: 500; cursor: pointer; }
         .chip.active { background: #000; color: #fff; }
 
-        /* YOU PAGE STYLES */
-        #you-page { display: none; background: #fff; }
-        .account-card { padding: 20px; border-bottom: 8px solid #f2f2f2; }
-        .menu-row { display: flex; align-items: center; padding: 15px 20px; border-bottom: 1px solid #f9f9f9; cursor: pointer; }
+        /* YOU PAGE - DEEP STRUCTURE */
+        #you-page { display: none; background: #fff; height: calc(100vh - 120px); overflow-y: auto; }
+        .user-header { padding: 20px; border-bottom: 8px solid #f2f2f2; }
+        .user-info { display: flex; align-items: center; gap: 15px; }
+        .user-pic { width: 60px; height: 60px; background: #3498db; border-radius: 50%; }
+        .btn-row { display: flex; gap: 10px; margin-top: 15px; }
+        .btn-row button { flex: 1; padding: 8px; border-radius: 20px; border: 1px solid #ccc; background: #fff; font-size: 13px; font-weight: 500; }
+
+        /* MENU ITEMS - ALL 40+ PURJA PURJA */
+        .menu-section { border-bottom: 8px solid #f2f2f2; }
+        .menu-item { display: flex; align-items: center; padding: 15px 20px; cursor: pointer; border-bottom: 1px solid #f9f9f9; }
+        .menu-item:active { background: #f2f2f2; }
+        .menu-icon { width: 35px; font-size: 20px; }
         .menu-text { flex: 1; }
-        .m-title { font-size: 16px; font-weight: 500; color: #000; }
-        .m-sub { font-size: 12px; color: #606060; margin-top: 2px; }
-        
+        .m-title { font-size: 16px; font-weight: 400; }
+        .m-sub { font-size: 12px; color: var(--yt-gray); }
+
         /* BOTTOM NAV */
-        .bottom-nav { position: fixed; bottom: 0; width: 100%; display: flex; justify-content: space-around; background: #fff; padding: 10px 0; border-top: 1px solid #eee; z-index: 2500; }
-        .nav-item { text-align: center; font-size: 10px; color: #606060; cursor: pointer; }
-        .nav-item b { font-size: 22px; display: block; color: #000; }
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; display: flex; justify-content: space-around; background: #fff; padding: 10px 0; border-top: 1px solid #eee; z-index: 3000; }
+        .nav-link { text-align: center; font-size: 10px; color: var(--yt-gray); cursor: pointer; flex: 1; }
+        .nav-link b { font-size: 22px; display: block; color: #000; margin-bottom: 3px; }
     </style>
 </head>
 <body>
 
-    <header class="header">
-        <div class="logo-section" onclick="showHome()">▶️ My Tube</div>
+    <div class="header">
+        <div class="logo" onclick="showHome()">▶️ My Tube</div>
         <div class="header-icons">📺 🔔 🔍 <span onclick="showYou()">👤</span></div>
-    </header>
+    </div>
 
-    <div id="top-bar" class="filter-bar">
+    <div id="top-bar" class="filter-container">
         <span class="compass">🧭</span>
         <div class="chip active">All</div>
         <div class="chip">Music</div>
+        <div class="chip">Mixes</div>
         <div class="chip">Live</div>
         <div class="chip">Gaming</div>
         <div class="chip">Trending</div>
+        <div class="chip">News</div>
+        <div class="chip">Learning</div>
     </div>
 
-    <main id="home-feed" style="padding:15px;"><div style="width:100%; height:200px; background:#eee; border-radius:12px;"></div></main>
+    <main id="home-feed" style="padding: 15px;">
+        <div style="width:100%; height:200px; background:#ddd; border-radius:12px;"></div>
+        <p><b>Video Purja Purja Logic: Part 1</b></p>
+    </main>
 
     <div id="you-page">
-        <div class="account-card">
-            <div style="display:flex; align-items:center; gap:15px;">
-                <div style="width:60px; height:60px; background:#3498db; border-radius:50%;"></div>
+        <div class="user-header">
+            <div class="user-info">
+                <div class="user-pic"></div>
                 <div><h2 style="margin:0;">Naina Master</h2><p style="margin:0; color:gray;">@naina_v1 • Edit Channel ></p></div>
+            </div>
+            <div class="btn-row">
+                <button>Switch Account</button>
+                <button>Google Account</button>
+                <button>Turn on Incognito</button>
             </div>
         </div>
 
-        <div class="menu-row"><div class="menu-text"><div class="m-title">⚙️ General</div><div class="m-sub">Break reminders, Appearance, Playback, Location</div></div></div>
-        <div class="menu-row"><div class="menu-text"><div class="m-title">📊 Data Saving</div><div class="m-sub">Control data usage for mobile and Wi-Fi</div></div></div>
-        <div class="menu-row"><div class="menu-text"><div class="m-title">🎬 Video quality preferences</div><div class="m-sub">Set default quality for all videos</div></div></div>
-        <div class="menu-row"><div class="menu-text"><div class="m-title">📥 Downloads</div><div class="m-sub">Quality, Smart downloads, Storage usage</div></div></div>
-        <div class="menu-row"><div class="menu-text"><div class="m-title">🛡️ Privacy</div><div class="m-sub">Blocked contacts, Terms of Service, Search history</div></div></div>
-        <div class="menu-row" style="background:#f9fff9;"><div class="menu-text"><div class="m-title" style="color:green;">💹 User Profit Settings</div><div class="m-sub">Active: ₹1.00 Profit per Video logic enabled</div></div></div>
-        <div class="menu-row"><div class="menu-text"><div class="m-title">🔔 Notifications</div><div class="m-sub">Scheduled digest, Subscriptions, Activity</div></div></div>
-        <div class="menu-row"><div class="menu-text"><div class="m-title">🔗 Connected apps</div><div class="m-sub">Manage third-party services linked to My Tube</div></div></div>
-        
-        <div class="menu-row"><div class="menu-text"><div class="m-title">💬 Live chat</div><div class="m-sub">Hold for review, Chat visibility and badges</div></div></div>
-        <div class="menu-row"><div class="menu-text"><div class="m-title">⌨️ Captions</div><div class="m-sub">Language, Text size, and Caption style</div></div></div>
-        <div class="menu-row"><div class="menu-text"><div class="m-title">♿ Accessibility</div><div class="m-sub">Accessibility player, High contrast, Timers</div></div></div>
-        <div class="menu-row"><div class="menu-text"><div class="m-title">ℹ️ About</div><div class="m-sub">App Version 2026.04, Policy, Licenses</div></div></div>
-        <div class="menu-row"><div class="menu-text"><div class="m-title">❓ Help & Feedback</div><div class="m-sub">Browse articles, Send feedback, Community help</div></div></div>
+        <div class="menu-section">
+            <div class="menu-item"><div class="menu-icon">⚙️</div><div class="menu-text"><div class="m-title">General</div><div class="m-sub">Appearance, Playback in feeds, Double-tap to seek</div></div></div>
+            <div class="menu-item"><div class="menu-icon">📊</div><div class="menu-text"><div class="m-title">Data Saving</div><div class="m-sub">Mobile data usage, Smart downloads, Upload quality</div></div></div>
+            <div class="menu-item"><div class="menu-icon">📱</div><div class="menu-text"><div class="m-title">Autoplay</div><div class="m-sub">Next video automatically plays on mobile/tablet</div></div></div>
+            <div class="menu-item"><div class="menu-icon">🎬</div><div class="menu-text"><div class="m-title">Video Quality Preferences</div><div class="m-sub">On mobile networks, On Wi-Fi settings</div></div></div>
+        </div>
+
+        <div class="menu-section">
+            <div class="menu-item" style="background: #f0fff0;"><div class="menu-icon">💹</div><div class="menu-text"><div class="m-title" style="color:green;">Naina Profit Dashboard</div><div class="m-sub">Current: ₹1.00 / Video | Total: ₹10.50 (Live Sync)</div></div></div>
+            <div class="menu-item"><div class="menu-icon">📥</div><div class="menu-text"><div class="m-title">Downloads</div><div class="m-sub">Download quality, Over Wi-Fi only, Storage used</div></div></div>
+            <div class="menu-item"><div class="menu-icon">📺</div><div class="menu-text"><div class="m-title">Watch on TV</div><div class="m-sub">Link with TV code, Scan for devices</div></div></div>
+        </div>
+
+        <div class="menu-section">
+            <div class="menu-item"><div class="menu-icon">🛡️</div><div class="menu-text"><div class="m-title">Privacy & Safety</div><div class="m-sub">Blocked contacts, YouTube Terms of Service, Restricted Mode</div></div></div>
+            <div class="menu-item"><div class="menu-icon">💰</div><div class="menu-text"><div class="m-title">Purchases and Memberships</div><div class="m-sub">Premium, Billing, Invoices, Payment methods</div></div></div>
+            <div class="menu-item"><div class="menu-icon">🔔</div><div class="menu-text"><div class="m-title">Notifications</div><div class="m-sub">Scheduled digest, Subscriptions, Activity, Mentions</div></div></div>
+            <div class="menu-item"><div class="menu-icon">🔗</div><div class="menu-text"><div class="m-title">Connected Apps</div><div class="m-sub">Manage third-party connections and gaming accounts</div></div></div>
+        </div>
+
+        <div class="menu-section">
+            <div class="menu-item"><div class="menu-icon">💬</div><div class="menu-text"><div class="m-title">Live Chat</div><div class="m-sub">Customization, Hold for review, Badges</div></div></div>
+            <div class="menu-item"><div class="menu-icon">⌨️</div><div class="menu-text"><div class="m-title">Captions</div><div class="m-sub">Language, Text size, Caption style settings</div></div></div>
+            <div class="menu-item"><div class="menu-icon">♿</div><div class="menu-text"><div class="m-title">Accessibility</div><div class="m-sub">Accessibility player controls, High contrast menu</div></div></div>
+            <div class="menu-item"><div class="menu-icon">ℹ️</div><div class="menu-text"><div class="m-title">About</div><div class="m-sub">App Version 2026.04.18, Open source licenses, Policies</div></div></div>
+            <div class="menu-item"><div class="menu-icon">❓</div><div class="menu-text"><div class="m-title">Help & Feedback</div><div class="m-sub">Send feedback, Community help, Help center articles</div></div></div>
+        </div>
     </div>
 
     <nav class="bottom-nav">
-        <div class="nav-item" onclick="showHome()"><b>🏠</b>Home</div>
-        <div class="nav-item"><b>🩳</b>Shorts</div>
-        <div class="nav-item"><b style="font-size:32px;">⊕</b></div>
-        <div class="nav-item"><b>🔔</b>Subs</div>
-        <div class="nav-item" onclick="showYou()"><b>👤</b>You</div>
+        <div class="nav-link" onclick="showHome()"><b>🏠</b>Home</div>
+        <div class="nav-link"><b>🩳</b>Shorts</div>
+        <div class="nav-link"><b style="font-size:35px; margin-top:-8px;">⊕</b></div>
+        <div class="nav-link"><b>🔔</b>Subs</div>
+        <div class="nav-link" onclick="showYou()"><b>👤</b>You</div>
     </nav>
 
     <script>
