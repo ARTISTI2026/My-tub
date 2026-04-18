@@ -150,7 +150,29 @@
     document.getElementById('searchInput').addEventListener('keypress', function (e) {
         if (e.key === 'Enter') { alert("Searching V12 for: " + this.value); }
     });
-    // --- NEW: HISTORY & LIBRARY LOGIC ---
+  /* COMMENT PANEL STYLE: YOUTUBE MIRROR */
+.comment-section-overlay {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60%; /* Taki adha video bhi dikhe */
+    background: white;
+    border-radius: 15px 15px 0 0; /* Upar se gol corners */
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.2);
+    z-index: 2000;
+    overflow-y: auto;
+    transition: transform 0.3s ease-in-out;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    font-weight: bold;
+}
+  // --- NEW: HISTORY & LIBRARY LOGIC ---
     let watchHistory = [];
 
     function addToHistory(title) {
