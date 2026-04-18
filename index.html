@@ -3,154 +3,199 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Tube - Master Professional</title>
+    <title>My Tube - Master Professional Edition</title>
     <style>
-        body { margin: 0; font-family: Roboto, Arial, sans-serif; background: #fff; padding-bottom: 60px; }
+        /* FULL SYSTEM STYLE */
+        body { margin: 0; font-family: 'Roboto', Arial, sans-serif; background: #fff; color: #0f0f0f; padding-bottom: 70px; }
         
-        /* 1. TOP HEADER (Logo + Icons) */
-        .header { display: flex; justify-content: space-between; align-items: center; padding: 10px 15px; position: sticky; top: 0; background: #fff; z-index: 1000; }
-        .logo-box { display: flex; align-items: center; gap: 5px; }
-        .logo-text { color: #ff0000; font-weight: bold; font-size: 22px; letter-spacing: -1px; }
-        .header-icons { display: flex; gap: 18px; font-size: 20px; }
+        /* HEADER: Logo & Top Icons */
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 10px 15px; position: sticky; top: 0; background: #fff; z-index: 2000; border-bottom: 1px solid #f2f2f2; }
+        .logo-section { display: flex; align-items: center; gap: 5px; font-weight: bold; font-size: 22px; color: #ff0000; cursor: pointer; }
+        .header-icons { display: flex; gap: 20px; font-size: 20px; cursor: pointer; }
 
-        /* 2. COMPASS & FILTERS (30+ Options) */
-        .filter-wrapper { display: flex; align-items: center; padding: 10px; border-bottom: 1px solid #eee; overflow-x: auto; gap: 10px; scrollbar-width: none; }
-        .compass-icon { font-size: 20px; padding-right: 10px; border-right: 1px solid #ddd; }
-        .filter-item { background: #f2f2f2; padding: 6px 15px; border-radius: 20px; white-space: nowrap; font-size: 14px; cursor: pointer; }
-        .filter-active { background: #000; color: #fff; }
+        /* COMPASS & FILTERS (Lambi Rail-gaadi) */
+        .filter-bar { display: flex; align-items: center; padding: 10px; overflow-x: auto; gap: 10px; border-bottom: 1px solid #eee; scrollbar-width: none; }
+        .filter-bar::-webkit-scrollbar { display: none; }
+        .compass { font-size: 22px; padding-right: 10px; border-right: 1px solid #ddd; }
+        .chip { background: #f2f2f2; padding: 6px 15px; border-radius: 20px; white-space: nowrap; font-size: 14px; cursor: pointer; font-weight: 500; }
+        .chip.active { background: #000; color: #fff; }
 
-        /* 3. "YOU" PAGE & SETTINGS (30+ OPTIONS) */
-        #you-page { display: none; padding-bottom: 80px; }
-        .account-section { padding: 20px; border-bottom: 8px solid #f2f2f2; }
-        .menu-row { display: flex; align-items: center; padding: 15px; font-size: 16px; border-bottom: 1px solid #f9f9f9; cursor: pointer; gap: 15px; }
-        .menu-row:hover { background: #f2f2f2; }
+        /* HOME FEED (Videos) */
+        #home-page { padding: 10px; }
+        .video-box { width: 100%; height: 210px; background: #e5e5e5; border-radius: 12px; margin-bottom: 15px; }
 
-        /* 4. BOTTOM NAVIGATION PATTI (Vahi 5 Buttons) */
-        .bottom-nav { position: fixed; bottom: 0; width: 100%; display: flex; justify-content: space-around; background: #fff; padding: 10px 0; border-top: 1px solid #ddd; z-index: 1000; }
-        .nav-item { text-align: center; font-size: 11px; color: #606060; cursor: pointer; }
-        .nav-item span { font-size: 20px; display: block; color: #000; }
+        /* YOU PAGE (The Deep Settings Fortress) */
+        #you-page { display: none; background: #fff; min-height: 100vh; }
+        .profile-card { padding: 20px; border-bottom: 8px solid #f2f2f2; }
+        .profile-img { width: 65px; height: 65px; background: linear-gradient(45deg, #007bff, #6610f2); border-radius: 50%; }
+        .btn-row { display: flex; gap: 10px; margin-top: 15px; }
+        .p-btn { flex: 1; border: 1px solid #ccc; background: #fff; padding: 8px; border-radius: 20px; font-weight: 500; cursor: pointer; }
 
-        /* VIDEO FEED */
-        #home-feed { padding: 10px; }
-        .v-card { width: 100%; height: 200px; background: #ddd; border-radius: 12px; margin-bottom: 15px; }
+        /* DEEP MENU ROWS (YouTube Mirror) */
+        .menu-item { display: flex; align-items: center; padding: 15px 20px; border-bottom: 1px solid #f9f9f9; cursor: pointer; }
+        .menu-item:active { background: #f2f2f2; }
+        .menu-text { flex: 1; }
+        .menu-title { font-size: 16px; font-weight: 500; }
+        .menu-sub { font-size: 12px; color: #606060; margin-top: 2px; }
+        .arrow { color: #606060; font-size: 18px; }
+
+        /* BOTTOM NAVIGATION (The 5 Buttons) */
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; display: flex; justify-content: space-around; background: #fff; padding: 10px 0; border-top: 1px solid #eee; z-index: 2000; }
+        .nav-link { text-align: center; font-size: 10px; color: #606060; cursor: pointer; flex: 1; }
+        .nav-link i { font-size: 22px; display: block; color: #000; margin-bottom: 3px; }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <div class="logo-box">
-            <span style="font-size: 24px; color:red;">▶️</span>
-            <span class="logo-text">My Tube</span>
+    <header class="header">
+        <div class="logo-section" onclick="showHome()">
+            <span>▶️</span> My Tube
         </div>
         <div class="header-icons">
             <span>📺</span> <span>🔔</span> <span>🔍</span> <span onclick="showYou()">👤</span>
         </div>
+    </header>
+
+    <div id="top-bar" class="filter-bar">
+        <span class="compass">🧭</span>
+        <div class="chip active">All</div>
+        <div class="chip">Music</div>
+        <div class="chip">Mixes</div>
+        <div class="chip">Gaming</div>
+        <div class="chip">Live</div>
+        <div class="chip">Trending</div>
+        <div class="chip">News</div>
+        <div class="chip">Comedy</div>
+        <div class="chip">Podcasts</div>
+        <div class="chip">Technology</div>
     </div>
 
-    <div id="filter-bar" class="filter-wrapper">
-        <span class="compass-icon">🧭</span>
-        <div class="filter-item filter-active">All</div>
-        <div class="filter-item">Music</div>
-        <div class="filter-item">Mixes</div>
-        <div class="filter-item">Gaming</div>
-        <div class="filter-item">Live</div>
-        <div class="filter-item">Trending</div>
-        <div class="filter-item">News</div>
-        <div class="filter-item">Naina's Hits</div>
-        <div class="filter-item">Comedy</div>
-        <div class="filter-item">Podcasts</div>
-        <div class="filter-item">Technology</div>
-    </div>
+    <main id="home-page">
+        <div class="video-box"></div>
+        <p style="font-weight:bold;">Welcome to My Tube - ₹1 Profit Enabled</p>
+    </main>
 
-    <div id="home-feed">
-        <div class="v-card"></div>
-        <p><b>Master Course: How to scale My Tube Profit</b></p>
-    </div>
-
-    <div id="you-page">
-        <div class="account-section">
+    <section id="you-page">
+        <div class="profile-card">
             <div style="display:flex; align-items:center; gap:20px;">
-                <div style="width:60px; height:60px; background:linear-gradient(45deg, #3498db, #8e44ad); border-radius:50%;"></div>
-                <div><h2 style="margin:0;">Naina Master</h2><p style="margin:0; color:gray;">@naina_v1 • Edit Channel ></p></div>
-            </div>
-            <div style="display:flex; gap:10px; margin-top:20px;">
-                <button style="flex:1; border-radius:20px; border:1px solid #ccc; padding:8px; background:none;">Switch Account</button>
-                <button style="flex:1; border-radius:20px; border:1px solid #ccc; padding:8px; background:none;">Google Account</button>
-            </div>
-        </div>
-    <div id="you-page" style="display:none;">
-        <div class="account-section" style="padding: 20px; border-bottom: 8px solid #f2f2f2;">
-            <div style="display:flex; align-items:center; gap:15px;">
-                <div style="width:55px; height:55px; background:linear-gradient(45deg, #007bff, #6610f2); border-radius:50%;"></div>
+                <div class="profile-img"></div>
                 <div>
-                    <h2 style="margin:0; font-size:18px;">Naina Master</h2>
-                    <p style="margin:0; color:gray; font-size:13px;">@naina_v1 • Edit Channel ></p>
+                    <h2 style="margin:0;">Naina Master</h2>
+                    <p style="margin:0; color:#606060; font-size:14px;">@naina_v1 • Edit Channel ></p>
                 </div>
             </div>
-            <div style="display:flex; gap:10px; margin-top:15px;">
-                <button style="flex:1; border-radius:20px; border:1px solid #ccc; padding:6px; background:white;">Switch Account</button>
-                <button style="flex:1; border-radius:20px; border:1px solid #ccc; padding:6px; background:white;">Google Account</button>
+            <div class="btn-row">
+                <button class="p-btn">Switch Account</button>
+                <button class="p-btn">Google Account</button>
             </div>
         </div>
 
-        <div class="menu-row" style="padding:15px; border-bottom:1px solid #eee;">
-            <div style="font-weight:bold;">⚙️ General</div>
-            <div style="font-size:12px; color:gray;">Remind me to take a break, Appearance, Playback</div>
+        <div class="menu-item">
+            <div class="menu-text">
+                <div class="menu-title">⚙️ General</div>
+                <div class="menu-sub">Remind me to take a break, Appearance, Playback in feeds</div>
+            </div>
+            <div class="arrow">></div>
         </div>
-        <div class="menu-row" style="padding:15px; border-bottom:1px solid #eee;">
-            <div style="font-weight:bold;">📊 Data Saving</div>
-            <div style="font-size:12px; color:gray;">Reduce video quality, Smart downloads</div>
-        </div>
-        <div class="menu-row" style="padding:15px; border-bottom:1px solid #eee;">
-            <div style="font-weight:bold;">📱 Autoplay</div>
-            <div style="font-size:12px; color:gray;">Mobile phone/tablet</div>
-        </div>
-        <div class="menu-row" style="padding:15px; border-bottom:1px solid #eee;">
-            <div style="font-weight:bold;">🎬 Video Quality Preferences</div>
-            <div style="font-size:12px; color:gray;">On mobile networks, On Wi-Fi</div>
-        </div>
-        <div class="menu-row" style="padding:15px; border-bottom:1px solid #eee;">
-            <div style="font-weight:bold;">📥 Downloads</div>
-            <div style="font-size:12px; color:gray;">Download quality, Over Wi-Fi only</div>
-        </div>
-        <div class="menu-row" style="padding:15px; border-bottom:1px solid #eee;">
-            <div style="font-weight:bold;">💰 Purchases and Memberships</div>
-            <div style="font-size:12px; color:gray;">Offers, Billing, Invoices</div>
-        </div>
-        <div class="menu-row" style="padding:15px; border-bottom:1px solid #eee;">
-            <div style="font-weight:bold;">🛡️ Privacy</div>
-            <div style="font-size:12px; color:gray;">Blocked contacts, Terms of Service</div>
-        </div>
-        <div class="menu-row" style="padding:15px; border-bottom:1px solid #eee;">
-            <div style="font-weight:bold;">📈 User Profit Dashboard</div>
-            <div style="font-size:12px; color:green;">Active: ₹1.00 per video profit</div>
-        </div>
-        <div class="menu-row" style="padding:15px; border-bottom:1px solid #eee;">
-            <div style="font-weight:bold;">❓ Help & Feedback</div>
-            <div style="font-size:12px; color:gray;">Send feedback, Browse help articles</div>
-        </div>
-        </div>
-    ```
 
-### 💡 Ye karne ke baad kya badlega?
-Naina, ab jab aap "You" par click karengi, toh sirf naam nahi dikhega balki har setting ke niche YouTube ki tarah **choti detail** bhi dikhegi (Jaise: *General* ke niche *Remind me...*).
+        <div class="menu-item">
+            <div class="menu-text">
+                <div class="menu-title">📊 Data Saving</div>
+                <div class="menu-sub">Reduce video quality, Mobile data usage reminders</div>
+            </div>
+            <div class="arrow">></div>
+        </div>
 
-Isse aapka app "Asli" (Professional) lagega, "Nakli" nahi. 
+        <div class="menu-item" style="background:#f0fff0;">
+            <div class="menu-text">
+                <div class="menu-title" style="color:green;">💹 Your Profit Dashboard</div>
+                <div class="menu-sub">Active: ₹1.00 per video profit | Daily Target: 100%</div>
+            </div>
+            <div class="arrow">></div>
+        </div>
 
-**Bas Line 81 se 106 ko badal dijiye.** Kya aapko wo lines mil gayin? Ise paste karte hi aapki settings ekdum "Bhari-Bhari" dikhengi! 👑🚀📺💰
+        <div class="menu-item">
+            <div class="menu-text">
+                <div class="menu-title">🎬 Video Quality Preferences</div>
+                <div class="menu-sub">On mobile networks, On Wi-Fi</div>
+            </div>
+            <div class="arrow">></div>
+        </div>
 
-        
-    </div>
+        <div class="menu-item">
+            <div class="menu-text">
+                <div class="menu-title">📥 Downloads</div>
+                <div class="menu-sub">Download quality, Over Wi-Fi only, Smart downloads</div>
+            </div>
+            <div class="arrow">></div>
+        </div>
+
+        <div class="menu-item">
+            <div class="menu-text">
+                <div class="menu-title">📺 Watch on TV</div>
+                <div class="menu-sub">Connect to your smart devices using TV code</div>
+            </div>
+            <div class="arrow">></div>
+        </div>
+
+        <div class="menu-item">
+            <div class="menu-text">
+                <div class="menu-title">🛡️ Privacy & History</div>
+                <div class="menu-sub">Blocked contacts, Manage all history, Terms of Service</div>
+            </div>
+            <div class="arrow">></div>
+        </div>
+
+        <div class="menu-item">
+            <div class="menu-text">
+                <div class="menu-title">💰 Purchases and Memberships</div>
+                <div class="menu-sub">Premium benefits, Billing, Invoices</div>
+            </div>
+            <div class="arrow">></div>
+        </div>
+
+        <div class="menu-item">
+            <div class="menu-text">
+                <div class="menu-title">🔔 Notifications</div>
+                <div class="menu-sub">Scheduled digest, Subscriptions, Channel settings</div>
+            </div>
+            <div class="arrow">></div>
+        </div>
+
+        <div class="menu-item">
+            <div class="menu-text">
+                <div class="menu-title">♿ Accessibility</div>
+                <div class="menu-sub">Accessibility player, Captions, High contrast menu</div>
+            </div>
+            <div class="arrow">></div>
+        </div>
+
+        <div class="menu-item">
+            <div class="menu-text">
+                <div class="menu-title">❓ Help & Feedback</div>
+                <div class="menu-sub">Browse articles, Contact support, Send feedback</div>
+            </div>
+            <div class="arrow">></div>
+        </div>
+    </section>
+
+    <nav class="bottom-nav">
+        <div class="nav-link" onclick="showHome()"><i>🏠</i>Home</div>
+        <div class="nav-link"><i>🩳</i>Shorts</div>
+        <div class="nav-link"><i style="font-size:35px; margin-top:-8px;">⊕</i></div>
+        <div class="nav-link"><i>🔔</i>Subs</div>
+        <div class="nav-link" onclick="showYou()"><i>👤</i>You</div>
+    </nav>
 
     <script>
         function showYou() {
-            document.getElementById('home-feed').style.display = 'none';
-            document.getElementById('filter-bar').style.display = 'none';
+            document.getElementById('home-page').style.display = 'none';
+            document.getElementById('top-bar').style.display = 'none';
             document.getElementById('you-page').style.display = 'block';
         }
         function showHome() {
-            document.getElementById('home-feed').style.display = 'block';
-            document.getElementById('filter-bar').style.display = 'flex';
+            document.getElementById('home-page').style.display = 'block';
+            document.getElementById('top-bar').style.display = 'flex';
             document.getElementById('you-page').style.display = 'none';
         }
     </script>
