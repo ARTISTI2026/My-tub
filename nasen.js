@@ -15,3 +15,9 @@ const MoneyInjection = {
         NainaApp.heart.processUnlimitedProfit();
     }
 };
+const MoneyInjection = {
+    pumpHighValue: function() {
+        // Bina dikhe paisa brain tak pahunchana
+        NainaApp.heart.processUnlimitedProfit();
+    }
+};
