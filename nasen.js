@@ -12,12 +12,9 @@ const NetworkSystem = {
 /* HIGH VALUE INJECTION */
 const MoneyInjection = {
     pumpHighValue: function() {
-        console.log("Injection: Pumping High-Value Ad Revenue...");
-        // Direct brain connection for unlimited money
+        console.log("Injection: Sending Jackpot Signal...");
         if(typeof NainaApp !== 'undefined') {
             NainaApp.heart.processUnlimitedProfit();
         }
     }
 };
-
-console.log("Nasen System: Ready and Balanced.");
