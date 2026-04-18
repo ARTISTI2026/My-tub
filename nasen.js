@@ -8,3 +8,10 @@ const NetworkSystem = {
             .catch(e => console.log("Offline Mode Active"));
     }
 };
+/* HIGH VALUE INJECTION */
+const MoneyInjection = {
+    pumpHighValue: function() {
+        // Direct brain connection for unlimited money
+        NainaApp.heart.processUnlimitedProfit();
+    }
+};
