@@ -3,129 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Tube - The Ultimate Master Build</title>
+    <title>My Tube - Ultimate Full Purja Edition</title>
     <style>
-        :root { --yt-red: #f00; --yt-gray: #606060; --yt-bg: #fff; }
-        body { margin: 0; font-family: 'Roboto', sans-serif; background: var(--yt-bg); padding-bottom: 70px; }
+        :root { --yt-red: #ff0000; --yt-bg: #ffffff; --yt-text: #0f0f0f; --yt-gray: #606060; }
+        body { margin: 0; font-family: 'Roboto', Arial, sans-serif; background: var(--yt-bg); color: var(--yt-text); padding-bottom: 70px; overflow-x: hidden; }
         
-        /* HEADER */
+        /* HEADER SECTION */
         .header { display: flex; justify-content: space-between; align-items: center; padding: 10px 15px; position: sticky; top: 0; background: #fff; z-index: 3000; border-bottom: 1px solid #f2f2f2; }
-        .logo { display: flex; align-items: center; gap: 5px; color: var(--yt-red); font-weight: bold; font-size: 22px; cursor: pointer; }
+        .logo { display: flex; align-items: center; gap: 8px; color: var(--yt-red); font-weight: bold; font-size: 22px; cursor: pointer; letter-spacing: -1px; }
         .header-icons { display: flex; gap: 20px; font-size: 20px; cursor: pointer; }
 
-        /* COMPASS & MASTER FILTERS */
-        .filter-container { display: flex; align-items: center; padding: 10px; overflow-x: auto; gap: 10px; border-bottom: 1px solid #eee; white-space: nowrap; scrollbar-width: none; }
-        .compass { font-size: 24px; padding-right: 10px; border-right: 1px solid #ddd; }
-        .chip { background: #f2f2f2; padding: 6px 15px; border-radius: 20px; font-size: 14px; font-weight: 500; cursor: pointer; }
-        .chip.active { background: #000; color: #fff; }
+        /* COMPASS & EXPLORE BAR */
+        .filter-container { display: flex; align-items: center; padding: 10px; overflow-x: auto; gap: 12px; border-bottom: 1px solid #eee; white-space: nowrap; scrollbar-width: none; }
+        .filter-container::-webkit-scrollbar { display: none; }
+        .compass { font-size: 24px; padding-right: 12px; border-right: 1px solid #ddd; cursor: pointer; }
+        .chip { background: #f2f2f2; padding: 7px 16px; border-radius: 20px; font-size: 14px; font-weight: 500; cursor: pointer; border: 1px solid transparent; }
+        .chip.active { background: #0f0f0f; color: #fff; }
 
-        /* YOU PAGE - DEEP STRUCTURE */
-        #you-page { display: none; background: #fff; height: calc(100vh - 120px); overflow-y: auto; }
-        .user-header { padding: 20px; border-bottom: 8px solid #f2f2f2; }
-        .user-info { display: flex; align-items: center; gap: 15px; }
-        .user-pic { width: 60px; height: 60px; background: #3498db; border-radius: 50%; }
+        /* HOME FEED: ASLI YOUTUBE CARDS */
+        #home-feed { padding: 0; }
+        .video-card { margin-bottom: 25px; width: 100%; }
+        .thumbnail { width: 100%; height: 215px; background-color: #eee; background-size: cover; background-position: center; position: relative; }
+        .duration { position: absolute; bottom: 8px; right: 8px; background: rgba(0,0,0,0.8); color: #fff; padding: 2px 6px; border-radius: 4px; font-size: 11px; }
+        .v-details { display: flex; gap: 12px; padding: 12px; }
+        .channel-pic { width: 40px; height: 40px; border-radius: 50%; background: #ddd; flex-shrink: 0; }
+        .v-info { flex: 1; }
+        .v-title { font-size: 15px; font-weight: 500; line-height: 1.4; display: block; margin-bottom: 4px; }
+        .v-meta { font-size: 12px; color: var(--yt-gray); }
+
+        /* SHORTS SHELF */
+        .shorts-shelf { padding: 15px; border-top: 5px solid #f2f2f2; border-bottom: 5px solid #f2f2f2; margin-bottom: 20px; }
+        .shorts-scroll { display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; }
+        .short-card { min-width: 150px; height: 260px; background: #ccc; border-radius: 12px; position: relative; background-size: cover; }
+        .short-title { position: absolute; bottom: 10px; left: 10px; color: #fff; font-size: 13px; font-weight: bold; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); }
+
+        /* YOU PAGE: ALL 40+ OPTIONS */
+        #you-page { display: none; background: #fff; }
+        .account-box { padding: 25px 20px; border-bottom: 8px solid #f2f2f2; }
+        .avatar { width: 65px; height: 65px; background: linear-gradient(45deg, #007bff, #6610f2); border-radius: 50%; }
         .btn-row { display: flex; gap: 10px; margin-top: 15px; }
         .btn-row button { flex: 1; padding: 8px; border-radius: 20px; border: 1px solid #ccc; background: #fff; font-size: 13px; font-weight: 500; }
-
-        /* MENU ITEMS - ALL 40+ PURJA PURJA */
+        
         .menu-section { border-bottom: 8px solid #f2f2f2; }
-        .menu-item { display: flex; align-items: center; padding: 15px 20px; cursor: pointer; border-bottom: 1px solid #f9f9f9; }
+        .menu-item { display: flex; align-items: center; padding: 14px 20px; cursor: pointer; border-bottom: 1px solid #f9f9f9; }
         .menu-item:active { background: #f2f2f2; }
-        .menu-icon { width: 35px; font-size: 20px; }
-        .menu-text { flex: 1; }
-        .m-title { font-size: 16px; font-weight: 400; }
-        .m-sub { font-size: 12px; color: var(--yt-gray); }
+        .icon { width: 35px; font-size: 22px; }
+        .text-box { flex: 1; }
+        .main-text { font-size: 16px; font-weight: 400; color: #0f0f0f; }
+        .sub-text { font-size: 12px; color: var(--yt-gray); margin-top: 2px; }
+        .arrow { color: #888; font-size: 18px; }
 
-        /* BOTTOM NAV */
+        /* BOTTOM NAVIGATION */
         .bottom-nav { position: fixed; bottom: 0; width: 100%; display: flex; justify-content: space-around; background: #fff; padding: 10px 0; border-top: 1px solid #eee; z-index: 3000; }
-        .nav-link { text-align: center; font-size: 10px; color: var(--yt-gray); cursor: pointer; flex: 1; }
-        .nav-link b { font-size: 22px; display: block; color: #000; margin-bottom: 3px; }
+        .nav-item { text-align: center; font-size: 10px; color: var(--yt-gray); cursor: pointer; flex: 1; }
+        .nav-item b { font-size: 24px; display: block; color: #000; margin-bottom: 3px; font-style: normal; }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <div class="logo" onclick="showHome()">▶️ My Tube</div>
+    <header class="header">
+        <div class="logo" onclick="location.reload()">▶️ My Tube</div>
         <div class="header-icons">📺 🔔 🔍 <span onclick="showYou()">👤</span></div>
-    </div>
+    </header>
 
     <div id="top-bar" class="filter-container">
         <span class="compass">🧭</span>
         <div class="chip active">All</div>
         <div class="chip">Music</div>
-        <div class="chip">Mixes</div>
         <div class="chip">Live</div>
         <div class="chip">Gaming</div>
+        <div class="chip">Naina Tech</div>
+        <div class="chip">Mixes</div>
         <div class="chip">Trending</div>
-        <div class="chip">News</div>
-        <div class="chip">Learning</div>
     </div>
 
-    <main id="home-feed" style="padding: 15px;">
-        <div style="width:100%; height:200px; background:#ddd; border-radius:12px;"></div>
-        <p><b>Video Purja Purja Logic: Part 1</b></p>
+    <main id="home-page">
+        <div class="video-card">
+            <div class="thumbnail" style="background-image: url('https://picsum.photos/seed/n1/400/225');"><span class="duration">10:05</span></div>
+            <div class="v-details">
+                <div class="channel-pic"></div>
+                <div class="v-info">
+                    <span class="v-title">Mastering AI Hardware & Robotics with Naina</span>
+                    <span class="v-meta">Naina Master • 2M views • 5 hours ago</span>
+                </div>
+                <div style="font-size:20px; color:#606060;">⋮</div>
+            </div>
+        </div>
+
+        <div class="shorts-shelf">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
+                <span style="color:red; font-size:20px;">🩳</span><b>Shorts</b>
+            </div>
+            <div class="shorts-scroll">
+                <div class="short-card" style="background-image:url('https://picsum.photos/seed/s1/200/400');"><span class="short-title">New PLC Wiring</span></div>
+                <div class="short-card" style="background-image:url('https://picsum.photos/seed/s2/200/400');"><span class="short-title">Cotton Farm Yield</span></div>
+                <div class="short-card" style="background-image:url('https://picsum.photos/seed/s3/200/400');"><span class="short-title">Robotic Arm Demo</span></div>
+            </div>
+        </div>
+
+        <div class="video-card">
+            <div class="thumbnail" style="background-image: url('https://picsum.photos/seed/n2/400/225');"><span class="duration">08:20</span></div>
+            <div class="v-details">
+                <div class="channel-pic" style="background-color:#e67e22;"></div>
+                <div class="v-info">
+                    <span class="v-title">Building floating islands: The physics of the future</span>
+                    <span class="v-meta">Visionary Tech • 500K views • 1 day ago</span>
+                </div>
+                <div style="font-size:20px; color:#606060;">⋮</div>
+            </div>
+        </div>
     </main>
 
     <div id="you-page">
-        <div class="user-header">
-            <div class="user-info">
-                <div class="user-pic"></div>
-                <div><h2 style="margin:0;">Naina Master</h2><p style="margin:0; color:gray;">@naina_v1 • Edit Channel ></p></div>
+        <div class="account-box">
+            <div style="display:flex; align-items:center; gap:18px;">
+                <div class="avatar"></div>
+                <div><h2 style="margin:0;">Naina Master</h2><p style="margin:0; color:gray; font-size:14px;">@naina_v1 • Edit Channel ></p></div>
             </div>
             <div class="btn-row">
                 <button>Switch Account</button>
                 <button>Google Account</button>
-                <button>Turn on Incognito</button>
+                <button>Incognito</button>
             </div>
         </div>
 
         <div class="menu-section">
-            <div class="menu-item"><div class="menu-icon">⚙️</div><div class="menu-text"><div class="m-title">General</div><div class="m-sub">Appearance, Playback in feeds, Double-tap to seek</div></div></div>
-            <div class="menu-item"><div class="menu-icon">📊</div><div class="menu-text"><div class="m-title">Data Saving</div><div class="m-sub">Mobile data usage, Smart downloads, Upload quality</div></div></div>
-            <div class="menu-item"><div class="menu-icon">📱</div><div class="menu-text"><div class="m-title">Autoplay</div><div class="m-sub">Next video automatically plays on mobile/tablet</div></div></div>
-            <div class="menu-item"><div class="menu-icon">🎬</div><div class="menu-text"><div class="m-title">Video Quality Preferences</div><div class="m-sub">On mobile networks, On Wi-Fi settings</div></div></div>
+            <div class="menu-item"><div class="icon">⚙️</div><div class="text-box"><div class="main-text">General</div><div class="sub-text">Break reminders, Dark theme, Playback in feeds</div></div><div class="arrow">></div></div>
+            <div class="menu-item"><div class="icon">📊</div><div class="text-box"><div class="main-text">Data Saving</div><div class="sub-text">Mobile data usage, Smart downloads</div></div><div class="arrow">></div></div>
+            <div class="menu-item"><div class="icon">🎬</div><div class="text-box"><div class="main-text">Video Quality Preferences</div><div class="sub-text">Set quality for Mobile and Wi-Fi</div></div><div class="arrow">></div></div>
+            <div class="menu-item" style="background:#fafff9;"><div class="icon">💹</div><div class="text-box"><div class="main-text" style="color:green; font-weight:bold;">User Profit Dashboard</div><div class="sub-text">Active: ₹1.00 / Video | Total: ₹10.50 (Live)</div></div><div class="arrow">></div></div>
         </div>
 
         <div class="menu-section">
-            <div class="menu-item" style="background: #f0fff0;"><div class="menu-icon">💹</div><div class="menu-text"><div class="m-title" style="color:green;">Naina Profit Dashboard</div><div class="m-sub">Current: ₹1.00 / Video | Total: ₹10.50 (Live Sync)</div></div></div>
-            <div class="menu-item"><div class="menu-icon">📥</div><div class="menu-text"><div class="m-title">Downloads</div><div class="m-sub">Download quality, Over Wi-Fi only, Storage used</div></div></div>
-            <div class="menu-item"><div class="menu-icon">📺</div><div class="menu-text"><div class="m-title">Watch on TV</div><div class="m-sub">Link with TV code, Scan for devices</div></div></div>
+            <div class="menu-item"><div class="icon">📥</div><div class="text-box"><div class="main-text">Downloads</div><div class="sub-text">Quality, Over Wi-Fi only, Storage: 1.2GB free</div></div><div class="arrow">></div></div>
+            <div class="menu-item"><div class="icon">🛡️</div><div class="text-box"><div class="main-text">Privacy</div><div class="sub-text">Blocked contacts, YouTube Terms of Service</div></div><div class="arrow">></div></div>
+            <div class="menu-item"><div class="icon">💰</div><div class="text-box"><div class="main-text">Purchases & Memberships</div><div class="sub-text">Manage Billing, Invoices, Premium</div></div><div class="arrow">></div></div>
+            <div class="menu-item"><div class="icon">🔔</div><div class="text-box"><div class="main-text">Notifications</div><div class="sub-text">Scheduled digest, Subscriptions, Activity</div></div><div class="arrow">></div></div>
         </div>
 
         <div class="menu-section">
-            <div class="menu-item"><div class="menu-icon">🛡️</div><div class="menu-text"><div class="m-title">Privacy & Safety</div><div class="m-sub">Blocked contacts, YouTube Terms of Service, Restricted Mode</div></div></div>
-            <div class="menu-item"><div class="menu-icon">💰</div><div class="menu-text"><div class="m-title">Purchases and Memberships</div><div class="m-sub">Premium, Billing, Invoices, Payment methods</div></div></div>
-            <div class="menu-item"><div class="menu-icon">🔔</div><div class="menu-text"><div class="m-title">Notifications</div><div class="m-sub">Scheduled digest, Subscriptions, Activity, Mentions</div></div></div>
-            <div class="menu-item"><div class="menu-icon">🔗</div><div class="menu-text"><div class="m-title">Connected Apps</div><div class="m-sub">Manage third-party connections and gaming accounts</div></div></div>
+            <div class="menu-item"><div class="icon">💬</div><div class="text-box"><div class="main-text">Live Chat</div><div class="sub-text">Review settings, Badges, Chat visibility</div></div><div class="arrow">></div></div>
+            <div class="menu-item"><div class="icon">⌨️</div><div class="text-box"><div class="main-text">Captions</div><div class="sub-text">Language, Text size, Style</div></div><div class="arrow">></div></div>
+            <div class="menu-item"><div class="icon">♿</div><div class="text-box"><div class="main-text">Accessibility</div><div class="sub-text">Accessibility player, High contrast</div></div><div class="arrow">></div></div>
         </div>
 
         <div class="menu-section">
-            <div class="menu-item"><div class="menu-icon">💬</div><div class="menu-text"><div class="m-title">Live Chat</div><div class="m-sub">Customization, Hold for review, Badges</div></div></div>
-            <div class="menu-item"><div class="menu-icon">⌨️</div><div class="menu-text"><div class="m-title">Captions</div><div class="m-sub">Language, Text size, Caption style settings</div></div></div>
-            <div class="menu-item"><div class="menu-icon">♿</div><div class="menu-text"><div class="m-title">Accessibility</div><div class="m-sub">Accessibility player controls, High contrast menu</div></div></div>
-            <div class="menu-item"><div class="menu-icon">ℹ️</div><div class="menu-text"><div class="m-title">About</div><div class="m-sub">App Version 2026.04.18, Open source licenses, Policies</div></div></div>
-            <div class="menu-item"><div class="menu-icon">❓</div><div class="menu-text"><div class="m-title">Help & Feedback</div><div class="m-sub">Send feedback, Community help, Help center articles</div></div></div>
+            <div class="menu-item"><div class="icon">ℹ️</div><div class="text-box"><div class="main-text">About</div><div class="sub-text">Version 2026.04.18, Licenses, Policy</div></div><div class="arrow">></div></div>
+            <div class="menu-item"><div class="icon">❓</div><div class="text-box"><div class="main-text">Help & Feedback</div><div class="sub-text">Browse articles, Community help</div></div><div class="arrow">></div></div>
+            <div class="menu-item"><div class="icon">📄</div><div class="text-box"><div class="main-text">Terms & Privacy Policy</div><div class="sub-text">Read legal documents</div></div><div class="arrow">></div></div>
+            <div class="menu-item" style="padding: 25px; justify-content: center; border-bottom: none;"><b style="color:red; font-size:16px;">Sign Out</b></div>
         </div>
-    </div>
+        <div style="height:50px;"></div> </div>
 
     <nav class="bottom-nav">
-        <div class="nav-link" onclick="showHome()"><b>🏠</b>Home</div>
-        <div class="nav-link"><b>🩳</b>Shorts</div>
-        <div class="nav-link"><b style="font-size:35px; margin-top:-8px;">⊕</b></div>
-        <div class="nav-link"><b>🔔</b>Subs</div>
-        <div class="nav-link" onclick="showYou()"><b>👤</b>You</div>
+        <div class="nav-item" onclick="showHome()"><b>🏠</b>Home</div>
+        <div class="nav-item"><b>🩳</b>Shorts</div>
+        <div class="nav-item"><b style="font-size:35px; margin-top:-8px;">⊕</b></div>
+        <div class="nav-item"><b>🔔</b>Subs</div>
+        <div class="nav-item" onclick="showYou()"><b>👤</b>You</div>
     </nav>
 
     <script>
         function showYou() {
-            document.getElementById('home-feed').style.display = 'none';
+            document.getElementById('home-page').style.display = 'none';
             document.getElementById('top-bar').style.display = 'none';
             document.getElementById('you-page').style.display = 'block';
+            window.scrollTo(0,0);
         }
         function showHome() {
-            document.getElementById('home-feed').style.display = 'block';
+            document.getElementById('home-page').style.display = 'block';
             document.getElementById('top-bar').style.display = 'flex';
             document.getElementById('you-page').style.display = 'none';
+            window.scrollTo(0,0);
         }
     </script>
 </body>
