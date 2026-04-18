@@ -3,81 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Tube - Master System</title>
+    <title>My Tube - Master Sync</title>
     <style>
-        /* CSS: YOUTUBE LOOK & FEEL */
-        body { margin: 0; font-family: Roboto, Arial; background: #f9f9f9; }
-        #header { display: flex; justify-content: space-between; padding: 10px; background: #fff; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #ddd; }
-        .logo { color: red; font-weight: bold; font-size: 22px; }
-        .icons span { margin-left: 15px; cursor: pointer; font-size: 20px; }
+        body { margin: 0; font-family: Roboto, Arial; background: #fff; }
+        .header { display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid #ddd; position: sticky; top: 0; background: #fff; z-index: 100; }
+        .logo { color: red; font-weight: bold; font-size: 20px; }
+        .filter-bar { display: flex; overflow-x: auto; padding: 10px; gap: 10px; border-bottom: 1px solid #eee; }
+        .filter-item { background: #f2f2f2; padding: 6px 12px; border-radius: 20px; white-space: nowrap; font-size: 14px; }
         
-        /* HIDDEN SECTIONS: Jo sirf click par khulenge */
-        #settings-page, #account-section { display: none; padding: 20px; background: white; height: 100vh; }
-        
-        /* HOME PAGE: Jo sabse pehle dikhega */
-        #home-page { display: block; }
-        .video-card { width: 100%; margin-bottom: 20px; background: #fff; }
-        .thumbnail { width: 100%; height: 200px; background: #ccc; }
-        
-        /* NAVIGATION BAR (Bottom) */
-        #nav-bar { position: fixed; bottom: 0; width: 100%; display: flex; justify-content: space-around; background: #fff; padding: 10px 0; border-top: 1px solid #ddd; }
-        .nav-item { text-align: center; font-size: 12px; cursor: pointer; }
+        /* SETTINGS & YOU PAGE STYLE */
+        .settings-page { display: none; background: #fff; height: 100vh; overflow-y: auto; }
+        .setting-row { display: flex; align-items: center; padding: 15px; border-bottom: 1px solid #f9f9f9; cursor: pointer; font-size: 16px; }
+        .setting-row:hover { background: #f2f2f2; }
+        .account-box { padding: 20px; border-bottom: 8px solid #f2f2f2; }
     </style>
 </head>
 <body>
 
-    <div id="header">
+    <div class="header">
         <div class="logo">My Tube</div>
-        <div class="icons">
-            <span>📺</span> <span>🔔</span> <span>🔍</span> <span onclick="openSettings()">👤</span> </div>
+        <div style="font-size: 20px;">📺 🔔 🔍 <span onclick="openSettings()" style="cursor:pointer;">👤</span></div>
     </div>
 
-    <div id="home-page">
-        <div class="filter-bar" style="padding:10px; display:flex; gap:10px; overflow-x:auto;">
-            <div style="background:#000; color:#fff; padding:5px 15px; border-radius:15px;">All</div>
-            <div style="background:#eee; padding:5px 15px; border-radius:15px;">Music</div>
-            <div style="background:#eee; padding:5px 15px; border-radius:15px;">Mixes</div>
+    <div class="filter-bar" id="top-filters">
+        <div class="filter-item" style="background:#000; color:#fff;">All</div>
+        <div class="filter-item">Music</div>
+        <div class="filter-item">Mixes</div>
+        <div class="filter-item">Gaming</div>
+        <div class="filter-item">Live</div>
+        <div class="filter-item">Trending</div>
+        <div class="filter-item">News</div>
+        <div class="filter-item">Podcasts</div>
+    </div>
+
+    <div id="home-feed" style="padding: 10px;">
+        <div style="width:100%; height:200px; background:#eee; margin-bottom:10px;"></div>
+        <p><b>Video: How to earn ₹1 per view</b></p>
+    </div>
+
+    <div id="settings-view" class="settings-page">
+        <div class="account-box">
+            <div style="display:flex; align-items:center; gap:15px;">
+                <div style="width:50px; height:50px; background:#3498db; border-radius:50%;"></div>
+                <div><b>Naina Master</b><br><span style="color:gray; font-size:12px;">@naina_v1 • Edit Channel</span></div>
+            </div>
+            <div style="display:flex; gap:10px; margin-top:15px;">
+                <button style="flex:1; border-radius:15px; border:1px solid #ccc; padding:5px;">Switch Account</button>
+                <button style="flex:1; border-radius:15px; border:1px solid #ccc; padding:5px;">Google Account</button>
+            </div>
         </div>
-        <div class="video-card"><div class="thumbnail"></div><p style="padding:10px;">Sample Video - ₹1 Profit Enabled</p></div>
-    </div>
 
-    <div id="settings-page">
-        <h2 onclick="closeSettings()" style="cursor:pointer;">← Settings</h2>
-        <div class="setting-item">⚙️ Data Saving</div>
-        <div class="setting-item">👤 Account Information (Prayer Section)</div>
-        <div class="setting-item">🔒 Privacy & Security</div>
-        <div class="setting-item">💰 My Earnings: ₹100.00</div>
-        <div class="setting-item">♿ Accessibility</div>
-    </div>
-
-    <div id="nav-bar">
-        <div class="nav-item" onclick="showHome()">🏠<br>Home</div>
-        <div class="nav-item">🩳<br>Shorts</div>
-        <div class="nav-item">➕</div>
-        <div class="nav-item">🔔<br>Subs</div>
-        <div class="nav-item" onclick="openSettings()">👤<br>You</div>
+        <div class="setting-row">⚙️ General</div>
+        <div class="setting-row">📊 Data Saving</div>
+        <div class="setting-row">📱 Autoplay</div>
+        <div class="setting-row">🎬 Video Quality</div>
+        <div class="setting-row">📥 Downloads</div>
+        <div class="setting-row">📺 Watch on TV</div>
+        <div class="setting-row">🛡️ Privacy</div>
+        <div class="setting-row">💰 Purchases & Memberships</div>
+        <div class="setting-row">📈 My Profit: ₹10.50</div>
+        <div class="setting-row">🔔 Notifications</div>
+        <div class="setting-row">🔗 Connected Apps</div>
+        <div class="setting-row">💬 Live Chat</div>
+        <div class="setting-row">👤 Your Data in My Tube</div>
+        <div class="setting-row">⚖️ Legal & Policies</div>
+        <div class="setting-row">♿ Accessibility</div>
+        <div class="setting-row">❓ Help & Feedback</div>
+        <div style="padding:20px; text-align:center; color:gray; font-size:12px;">App Version 2026.04.18 (Naina Edition)</div>
     </div>
 
     <script>
-        // MASTER NAVIGATION LOGIC: Ye tay karega ki kya kab dikhega
         function openSettings() {
-            document.getElementById('home-page').style.display = 'none';
-            document.getElementById('settings-page').style.display = 'block';
-            console.log("Settings Locked: Open!");
+            document.getElementById('home-feed').style.display = 'none';
+            document.getElementById('top-filters').style.display = 'none';
+            document.getElementById('settings-view').style.display = 'block';
         }
-
         function showHome() {
-            document.getElementById('home-page').style.display = 'block';
-            document.getElementById('settings-page').style.display = 'none';
-            console.log("Back to Home Page");
+            document.getElementById('home-feed').style.display = 'block';
+            document.getElementById('top-filters').style.display = 'flex';
+            document.getElementById('settings-view').style.display = 'none';
         }
-
-        // AUTO-SYNC LOGIC (Lakhon Karodon wala Logic)
-        function initApp() {
-            console.log("My Tube Master Sync Active...");
-            // Yahan aapka baaki ka 3000 lines ka data logic automatically connect ho jayega
-        }
-        window.onload = initApp;
     </script>
 </body>
 </html>
