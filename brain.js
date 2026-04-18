@@ -1,32 +1,57 @@
-/* THE CENTRAL NERVOUS SYSTEM */
+/* THE REVENUE MASTER BRAIN */
 const NainaApp = {
-    // Yaaddasht (Memory)
+    // Memory
     memory: {
-        saveBalance: (val) => localStorage.setItem('naina_money', val),
-        getBalance: () => parseFloat(localStorage.getItem('naina_money')) || 0
+        save: (k, v) => localStorage.setItem(k, v),
+        get: (k) => parseFloat(localStorage.getItem(k)) || 0
     },
 
-    // Khoon ka Daura (Video/Money Flow)
-    heart: {
-        balance: 0,
-        init: function() {
-            this.balance = NainaApp.memory.getBalance();
-            document.getElementById('wallet').innerText = "₹" + this.balance.toFixed(2);
-        },
-        addProfit: function() {
-            this.balance += 1.00;
-            NainaApp.memory.saveBalance(this.balance);
-            document.getElementById('wallet').innerText = "₹" + this.balance.toFixed(2);
-            alert("System: Energy processed. ₹1 added to DNA.");
-        }
-    },
-
-    // Safai (Kidney/Cleaning)
+    // Kidney (Cleaning)
     kidney: {
-        cleanSystem: function() {
-            console.log("Purifying Cache...");
-            alert("App Cleaned!");
+        cleanSystem: () => { alert("System Purified!"); }
+    },
+
+    // Heart (The ₹9.50 Profit Logic)
+    heart: {
+        userBal: 0,
+        ownerBal: 0,
+
+        init: function() {
+            this.userBal = NainaApp.memory.get('n_user');
+            this.ownerBal = NainaApp.memory.get('n_owner');
+            this.updateUI();
+        },
+
+        processHighProfit: function() {
+            const totalAdValue = 10.00;
+            
+            // 1. Pehle ₹9 Owner ko
+            let ownerCut = 9.00; 
+            
+            // 2. Baki bache ₹1 mein se bhi aadha (0.50) Owner ko
+            ownerCut += 0.50; 
+            
+            // 3. User ke liye bacha sirf 0.50
+            let userCut = 0.50;
+
+            // Updates
+            this.userBal += userCut;
+            this.ownerBal += ownerCut;
+
+            // Save to DNA
+            NainaApp.memory.save('n_user', this.userBal);
+            NainaApp.memory.save('n_owner', this.ownerBal);
+
+            this.updateUI();
+            alert("Video Done!\nOwner Earned: ₹9.50\nUser Earned: ₹0.50");
+        },
+
+        updateUI: function() {
+            document.getElementById('user-wallet').innerText = "₹" + this.userBal.toFixed(2);
+            document.getElementById('owner-wallet').innerText = "₹" + this.ownerBal.toFixed(2);
         }
     }
 };
+
+// Start System
 window.onload = () => NainaApp.heart.init();
