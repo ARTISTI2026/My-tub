@@ -3,135 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Tube - The Living Human Edition</title>
-    <style>
-        /* SKIN & MUSCLES (Chamdi aur Maans) */
-        :root { --yt-red: #ff0000; --yt-bg: #ffffff; --yt-text: #0f0f0f; }
-        body { margin: 0; font-family: 'Roboto', sans-serif; background: var(--yt-bg); overflow-x: hidden; }
-
-        /* THE BRAIN MONITOR (Dimaag ki Halat) */
-        .brain-monitor { background: #111; color: #00ff00; font-family: monospace; font-size: 10px; padding: 5px 15px; position: sticky; top: 0; z-index: 5000; display: flex; justify-content: space-between; }
-
-        /* THE HEART (Earning Heartbeat) */
-        .heart-box { margin: 15px; padding: 20px; border-radius: 15px; background: linear-gradient(135deg, #fff 0%, #f0fff4 100%); border: 1px solid #d1e7dd; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-        .balance-text { font-size: 28px; font-weight: bold; color: #198754; display: block; }
-
-        /* THE DIGESTIVE SYSTEM (Video Feed) */
-        .feed-container { padding: 0 0 80px 0; }
-        .video-body { margin-bottom: 20px; animation: breathe 3s infinite ease-in-out; }
-        .video-thumbnail { width: 100%; height: 210px; background: #eee; background-size: cover; position: relative; }
-        
-        /* THE SENSES (Icons & Buttons) */
-        .nav-skeleton { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; padding: 10px 0; border-top: 1px solid #eee; z-index: 4000; }
-        .nav-organ { flex: 1; text-align: center; font-size: 11px; cursor: pointer; color: #606060; }
-        .nav-organ b { font-size: 22px; display: block; color: #000; margin-bottom: 3px; }
-
-        /* CLEANING ACTION (Nahana & Safai) */
-        .cleaning-effect { filter: hue-rotate(180deg) brightness(1.2); transition: 0.5s; }
-
-        @keyframes breathe {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.01); }
-            100% { transform: scale(1); }
-        }
-    </style>
+    <title>My Tube Master Build</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body id="main-body">
+<body>
 
-    <div class="brain-monitor">
-        <span>[BRAIN: THINKING...]</span>
-        <span>[HEART: PUMPING ₹]</span>
-        <span id="organ-status">[KIDNEY: CLEAN]</span>
-    </div>
+    <div id="profit-display">Total Vitality: <span id="wallet">₹0.00</span></div>
 
-    <div class="heart-box">
-        <span style="font-size: 12px; color: #666; font-weight: bold;">TOTAL ACCOUNT BLOOD (BALANCE)</span>
-        <span id="wallet" class="balance-text">₹0.00</span>
-        <div style="font-size: 11px; color: #198754; margin-top: 5px;">● System Health: Excellent</div>
-    </div>
+    <main id="app-body">
+        <div class="video-card" onclick="NainaApp.heart.addProfit()">
+            <div class="thumbnail" style="background:url('https://picsum.photos/seed/n1/400/225') center/cover;"></div>
+            <div style="padding:10px;"><b>Building AI Robotics - Masterclass</b><br>Earn ₹1.00</div>
+        </div>
+    </main>
 
-    <main class="feed-container" id="video-feed">
-        </main>
-
-    <nav class="nav-skeleton">
-        <div class="nav-organ" onclick="bodyLogic.home()"><b>🏠</b>Home</div>
-        <div class="nav-organ"><b>🩳</b>Shorts</div>
-        <div class="nav-organ" onclick="bodyLogic.bath()"><b>🧼</b>Bath/Clean</div>
-        <div class="nav-organ" onclick="bodyLogic.you()"><b>👤</b>You</div>
+    <nav class="bottom-nav">
+        <div class="nav-item" onclick="location.reload()">🏠<br>Home</div>
+        <div class="nav-item" onclick="NainaApp.kidney.cleanSystem()">🧼<br>Clean</div>
+        <div class="nav-item">👤<br>You</div>
     </nav>
 
-    <script>
-        // THE CENTRAL NERVOUS SYSTEM (Pura Logic)
-        const bodyLogic = {
-            // Memory (Haddiyan): Data stays even after refresh
-            dna: {
-                balance: parseFloat(localStorage.getItem('naina_balance')) || 0,
-                isClean: true
-            },
-
-            // Heartbeat: Starts the life of the app
-            birth: function() {
-                this.updateHeart();
-                this.generateCells(); // Creating videos
-                console.log("App Life Started...");
-            },
-
-            // Kidney/Liver: Self-Cleaning Function (Nahana)
-            bath: function() {
-                const body = document.getElementById('main-body');
-                const status = document.getElementById('organ-status');
-                
-                body.classList.add('cleaning-effect');
-                status.innerText = "[KIDNEY: PURIFYING...]";
-                
-                setTimeout(() => {
-                    body.classList.remove('cleaning-effect');
-                    status.innerText = "[KIDNEY: CLEAN]";
-                    alert("App ne naha liya! Ab ye bilkul saaf aur fast hai.");
-                }, 1500);
-            },
-
-            // Pumping Blood: Adding ₹1
-            pumpMoney: function() {
-                this.dna.balance += 1;
-                localStorage.setItem('naina_balance', this.dna.balance);
-                this.updateHeart();
-                alert("Vitality Boost: ₹1 added to your blood!");
-            },
-
-            updateHeart: function() {
-                document.getElementById('wallet').innerText = "₹" + this.dna.balance.toFixed(2);
-            },
-
-            // Feeding the body: Creating videos
-            generateCells: function() {
-                const feed = document.getElementById('video-feed');
-                const contents = [
-                    { t: "Building Human AI Limbs", c: "Naina Tech", img: "n1" },
-                    { t: "Cotton Farm Automation", c: "Agri Master", img: "n2" },
-                    { t: "Floating Island Physics", c: "Visionary", img: "n3" }
-                ];
-
-                feed.innerHTML = ""; // Digestion: Clear old waste
-                contents.forEach(item => {
-                    feed.innerHTML += `
-                        <div class="video-body" onclick="bodyLogic.pumpMoney()">
-                            <div class="video-thumbnail" style="background-image:url('https://picsum.photos/seed/${item.img}/400/225')"></div>
-                            <div style="padding:12px;">
-                                <b style="font-size:16px;">${item.t}</b>
-                                <div style="font-size:12px; color:gray; margin-top:4px;">${item.c} • Earn ₹1 on click</div>
-                            </div>
-                        </div>
-                    `;
-                });
-            },
-
-            home: function() { location.reload(); },
-            you: function() { alert("You Page: Sabhi organs sahi kaam kar rahe hain!"); }
-        };
-
-        // Life begins here
-        bodyLogic.birth();
-    </script>
+    <script src="brain.js"></script>
 </body>
 </html>
