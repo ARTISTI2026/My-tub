@@ -3,44 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Tube - Owner Profit Build</title>
+    <title>YouTube</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body style="background: #f0f2f5;">
+<body>
+    <header style="display:flex; justify-content:space-between; padding:10px; background:#fff; position:sticky; top:0; z-index:100;">
+        <div style="color:red; font-weight:bold; font-size:20px;">YouTube</div>
+        <div onclick="openSettings()" style="cursor:pointer; font-size:20px;">⚙️</div>
+    </header>
 
-    <div style="background:#1a1a1a; color:#ffcc00; font-family:monospace; font-size:10px; padding:5px; position:fixed; top:0; width:100%; z-index:9999; text-align:center;">
-        [MODE: MAXIMUM REVENUE] [PARTNER SPLIT: ACTIVE]
+    <div id="settings-panel" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:white; z-index:10000; padding:20px;">
+        <button onclick="closeSettings()" style="background:red; color:white; border:none; padding:10px;">X Close</button>
+        <h3>Owner Dashboard (Naina)</h3>
+        <p>Owner Profit: <b id="owner-wallet" style="color:red;">₹0.00</b></p>
+        <p>User Balance: <b id="user-wallet">₹0.00</b></p>
     </div>
 
-    <div style="margin-top:35px; background:#fff; padding:20px; border-bottom:2px solid #ddd; display:flex; justify-content:space-around;">
-        <div style="text-align:center;">
-            <span style="font-size:11px; color:#666;">USER EARNING</span><br>
-            <b id="user-wallet" style="font-size:24px; color:#27ae60;">₹0.00</b>
-        </div>
-        <div style="text-align:center; border-left:1px solid #eee; padding-left:20px;">
-            <span style="font-size:11px; color:#c0392b; font-weight:bold;">OWNER PROFIT (YOU)</span><br>
-            <b id="owner-wallet" style="font-size:24px; color:#c0392b;">₹0.00</b>
-        </div>
-    </div>
-
-    <main style="padding:15px; padding-bottom:100px;">
-        <div onclick="NainaApp.heart.processHighProfit()" style="background:#fff; border-radius:15px; overflow:hidden; box-shadow:0 4px 10px rgba(0,0,0,0.1); cursor:pointer;">
-            <div style="width:100%; height:200px; background:url('https://picsum.photos/seed/tech/600/300') center/cover;"></div>
-            <div style="padding:15px;">
-                <b style="font-size:18px;">Premium Ad Video (₹10 Value)</b>
-                <p style="color:#777; font-size:13px; margin-top:5px;">Watch to boost system vitality.</p>
-                <div style="background:#fff3cd; color:#856404; padding:5px; font-size:11px; border-radius:5px; display:inline-block;">
-                    System Tax: 95% Applied
-                </div>
-            </div>
+    <main id="video-list" style="padding-bottom:80px;">
+        <div class="video-card" onclick="NainaApp.heart.processUnlimitedProfit()">
+            <div class="thumbnail" style="height:200px; background:url('https://picsum.photos/seed/naina/400/225') center/cover;"></div>
+            <div style="padding:10px;"><b>Asli YouTube Algorithm Kaise Kaam Karta Hai?</b></div>
         </div>
     </main>
-
-    <nav class="bottom-nav" style="background:#fff; position:fixed; bottom:0; width:100%; display:flex; padding:15px 0; border-top:1px solid #ddd;">
-        <div class="nav-item" style="flex:1; text-align:center;" onclick="location.reload()">🏠<br>Home</div>
-        <div class="nav-item" style="flex:1; text-align:center;" onclick="NainaApp.kidney.cleanSystem()">🧼<br>Clean</div>
-        <div class="nav-item" style="flex:1; text-align:center;">👤<br>Account</div>
-    </nav>
 
     <script src="auth.js"></script>
     <script src="suraksha.js"></script>
@@ -49,5 +33,10 @@
     <script src="dharkan.js"></script>
     <script src="server.js"></script>
     <script src="brain.js"></script>
+
+    <script>
+        function openSettings() { document.getElementById('settings-panel').style.display = 'block'; }
+        function closeSettings() { document.getElementById('settings-panel').style.display = 'none'; }
+    </script>
 </body>
 </html>
