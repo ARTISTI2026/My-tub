@@ -1,203 +1,59 @@
-<!DOCTYPE html>
-<html lang="hi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyTub V12 Master - Final Edition</title>
-    <style>
-        * { box-sizing: border-box; }
-        body { background: #0f0f0f; color: white; font-family: Roboto, Arial; margin: 0; padding-bottom: 80px; }
-        
-        /* HEADER */
-        header { display: flex; align-items: center; justify-content: space-between; padding: 10px 15px; background: #0f0f0f; position: sticky; top: 0; z-index: 1000; }
-        .search-box { background: #222; border-radius: 20px; padding: 5px 15px; display: flex; flex: 1; margin: 0 15px; border: 1px solid #333; }
-        .search-box input { background: none; border: none; color: white; width: 100%; outline: none; }
-
-        /* VIDEO CARDS */
-        .v-card { margin-bottom: 15px; width: 100%; }
-        .thumb { width: 100%; aspect-ratio: 16/9; background: #111; position: relative; }
-        .thumb img { width: 100%; height: 100%; object-fit: cover; }
-
-        .details { padding: 12px; display: flex; gap: 12px; }
-        .channel-icon { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(45deg, #ff0000, #550000); flex-shrink: 0; }
-        .v-text h4 { margin: 0; font-size: 15px; font-weight: 500; }
-        .v-text p { margin: 5px 0; color: #aaa; font-size: 12px; }
-
-        /* OVERLAYS */
-        .full-page { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0f0f0f; z-index: 5000; overflow-y: auto; }
-        .back-btn { padding: 15px; font-size: 24px; cursor: pointer; display: block; }
-
-        /* BOTTOM NAV */
-        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: #0f0f0f; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #222; }
-#topLoader { position: fixed; top: 0; left: 0; height: 3px; background: red; width: 0%; z-index: 9999; transition: width 0.4s ease; }
-/* Block 1: Futuristic UI */
-.v12-card { background: linear-gradient(145deg, #1e1e1e, #111); border-radius: 15px; padding: 20px; margin: 10px; border: 1px solid #333; box-shadow: 5px 5px 15px #000; }
-.pulse-green { width: 10px; height: 10px; background: #00ff00; border-radius: 50%; display: inline-block; animation: pulse 1.5s infinite; }
-@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
-.control-btn { background: #f00; color: white; border: none; padding: 12px; border-radius: 8px; width: 100%; font-weight: bold; cursor: pointer; transition: 0.3s; }
-.sensor-data { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #222; font-size: 13px; }
-
-        /* Industrial Dashboard Styling */
-.dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 15px; }
-.stat-card { background: #1a1a1a; border-radius: 12px; padding: 15px; border-left: 4px solid red; }
-.stat-card h3 { font-size: 12px; color: #aaa; margin: 0; }
-.stat-card p { font-size: 18px; font-weight: bold; margin: 5px 0 0 0; }
-.farm-alert { background: rgba(255,0,0,0.1); border: 1px solid red; color: red; padding: 10px; border-radius: 8px; margin: 10px; font-size: 12px; }
-
-
-        /* ISSE LINE 34 KE BAAD DALO */
-html { scroll-behavior: smooth; }
-body { -webkit-tap-highlight-color: transparent; }
- // ==========================================
-// YOUTUBE HEADER & FILTER BAR (FULL SYNC)
 // ==========================================
-const AppHeader = {
-    branding: "My Tube", // Yahan 'My Tube' likha aayega
-    topIcons: ["Cast_to_TV", "Notifications", "Search", "Profile_Naina"],
-    
-    renderFilterBar: function() {
-        // Ye wahi compass aur Music, Mixes wali patti hai
-        return ["Explore", "All", "Music", "Mixes", "Gaming", "Live", "News"];
-    },
+// MY TUBE: FULL YOUTUBE MIRROR (HEADER + FILTERS + LOGIC)
+// ==========================================
 
-    activateHeader: function() {
-        console.log("Activating YouTube-Style Top Bar...");
-        this.showIcons(true);
-        this.setBranding("My Tube");
+// 1. TOP HEADER (Patti) WITH TV, BELL, SEARCH, PROFILE
+const AppHeader = {
+    brand: "My Tube",
+    icons: {
+        cast: "TV_Connect_Icon",
+        notifications: "Bell_Icon_Alert",
+        search: "Lens_Search_Icon",
+        profile: "Naina_Master_Profile_Circle"
+    },
+    render: function() {
+        console.log("Setting up My Tube Branding...");
+        // Ye line upar 'My Tube' aur TV, Bell icon dikhayegi
+        buildHeaderUI(this.brand, this.icons);
     }
 };
 
-// Sabhi buttons ko 'Zinda' karne ka trigger
-window.onload = function() {
-    AppHeader.activateHeader();
-    renderFilterBar(); // Niche ki Music/All wali patti activate ho jayegi
+// 2. TOP FILTER BAR (Music, Mixes, Gaming, etc.)
+const FilterBar = {
+    topics: ["All", "Music", "Mixes", "Gaming", "Live", "News", "Movies"],
+    render: function() {
+        // Screenshots ke hisaab se horizontal scroll patti
+        createFilterScroll(this.topics);
+    }
 };
-      
-        .nav-item { text-align: center; font-size: 10px; color: white; }
-        .nav-item span { font-size: 22px; display: block; }
-    </style>
-<div id="topLoader"></div>
 
-</head>
-<body>
+// 3. DEEP SETTINGS MIRROR (Jo aapne 10 photos mein dikhaya)
+const DeepSettings = {
+    menus: [
+        { id: "data", title: "Data Saving", icon: "cloud" },
+        { id: "access", title: "Accessibility", icon: "person" },
+        { id: "bill", title: "Billing & Payments", icon: "card" },
+        { id: "priv", title: "Privacy", icon: "lock" }
+    ],
+    init: function() {
+        this.menus.forEach(m => linkToYouTubeStyle(m));
+    }
+};
 
-<header>
-    <div style="font-weight:bold; color:red; font-size:22px;">▶</div>
-    <div class="search-box">
-        <input type="text" placeholder="Search MyTub..." id="searchInput">
-    </div>
-    <div style="font-size:20px;" onclick="openPage('settingsPage')">👤</div>
-</header>
-
-<div id="videoFeed" style="padding-top: 10px;">
+// 4. AUTOMATIC REFRESH & SYNC (AI Repair)
+window.onload = function() {
+    AppHeader.render();
+    FilterBar.render();
+    DeepSettings.init();
     
-    <div class="v-card" onclick="playVideo('jOTfB1TrQ_Q', '6-Foot Humanoid Robot: Cotton Farm Automation')">
-        <div class="thumb">
-            <img src="https://img.youtube.com/vi/jOTfB1TrQ_Q/maxresdefault.jpg">
-            <span style="position:absolute; bottom:8px; right:8px; background:rgba(0,0,0,0.8); padding:2px 5px; border-radius:4px; font-size:12px;">12:45</span>
-        </div>
-        <div class="details">
-            <div class="channel-icon" style="background: red;"></div>
-            <div class="v-text">
-                <h4 style="margin:0; font-size:14px;">6-Foot Humanoid Robot: Building the Future of AI in India</h4>
-                <p style="margin:4px 0; color:#aaa; font-size:12px;">Naina Tech • 8.5M views • 2 hours ago</p>
-            </div>
-        </div>
-    </div>
+    // Profit logic ko 'You' tab mein jodna
+    if (currentPage === "You") {
+        injectNainaProfitVault(); 
+    }
+    
+    console.log("System Status: 100% YouTube Mirror Active!");
+};
 
-    <div class="v-card" onclick="playVideo('9bZkp7q19f0', 'Robotic Hand: Master Code for Precise Movements')">
-        <div class="thumb">
-            <img src="https://img.youtube.com/vi/9bZkp7q19f0/maxresdefault.jpg">
-            <span style="position:absolute; bottom:8px; right:8px; background:rgba(0,0,0,0.8); padding:2px 5px; border-radius:4px; font-size:12px;">08:12</span>
-        </div>
-        <div class="details">
-            <div class="channel-icon" style="background: gold;"></div>
-            <div class="v-text">
-                <h4 style="margin:0; font-size:14px;">Robotic Hand Assembly: Master Code & Hardware Links</h4>
-                <p style="margin:4px 0; color:#aaa; font-size:12px;">Master Naina • 1.2M views • 5 hours ago</p>
-            </div>
-        </div>
-    </div>
-
-</div>
-
-    <div class="v-card" onclick="playVideo('jOTfB1TrQ_Q', '6-Foot Robot: High Density Cluster Technique')">
-        <div class="thumb"><img src="https://img.youtube.com/vi/jOTfB1TrQ_Q/maxresdefault.jpg"></div>
-        <div class="details">
-            <div class="channel-icon"></div>
-            <div class="v-text">
-                <h4>6-Foot Humanoid Robot: Cotton Farm Automation Project</h4>
-                <p>Naina Master • 2.5M views • 1 hour ago</p>
-                <button style="background:white; border:none; border-radius:15px; padding:4px 12px; font-weight:bold; font-size:11px;">Subscribe</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="playerPage" class="full-page">
-    <span class="back-btn" onclick="closePage('playerPage')">←</span>
-    <div id="video-container" style="width:100%; aspect-ratio:16/9; background:#000;"></div>
-    <div style="padding:15px;">
-        <h3 id="videoTitle">Video Title</h3>
-        <p style="color:#aaa;">1.2M Likes • Real-time tracking active</p>
-        <div style="background:#222; padding:15px; border-radius:10px; margin-top:10px;">
-            <p style="margin:0; color:#00ff00; font-weight:bold;">Profit Earned: ₹9.00</p>
-        </div>
-    </div>
-</div>
-
-<div id="settingsPage" class="full-page">
-    <span class="back-btn" onclick="closePage('settingsPage')">←</span>
-    <div style="padding:20px;">
-        <h2>V12 Master Settings</h2>
-        <div style="background:#1a1a1a; padding:15px; border-radius:10px; margin-bottom:10px;">
-            <p>💰 **Wallet Balance:** ₹850.00</p>
-        </div>
-        <div style="background:#1a1a1a; padding:15px; border-radius:10px; margin-bottom:10px;">
-            <p>🎨 **Artist Skill Reminder:** Engraving on plates is pending. (Auto-Remind Active)</p>
-        </div>
-        <p style="color:#555; font-size:12px;">App Version: 12.0.1 (Samsung Galaxy A06 Optimized)</p>
-    <div id="playerPage" class="full-page" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#0f0f0f; z-index:5000; overflow-y:auto;">
-    <span style="padding:15px; font-size:24px; cursor:pointer; display:block;" onclick="closePage('playerPage')">←</span>
-    <div id="video-container" style="width:100%; aspect-ratio:16/9; background:#000;"></div>
-    <div style="padding:15px;">
-        <h3 id="videoTitle">Video Title</h3>
-        <p style="color:#aaa; font-size:12px;">5.2M views • Real-time Profit Tracking Active</p>
-        <div style="background:#222; padding:15px; border-radius:10px; margin-top:10px; border-left:4px solid #00ff00;">
-            <p style="margin:0; color:#00ff00; font-weight:bold;">Profit Earned: ₹9.00 ✅</p>
-        </div>
-        <div style="display:flex; gap:15px; margin-top:20px; overflow-x:auto;">
-            <div style="background:#272727; padding:8px 15px; border-radius:20px; font-size:13px;">👍 124K</div>
-            <div style="background:#272727; padding:8px 15px; border-radius:20px; font-size:13px;">↪️ Share</div>
-<div style="background:#333; padding:15px; border-radius:10px; margin-top:10px; text-align:center;" onclick="openPage('dashboardPage')">
-    📊 Open Industrial Dashboard
-</div>
-
-            <div style="background:#272727; padding:8px 15px; border-radius:20px; font-size:13px;">📥 Download</div>
-        </div>
-    </div>
-</div>
-
-<div id="settingsPage" class="full-page" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#0f0f0f; z-index:6000; overflow-y:auto;">
-    <span style="padding:15px; font-size:24px; cursor:pointer; display:block;" onclick="closePage('settingsPage')">←</span>
-    <div style="padding:20px;">
-        <h2 style="border-bottom:1px solid #333; padding-bottom:10px;">V12 Master Settings</h2>
-        <div style="background:#222; padding:20px; border-radius:15px; margin-top:10px;">
-<div id="dashboardPage" class="full-page" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#0f0f0f; z-index:9500; overflow-y:auto;">
-    <span style="padding:15px; font-size:24px; display:block; cursor:pointer;" onclick="closePage('dashboardPage')">← Dashboard</span>
-    <div style="padding:20px;">
-        <h2>V12 Control Center</h2>
-        <div class="farm-alert">⚠️ Attention: Cotton Farm (0.5 Acre) needs high-density check!</div>
-        <div class="dashboard-grid">
-            <div class="stat-card"><h3>Robotic Hand</h3><p>Online 🟢</p></div>
-            <div class="stat-card"><h3>Wallet</h3><p>₹850.00</p></div>
-            <div class="stat-card"><h3>PLC Status</h3><p>Active</p></div>
-  <div id="adminPage" class="full-page" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#050505; z-index:9999; overflow-y:auto;">
-    <div style="padding:15px; display:flex; justify-content:space-between; align-items:center; background:#111;">
-        <span onclick="closePage('adminPage')" style="font-size:24px; cursor:pointer;">✕</span>
-        <b style="color:red;">V12 MASTER ADMIN</b>
-        <span class="pulse-green"></span>
-    </div>
     <div class="v12-card">
         <h4>🤖 Humanoid Hand Status</h4>
         <div class="sensor-data"><span>Motor Torque:</span><span style="color:gold;">4.2 Nm</span></div>
