@@ -3,179 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Tube - Ultimate Full Purja Edition</title>
+    <title>My Tube - The Living Human Edition</title>
     <style>
-        :root { --yt-red: #ff0000; --yt-bg: #ffffff; --yt-text: #0f0f0f; --yt-gray: #606060; }
-        body { margin: 0; font-family: 'Roboto', Arial, sans-serif; background: var(--yt-bg); color: var(--yt-text); padding-bottom: 70px; overflow-x: hidden; }
+        /* SKIN & MUSCLES (Chamdi aur Maans) */
+        :root { --yt-red: #ff0000; --yt-bg: #ffffff; --yt-text: #0f0f0f; }
+        body { margin: 0; font-family: 'Roboto', sans-serif; background: var(--yt-bg); overflow-x: hidden; }
+
+        /* THE BRAIN MONITOR (Dimaag ki Halat) */
+        .brain-monitor { background: #111; color: #00ff00; font-family: monospace; font-size: 10px; padding: 5px 15px; position: sticky; top: 0; z-index: 5000; display: flex; justify-content: space-between; }
+
+        /* THE HEART (Earning Heartbeat) */
+        .heart-box { margin: 15px; padding: 20px; border-radius: 15px; background: linear-gradient(135deg, #fff 0%, #f0fff4 100%); border: 1px solid #d1e7dd; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .balance-text { font-size: 28px; font-weight: bold; color: #198754; display: block; }
+
+        /* THE DIGESTIVE SYSTEM (Video Feed) */
+        .feed-container { padding: 0 0 80px 0; }
+        .video-body { margin-bottom: 20px; animation: breathe 3s infinite ease-in-out; }
+        .video-thumbnail { width: 100%; height: 210px; background: #eee; background-size: cover; position: relative; }
         
-        /* HEADER SECTION */
-        .header { display: flex; justify-content: space-between; align-items: center; padding: 10px 15px; position: sticky; top: 0; background: #fff; z-index: 3000; border-bottom: 1px solid #f2f2f2; }
-        .logo { display: flex; align-items: center; gap: 8px; color: var(--yt-red); font-weight: bold; font-size: 22px; cursor: pointer; letter-spacing: -1px; }
-        .header-icons { display: flex; gap: 20px; font-size: 20px; cursor: pointer; }
+        /* THE SENSES (Icons & Buttons) */
+        .nav-skeleton { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; padding: 10px 0; border-top: 1px solid #eee; z-index: 4000; }
+        .nav-organ { flex: 1; text-align: center; font-size: 11px; cursor: pointer; color: #606060; }
+        .nav-organ b { font-size: 22px; display: block; color: #000; margin-bottom: 3px; }
 
-        /* COMPASS & EXPLORE BAR */
-        .filter-container { display: flex; align-items: center; padding: 10px; overflow-x: auto; gap: 12px; border-bottom: 1px solid #eee; white-space: nowrap; scrollbar-width: none; }
-        .filter-container::-webkit-scrollbar { display: none; }
-        .compass { font-size: 24px; padding-right: 12px; border-right: 1px solid #ddd; cursor: pointer; }
-        .chip { background: #f2f2f2; padding: 7px 16px; border-radius: 20px; font-size: 14px; font-weight: 500; cursor: pointer; border: 1px solid transparent; }
-        .chip.active { background: #0f0f0f; color: #fff; }
+        /* CLEANING ACTION (Nahana & Safai) */
+        .cleaning-effect { filter: hue-rotate(180deg) brightness(1.2); transition: 0.5s; }
 
-        /* HOME FEED: ASLI YOUTUBE CARDS */
-        #home-feed { padding: 0; }
-        .video-card { margin-bottom: 25px; width: 100%; }
-        .thumbnail { width: 100%; height: 215px; background-color: #eee; background-size: cover; background-position: center; position: relative; }
-        .duration { position: absolute; bottom: 8px; right: 8px; background: rgba(0,0,0,0.8); color: #fff; padding: 2px 6px; border-radius: 4px; font-size: 11px; }
-        .v-details { display: flex; gap: 12px; padding: 12px; }
-        .channel-pic { width: 40px; height: 40px; border-radius: 50%; background: #ddd; flex-shrink: 0; }
-        .v-info { flex: 1; }
-        .v-title { font-size: 15px; font-weight: 500; line-height: 1.4; display: block; margin-bottom: 4px; }
-        .v-meta { font-size: 12px; color: var(--yt-gray); }
-
-        /* SHORTS SHELF */
-        .shorts-shelf { padding: 15px; border-top: 5px solid #f2f2f2; border-bottom: 5px solid #f2f2f2; margin-bottom: 20px; }
-        .shorts-scroll { display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; }
-        .short-card { min-width: 150px; height: 260px; background: #ccc; border-radius: 12px; position: relative; background-size: cover; }
-        .short-title { position: absolute; bottom: 10px; left: 10px; color: #fff; font-size: 13px; font-weight: bold; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); }
-
-        /* YOU PAGE: ALL 40+ OPTIONS */
-        #you-page { display: none; background: #fff; }
-        .account-box { padding: 25px 20px; border-bottom: 8px solid #f2f2f2; }
-        .avatar { width: 65px; height: 65px; background: linear-gradient(45deg, #007bff, #6610f2); border-radius: 50%; }
-        .btn-row { display: flex; gap: 10px; margin-top: 15px; }
-        .btn-row button { flex: 1; padding: 8px; border-radius: 20px; border: 1px solid #ccc; background: #fff; font-size: 13px; font-weight: 500; }
-        
-        .menu-section { border-bottom: 8px solid #f2f2f2; }
-        .menu-item { display: flex; align-items: center; padding: 14px 20px; cursor: pointer; border-bottom: 1px solid #f9f9f9; }
-        .menu-item:active { background: #f2f2f2; }
-        .icon { width: 35px; font-size: 22px; }
-        .text-box { flex: 1; }
-        .main-text { font-size: 16px; font-weight: 400; color: #0f0f0f; }
-        .sub-text { font-size: 12px; color: var(--yt-gray); margin-top: 2px; }
-        .arrow { color: #888; font-size: 18px; }
-
-        /* BOTTOM NAVIGATION */
-        .bottom-nav { position: fixed; bottom: 0; width: 100%; display: flex; justify-content: space-around; background: #fff; padding: 10px 0; border-top: 1px solid #eee; z-index: 3000; }
-        .nav-item { text-align: center; font-size: 10px; color: var(--yt-gray); cursor: pointer; flex: 1; }
-        .nav-item b { font-size: 24px; display: block; color: #000; margin-bottom: 3px; font-style: normal; }
+        @keyframes breathe {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.01); }
+            100% { transform: scale(1); }
+        }
     </style>
 </head>
-<body>
+<body id="main-body">
 
-    <header class="header">
-        <div class="logo" onclick="location.reload()">▶️ My Tube</div>
-        <div class="header-icons">📺 🔔 🔍 <span onclick="showYou()">👤</span></div>
-    </header>
-
-    <div id="top-bar" class="filter-container">
-        <span class="compass">🧭</span>
-        <div class="chip active">All</div>
-        <div class="chip">Music</div>
-        <div class="chip">Live</div>
-        <div class="chip">Gaming</div>
-        <div class="chip">Naina Tech</div>
-        <div class="chip">Mixes</div>
-        <div class="chip">Trending</div>
+    <div class="brain-monitor">
+        <span>[BRAIN: THINKING...]</span>
+        <span>[HEART: PUMPING ₹]</span>
+        <span id="organ-status">[KIDNEY: CLEAN]</span>
     </div>
 
-    <main id="home-page">
-        <div class="video-card">
-            <div class="thumbnail" style="background-image: url('https://picsum.photos/seed/n1/400/225');"><span class="duration">10:05</span></div>
-            <div class="v-details">
-                <div class="channel-pic"></div>
-                <div class="v-info">
-                    <span class="v-title">Mastering AI Hardware & Robotics with Naina</span>
-                    <span class="v-meta">Naina Master • 2M views • 5 hours ago</span>
-                </div>
-                <div style="font-size:20px; color:#606060;">⋮</div>
-            </div>
-        </div>
+    <div class="heart-box">
+        <span style="font-size: 12px; color: #666; font-weight: bold;">TOTAL ACCOUNT BLOOD (BALANCE)</span>
+        <span id="wallet" class="balance-text">₹0.00</span>
+        <div style="font-size: 11px; color: #198754; margin-top: 5px;">● System Health: Excellent</div>
+    </div>
 
-        <div class="shorts-shelf">
-            <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
-                <span style="color:red; font-size:20px;">🩳</span><b>Shorts</b>
-            </div>
-            <div class="shorts-scroll">
-                <div class="short-card" style="background-image:url('https://picsum.photos/seed/s1/200/400');"><span class="short-title">New PLC Wiring</span></div>
-                <div class="short-card" style="background-image:url('https://picsum.photos/seed/s2/200/400');"><span class="short-title">Cotton Farm Yield</span></div>
-                <div class="short-card" style="background-image:url('https://picsum.photos/seed/s3/200/400');"><span class="short-title">Robotic Arm Demo</span></div>
-            </div>
-        </div>
+    <main class="feed-container" id="video-feed">
+        </main>
 
-        <div class="video-card">
-            <div class="thumbnail" style="background-image: url('https://picsum.photos/seed/n2/400/225');"><span class="duration">08:20</span></div>
-            <div class="v-details">
-                <div class="channel-pic" style="background-color:#e67e22;"></div>
-                <div class="v-info">
-                    <span class="v-title">Building floating islands: The physics of the future</span>
-                    <span class="v-meta">Visionary Tech • 500K views • 1 day ago</span>
-                </div>
-                <div style="font-size:20px; color:#606060;">⋮</div>
-            </div>
-        </div>
-    </main>
-
-    <div id="you-page">
-        <div class="account-box">
-            <div style="display:flex; align-items:center; gap:18px;">
-                <div class="avatar"></div>
-                <div><h2 style="margin:0;">Naina Master</h2><p style="margin:0; color:gray; font-size:14px;">@naina_v1 • Edit Channel ></p></div>
-            </div>
-            <div class="btn-row">
-                <button>Switch Account</button>
-                <button>Google Account</button>
-                <button>Incognito</button>
-            </div>
-        </div>
-
-        <div class="menu-section">
-            <div class="menu-item"><div class="icon">⚙️</div><div class="text-box"><div class="main-text">General</div><div class="sub-text">Break reminders, Dark theme, Playback in feeds</div></div><div class="arrow">></div></div>
-            <div class="menu-item"><div class="icon">📊</div><div class="text-box"><div class="main-text">Data Saving</div><div class="sub-text">Mobile data usage, Smart downloads</div></div><div class="arrow">></div></div>
-            <div class="menu-item"><div class="icon">🎬</div><div class="text-box"><div class="main-text">Video Quality Preferences</div><div class="sub-text">Set quality for Mobile and Wi-Fi</div></div><div class="arrow">></div></div>
-            <div class="menu-item" style="background:#fafff9;"><div class="icon">💹</div><div class="text-box"><div class="main-text" style="color:green; font-weight:bold;">User Profit Dashboard</div><div class="sub-text">Active: ₹1.00 / Video | Total: ₹10.50 (Live)</div></div><div class="arrow">></div></div>
-        </div>
-
-        <div class="menu-section">
-            <div class="menu-item"><div class="icon">📥</div><div class="text-box"><div class="main-text">Downloads</div><div class="sub-text">Quality, Over Wi-Fi only, Storage: 1.2GB free</div></div><div class="arrow">></div></div>
-            <div class="menu-item"><div class="icon">🛡️</div><div class="text-box"><div class="main-text">Privacy</div><div class="sub-text">Blocked contacts, YouTube Terms of Service</div></div><div class="arrow">></div></div>
-            <div class="menu-item"><div class="icon">💰</div><div class="text-box"><div class="main-text">Purchases & Memberships</div><div class="sub-text">Manage Billing, Invoices, Premium</div></div><div class="arrow">></div></div>
-            <div class="menu-item"><div class="icon">🔔</div><div class="text-box"><div class="main-text">Notifications</div><div class="sub-text">Scheduled digest, Subscriptions, Activity</div></div><div class="arrow">></div></div>
-        </div>
-
-        <div class="menu-section">
-            <div class="menu-item"><div class="icon">💬</div><div class="text-box"><div class="main-text">Live Chat</div><div class="sub-text">Review settings, Badges, Chat visibility</div></div><div class="arrow">></div></div>
-            <div class="menu-item"><div class="icon">⌨️</div><div class="text-box"><div class="main-text">Captions</div><div class="sub-text">Language, Text size, Style</div></div><div class="arrow">></div></div>
-            <div class="menu-item"><div class="icon">♿</div><div class="text-box"><div class="main-text">Accessibility</div><div class="sub-text">Accessibility player, High contrast</div></div><div class="arrow">></div></div>
-        </div>
-
-        <div class="menu-section">
-            <div class="menu-item"><div class="icon">ℹ️</div><div class="text-box"><div class="main-text">About</div><div class="sub-text">Version 2026.04.18, Licenses, Policy</div></div><div class="arrow">></div></div>
-            <div class="menu-item"><div class="icon">❓</div><div class="text-box"><div class="main-text">Help & Feedback</div><div class="sub-text">Browse articles, Community help</div></div><div class="arrow">></div></div>
-            <div class="menu-item"><div class="icon">📄</div><div class="text-box"><div class="main-text">Terms & Privacy Policy</div><div class="sub-text">Read legal documents</div></div><div class="arrow">></div></div>
-            <div class="menu-item" style="padding: 25px; justify-content: center; border-bottom: none;"><b style="color:red; font-size:16px;">Sign Out</b></div>
-        </div>
-        <div style="height:50px;"></div> </div>
-
-    <nav class="bottom-nav">
-        <div class="nav-item" onclick="showHome()"><b>🏠</b>Home</div>
-        <div class="nav-item"><b>🩳</b>Shorts</div>
-        <div class="nav-item"><b style="font-size:35px; margin-top:-8px;">⊕</b></div>
-        <div class="nav-item"><b>🔔</b>Subs</div>
-        <div class="nav-item" onclick="showYou()"><b>👤</b>You</div>
+    <nav class="nav-skeleton">
+        <div class="nav-organ" onclick="bodyLogic.home()"><b>🏠</b>Home</div>
+        <div class="nav-organ"><b>🩳</b>Shorts</div>
+        <div class="nav-organ" onclick="bodyLogic.bath()"><b>🧼</b>Bath/Clean</div>
+        <div class="nav-organ" onclick="bodyLogic.you()"><b>👤</b>You</div>
     </nav>
 
     <script>
-        function showYou() {
-            document.getElementById('home-page').style.display = 'none';
-            document.getElementById('top-bar').style.display = 'none';
-            document.getElementById('you-page').style.display = 'block';
-            window.scrollTo(0,0);
-        }
-        function showHome() {
-            document.getElementById('home-page').style.display = 'block';
-            document.getElementById('top-bar').style.display = 'flex';
-            document.getElementById('you-page').style.display = 'none';
-            window.scrollTo(0,0);
-        }
+        // THE CENTRAL NERVOUS SYSTEM (Pura Logic)
+        const bodyLogic = {
+            // Memory (Haddiyan): Data stays even after refresh
+            dna: {
+                balance: parseFloat(localStorage.getItem('naina_balance')) || 0,
+                isClean: true
+            },
+
+            // Heartbeat: Starts the life of the app
+            birth: function() {
+                this.updateHeart();
+                this.generateCells(); // Creating videos
+                console.log("App Life Started...");
+            },
+
+            // Kidney/Liver: Self-Cleaning Function (Nahana)
+            bath: function() {
+                const body = document.getElementById('main-body');
+                const status = document.getElementById('organ-status');
+                
+                body.classList.add('cleaning-effect');
+                status.innerText = "[KIDNEY: PURIFYING...]";
+                
+                setTimeout(() => {
+                    body.classList.remove('cleaning-effect');
+                    status.innerText = "[KIDNEY: CLEAN]";
+                    alert("App ne naha liya! Ab ye bilkul saaf aur fast hai.");
+                }, 1500);
+            },
+
+            // Pumping Blood: Adding ₹1
+            pumpMoney: function() {
+                this.dna.balance += 1;
+                localStorage.setItem('naina_balance', this.dna.balance);
+                this.updateHeart();
+                alert("Vitality Boost: ₹1 added to your blood!");
+            },
+
+            updateHeart: function() {
+                document.getElementById('wallet').innerText = "₹" + this.dna.balance.toFixed(2);
+            },
+
+            // Feeding the body: Creating videos
+            generateCells: function() {
+                const feed = document.getElementById('video-feed');
+                const contents = [
+                    { t: "Building Human AI Limbs", c: "Naina Tech", img: "n1" },
+                    { t: "Cotton Farm Automation", c: "Agri Master", img: "n2" },
+                    { t: "Floating Island Physics", c: "Visionary", img: "n3" }
+                ];
+
+                feed.innerHTML = ""; // Digestion: Clear old waste
+                contents.forEach(item => {
+                    feed.innerHTML += `
+                        <div class="video-body" onclick="bodyLogic.pumpMoney()">
+                            <div class="video-thumbnail" style="background-image:url('https://picsum.photos/seed/${item.img}/400/225')"></div>
+                            <div style="padding:12px;">
+                                <b style="font-size:16px;">${item.t}</b>
+                                <div style="font-size:12px; color:gray; margin-top:4px;">${item.c} • Earn ₹1 on click</div>
+                            </div>
+                        </div>
+                    `;
+                });
+            },
+
+            home: function() { location.reload(); },
+            you: function() { alert("You Page: Sabhi organs sahi kaam kar rahe hain!"); }
+        };
+
+        // Life begins here
+        bodyLogic.birth();
     </script>
 </body>
 </html>
