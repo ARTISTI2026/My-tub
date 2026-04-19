@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YouTube Master Build</title>
+    <title>YouTube Master</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body style="margin:0; font-family:sans-serif; background:#f9f9f9;">
@@ -13,33 +13,31 @@
         <div onclick="openSettings()" style="cursor:pointer; font-size:24px;">⚙️</div>
     </header>
 
-    <div id="settings-panel" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:white; z-index:10000; overflow-y:auto;">
-        <div style="padding:20px;">
-            <button onclick="closeSettings()" style="background:#ff0000; color:#fff; border:none; padding:8px 15px; border-radius:5px; float:right;">X Close</button>
-            <h2 style="margin-top:0;">Settings</h2>
-            <hr>
-            
-            <div style="background:#f0f7ff; padding:15px; border-radius:10px; margin-bottom:15px; border:1px solid #007bff;">
-                <b style="color:#007bff;">📜 VISHWA GYAAN KOSH (Kanoon & Granth)</b>
-                <p style="font-size:13px; margin:5px 0;">Library of World Laws and Holy Scriptures.</p>
-                <button type="button" onclick="WorldKnowledge.openLibrary();" style="width:100%; padding:10px; background:#007bff; color:white; border:none; border-radius:5px; cursor:pointer;">Explore Library</button>
-            </div>
+    <div id="settings-panel" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:white; z-index:10000; overflow-y:auto; padding:20px;">
+        <button onclick="closeSettings()" style="background:#ff0000; color:#fff; border:none; padding:8px 15px; border-radius:5px; float:right;">X Close</button>
+        <h2>Master Control</h2>
+        <hr>
+        
+        <div style="background:#e3f2fd; padding:15px; border-radius:10px; margin-bottom:15px; border:1px solid #2196f3;">
+            <b style="color:#1976d2;">📜 VISHWA GYAAN KOSH (Kanoon & Granth)</b>
+            <p style="font-size:12px; margin:5px 0;">Access to World Laws, Gita, and Ancient Wisdom.</p>
+            <button onclick="WorldKnowledge.openLibrary()" style="width:100%; padding:10px; background:#2196f3; color:white; border:none; border-radius:5px; cursor:pointer;">Explore Library</button>
+        </div>
 
-            <div style="background:#fff3cd; padding:15px; border-radius:10px; border:1px solid #ffeeba;">
-                <b>Owner Dashboard (Naina)</b>
-                <p>Owner Profit: <b id="owner-wallet" style="color:#c0392b;">₹0.00</b></p>
-                <p>User Balance: <b id="user-wallet" style="color:#27ae60;">₹0.00</b></p>
-                <p style="font-size:10px; color:gray;">Split: 95% Owner / 5% User</p>
-            </div>
+        <div style="background:#fff3cd; padding:15px; border-radius:10px; border:1px solid #ffeeba;">
+            <b style="color:#856404;">Owner Dashboard (Naina)</b>
+            <p>Owner Profit: <b id="owner-wallet" style="color:#c0392b; font-size:20px;">₹0.00</b></p>
+            <p>User Balance: <b id="user-wallet" style="color:#1e7e34;">₹0.00</b></p>
+            <p style="font-size:10px; color:gray;">System: 95% Profit Injection Active</p>
         </div>
     </div>
 
-    <main style="padding:10px; padding-bottom:80px;">
-        <div class="video-card" onclick="MoneyInjection.pumpHighValue()" style="cursor:pointer; margin-bottom:20px; background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
-            <div style="width:100%; height:200px; background:url('https://picsum.photos/seed/naina1/600/350') center/cover;"></div>
+    <main id="video-feed" style="padding:10px; padding-bottom:80px;">
+        <div class="video-card" onclick="MoneyInjection.pumpHighValue()" style="cursor:pointer; margin-bottom:20px; background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 2px 4px rgba(0,0,0,0.1);">
+            <div style="width:100%; height:200px; background:url('https://picsum.photos/seed/naina/600/350') center/cover;"></div>
             <div style="padding:12px;">
-                <b style="font-size:16px;">World Knowledge & Law Masterclass</b>
-                <p style="color:#606060; font-size:12px; margin-top:5px;">Naina Master • 1.2M views</p>
+                <b style="font-size:16px;">Master Gyaan & Unlimited Revenue Video</b>
+                <p style="color:#606060; font-size:12px; margin-top:5px;">Naina Master • 1.5M views</p>
             </div>
         </div>
     </main>
