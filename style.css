@@ -6,3 +6,49 @@ body { margin: 0; font-family: 'Roboto', sans-serif; background: var(--bg); }
 .bottom-nav { position: fixed; bottom: 0; width: 100%; display: flex; background: #fff; border-top: 1px solid #eee; padding: 10px 0; }
 .nav-item { flex: 1; text-align: center; font-size: 12px; cursor: pointer; }
 #profit-display { color: green; font-weight: bold; font-size: 20px; padding: 10px; text-align: center; background: #f9f9f9; }
+
+
+
+
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
+body { background-color: #f9f9f9; padding-bottom: 70px; padding-top: 60px; }
+
+/* Header Styling */
+.top-nav {
+    position: fixed; top: 0; width: 100%; height: 56px;
+    background: #fff; display: flex; justify-content: space-between;
+    align-items: center; padding: 0 15px; z-index: 1000;
+}
+.logo { font-size: 20px; font-weight: bold; letter-spacing: -1px; display: flex; align-items: center; gap: 5px; }
+.top-icons { display: flex; gap: 20px; font-size: 18px; align-items: center; }
+.user-profile { width: 30px; height: 30px; background: #007bff; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+
+/* Video Feed */
+.video-card { width: 100%; margin-bottom: 20px; background: #fff; cursor: pointer; }
+.thumbnail { width: 100%; height: 210px; background-size: cover; background-position: center; }
+.video-info { display: flex; padding: 12px; gap: 12px; position: relative; }
+.channel-icon { width: 36px; height: 36px; background: #ddd; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.video-info h3 { font-size: 15px; margin-bottom: 5px; line-height: 20px; }
+.video-info p { font-size: 12px; color: #606060; }
+.video-info i { position: absolute; right: 10px; color: #606060; }
+
+/* Bottom Nav */
+.bottom-nav {
+    position: fixed; bottom: 0; width: 100%; height: 60px;
+    background: #fff; border-top: 1px solid #ddd;
+    display: flex; justify-content: space-around; align-items: center; z-index: 1000;
+}
+.nav-item { display: flex; flex-direction: column; align-items: center; font-size: 10px; color: #0f0f0f; }
+.nav-item i { font-size: 20px; margin-bottom: 4px; }
+.nav-item.active { color: #f00; }
+.plus-btn i { font-size: 35px; }
+
+/* Side Panel Settings */
+.side-panel {
+    position: fixed; top: 0; right: -100%; width: 100%; height: 100%;
+    background: #fff; transition: 0.3s; z-index: 2000; overflow-y: auto;
+}
+.panel-header { padding: 15px; border-bottom: 1px solid #ddd; display: flex; align-items: center; gap: 20px; }
+.owner-box { background: #fff3cd; padding: 15px; margin: 15px; border-radius: 10px; border: 1px solid #ffeeba; }
+.menu-item { padding: 15px 20px; border-bottom: 1px solid #f1f1f1; display: flex; align-items: center; gap: 15px; }
