@@ -1,15 +1,3 @@
-/* ALL DESIGN LOGIC */
-:root { --yt-red: #ff0000; --bg: #ffffff; }
-body { margin: 0; font-family: 'Roboto', sans-serif; background: var(--bg); }
-.video-card { width: 100%; border-bottom: 5px solid #f2f2f2; margin-bottom: 10px; }
-.thumbnail { width: 100%; height: 210px; background: #ddd; }
-.bottom-nav { position: fixed; bottom: 0; width: 100%; display: flex; background: #fff; border-top: 1px solid #eee; padding: 10px 0; }
-.nav-item { flex: 1; text-align: center; font-size: 12px; cursor: pointer; }
-#profit-display { color: green; font-weight: bold; font-size: 20px; padding: 10px; text-align: center; background: #f9f9f9; }
-
-
-
-
 
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
 body { background-color: #f9f9f9; padding-bottom: 70px; padding-top: 60px; }
