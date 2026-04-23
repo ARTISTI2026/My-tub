@@ -1,73 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My-Tub Master</title>
+    <title>My-Tub Live Master</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
     <header class="top-nav">
-        <div class="logo">
-            <i class="fab fa-youtube" style="color:red;"></i> <span>My-Tub</span>
-        </div>
+        <div class="logo">My-Tub</div>
         <div class="top-icons">
-            <i class="fas fa-tv"></i>
-            <i class="fas fa-bell"></i>
-            <i class="fas fa-search"></i>
-            <div class="user-profile" onclick="openSettings()">N</div>
+            <i class="fas fa-tv" onclick="alert('TV Connection Active')"></i>
+            <i class="fas fa-bell" onclick="alert('Notifications Empty')"></i>
+            <i class="fas fa-search" onclick="handleSearch()"></i>
+            <div class="profile-icon" onclick="openPage('account-page')">N</div>
         </div>
     </header>
 
-    <main id="video-feed">
-        <div class="video-card" onclick="MoneyInjection.pumpHighValue()">
-            <div class="thumbnail" style="background-image: url('https://picsum.photos/seed/naina1/400/225');"></div>
+    <main id="home-feed" class="page active">
+        <div class="video-container">
+            <div class="thumbnail" onclick="playFullVideo()"></div>
             <div class="video-info">
-                <div class="channel-icon">N</div>
+                <div class="channel-pic">N</div>
                 <div class="text">
-                    <h3>Asli YouTube Algorithm Kaise Kaam Karta Hai?</h3>
+                    <h4>Naina Master - My-Tub Revolution</h4>
                     <p>Naina Master • 1.2M views • 2 hours ago</p>
                 </div>
-                <i class="fas fa-ellipsis-v"></i>
             </div>
         </div>
     </main>
- 
-    <nav class="bottom-nav">
-        <div class="nav-item active"><i class="fas fa-home"></i><span>Home</span></div>
-        <div class="nav-item"><i class="fas fa-bolt"></i><span>Shorts</span></div>
-        <div class="nav-item plus-btn"><i class="fas fa-plus-circle"></i></div>
-        <div class="nav-item"><i class="fas fa-layer-group"></i><span>Subscriptions</span></div>
-        <div class="nav-item" onclick="openSettings()"><i class="fas fa-user-circle"></i><span>You</span></div>
-    </nav>
 
-    <div id="settings-panel" class="side-panel">
-        <div class="panel-header">
-            <button onclick="closeSettings()" class="close-btn">✕ Close</button>
-            <h2>Settings</h2>
-        </div>
-        <div class="panel-content">
-            <div class="owner-box">
-                <p>Owner Profit: <b id="owner-wallet">₹0.00</b></p>
-                <p>User Balance: <b id="user-wallet">₹0.00</b></p>
-            </div>
-            
-            <div class="menu-item"><i class="fas fa-cog"></i> General</div>
-            <div class="menu-item"><i class="fas fa-database"></i> Data Saving</div>
-            <div class="menu-item"><i class="fas fa-download"></i> Downloads</div>
-            <div class="menu-item" style="color:#007bff; font-weight:bold;">
-                <i class="fas fa-book"></i> VISHWA GYAAN KOSH (Kanoon)
-            </div>
-        </div>
+    <div id="account-page" class="page-overlay">
+        <div class="page-header"><i class="fas fa-arrow-left" onclick="closePage('account-page')"></i> Settings</div>
+        <div id="full-settings-list"></div>
     </div>
 
-    <script src="nasen.js"></script>
+    <div id="general-page" class="page-overlay">
+        <div class="page-header"><i class="fas fa-arrow-left" onclick="closePage('general-page')"></i> General</div>
+        <div id="general-items"></div>
+    </div>
+
+    <nav class="bottom-nav">
+        <div class="nav-item active" onclick="showHome()"><i class="fas fa-home"></i><span>Home</span></div>
+        <div class="nav-item" onclick="openExplore()"><i class="fas fa-compass"></i><span>Explore</span></div>
+        <div class="nav-item plus-btn"><i class="fas fa-plus-circle"></i></div>
+        <div class="nav-item"><i class="fas fa-layer-group"></i><span>Subs</span></div>
+        <div class="nav-item" onclick="openPage('account-page')"><i class="fas fa-user-circle"></i><span>You</span></div>
+    </nav>
+
     <script src="brain.js"></script>
-    <script>
-        function openSettings() { document.getElementById('settings-panel').style.right = '0'; }
-        function closeSettings() { document.getElementById('settings-panel').style.right = '-100%'; }
-    </script>
 </body>
 </html>
