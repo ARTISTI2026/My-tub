@@ -3,51 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My-Tub Live Master</title>
+    <title>My-Tub Final</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-
-    <header class="top-nav">
-        <div class="logo">My-Tub</div>
+    <header class="header">
+        <div class="logo"><img src="1000041495.jpg" alt="Logo"><span>My-Tub</span></div>
         <div class="top-icons">
-            <i class="fas fa-tv" onclick="alert('TV Connection Active')"></i>
-            <i class="fas fa-bell" onclick="alert('Notifications Empty')"></i>
-            <i class="fas fa-search" onclick="handleSearch()"></i>
-            <div class="profile-icon" onclick="openPage('account-page')">N</div>
+            <i class="fas fa-tv" onclick="openPanel('tv-panel')"></i>
+            <i class="fas fa-bell" onclick="openPanel('notif-panel')"></i>
+            <i class="fas fa-search" onclick="openSearch()"></i>
+            <div class="user-pfp" onclick="openPanel('account-panel')">N</div>
         </div>
     </header>
 
-    <main id="home-feed" class="page active">
-        <div class="video-container">
-            <div class="thumbnail" onclick="playFullVideo()"></div>
-            <div class="video-info">
-                <div class="channel-pic">N</div>
-                <div class="text">
-                    <h4>Naina Master - My-Tub Revolution</h4>
-                    <p>Naina Master • 1.2M views • 2 hours ago</p>
-                </div>
-            </div>
-        </div>
-    </main>
+    <main id="video-feed"></main>
 
-    <div id="account-page" class="page-overlay">
-        <div class="page-header"><i class="fas fa-arrow-left" onclick="closePage('account-page')"></i> Settings</div>
-        <div id="full-settings-list"></div>
-    </div>
-
-    <div id="general-page" class="page-overlay">
-        <div class="page-header"><i class="fas fa-arrow-left" onclick="closePage('general-page')"></i> General</div>
-        <div id="general-items"></div>
-    </div>
+    <div id="panel-container"></div>
 
     <nav class="bottom-nav">
-        <div class="nav-item active" onclick="showHome()"><i class="fas fa-home"></i><span>Home</span></div>
+        <div class="nav-item" onclick="location.reload()"><i class="fas fa-home"></i><span>Home</span></div>
         <div class="nav-item" onclick="openExplore()"><i class="fas fa-compass"></i><span>Explore</span></div>
-        <div class="nav-item plus-btn"><i class="fas fa-plus-circle"></i></div>
-        <div class="nav-item"><i class="fas fa-layer-group"></i><span>Subs</span></div>
-        <div class="nav-item" onclick="openPage('account-page')"><i class="fas fa-user-circle"></i><span>You</span></div>
+        <div class="nav-item plus"><i class="fas fa-plus-circle"></i></div>
+        <div class="nav-item" onclick="openPanel('subs-panel')"><i class="fas fa-layer-group"></i><span>Subs</span></div>
+        <div class="nav-item" onclick="openPanel('account-panel')"><i class="fas fa-user-circle"></i><span>You</span></div>
     </nav>
 
     <script src="brain.js"></script>
