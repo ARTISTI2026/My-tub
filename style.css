@@ -1,18 +1,15 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Roboto', sans-serif; background: #fff; }
-
-.top-nav { position: fixed; top: 0; width: 100%; height: 56px; display: flex; justify-content: space-between; align-items: center; padding: 0 15px; background: #fff; z-index: 1000; border-bottom: 1px solid #eee; }
-.logo { font-size: 20px; font-weight: bold; color: #ff0000; }
-
-.page-overlay { position: fixed; top: 0; left: 100%; width: 100%; height: 100%; background: #fff; z-index: 2000; transition: 0.3s; overflow-y: auto; }
-.page-overlay.active { left: 0; }
-.page-header { padding: 15px; border-bottom: 1px solid #ddd; font-weight: bold; font-size: 18px; }
-
-.list-row { padding: 18px 20px; border-bottom: 1px solid #f9f9f9; font-size: 16px; cursor: pointer; }
-.blue-text { color: #065fd4; font-weight: bold; }
-.special-future { background: #f0f7ff; border: 1px dashed #065fd4; color: #065fd4; font-weight: bold; margin: 10px; border-radius: 8px; }
+.header { position: fixed; top: 0; width: 100%; height: 56px; display: flex; justify-content: space-between; align-items: center; padding: 0 16px; background: #fff; z-index: 1000; }
+.logo img { height: 24px; margin-right: 5px; }
+.top-icons { display: flex; align-items: center; gap: 24px; } /* Icons ke beech 24px ka gap */
+.top-icons i { font-size: 20px; color: #000; cursor: pointer; }
+.user-pfp { width: 28px; height: 28px; background: #007bff; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; }
 
 .bottom-nav { position: fixed; bottom: 0; width: 100%; height: 60px; background: #fff; display: flex; justify-content: space-around; align-items: center; border-top: 1px solid #ddd; }
 .nav-item { display: flex; flex-direction: column; align-items: center; font-size: 10px; color: #606060; }
 .nav-item i { font-size: 22px; margin-bottom: 2px; }
-.plus-btn i { font-size: 35px; color: #000; }
+
+/* Panels Style */
+.full-panel { position: fixed; top: 0; left: 100%; width: 100%; height: 100%; background: #fff; z-index: 2000; transition: 0.3s; overflow-y: auto; }
+.full-panel.active { left: 0; }
+.panel-header { padding: 15px; border-bottom: 1px solid #eee; display: flex; align-items: center; gap: 20px; font-weight: bold; }
