@@ -1,35 +1,58 @@
-const NainaApp = {
-    memory: {
-        save: (k, v) => localStorage.setItem(k, v),
-        get: (k) => parseFloat(localStorage.getItem(k)) || 0
-    },
-    heart: {
-        userBal: 0, ownerBal: 0,
-        init: function() {
-            this.userBal = NainaApp.memory.get('n_user');
-            this.ownerBal = NainaApp.memory.get('n_owner');
-            this.updateUI();
-        },
-        processUnlimitedProfit: function() {
-            // Jackpot: ₹10 se ₹1000 ke beech random kamai
-            const totalRev = Math.floor(Math.random() * (1000 - 10 + 1)) + 10;
-            let userShare = 0.50; 
-            let ownerShare = totalRev - userShare;
+// 1. Settings 1-26 ki list
+const allSettings = [
+    "General", "Account", "Data Saving", "Autoplay", "Video Quality", 
+    "Downloads", "Watch on TV", "History & Privacy", "Try New Features",
+    "Purchases", "Billing", "Your Data", "Notifications", "Connected Apps", 
+    "Live Chat", "Captions", "Accessibility", "About", "Help", "Send Feedback",
+    "Your Clips", "Your Movies", "Time Watched", "Break Reminder", "Bedtime", "Creator Studio"
+];
 
-            this.userBal += userShare;
-            this.ownerBal += ownerShare;
+// 2. Settings Load Karo
+function openPage(id) {
+    document.getElementById(id).classList.add('active');
+    if(id === 'account-page') loadMainSettings();
+}
 
-            NainaApp.memory.save('n_user', this.userBal);
-            NainaApp.memory.save('n_owner', this.ownerBal);
-            this.updateUI();
-            alert("Jackpot! Money Added to Owner Wallet.");
-        },
-        updateUI: function() {
-            if(document.getElementById('user-wallet')) {
-                document.getElementById('user-wallet').innerText = "₹" + this.userBal.toFixed(2);
-                document.getElementById('owner-wallet').innerText = "₹" + this.ownerBal.toFixed(2);
-            }
-        }
+function loadMainSettings() {
+    const list = document.getElementById('full-settings-list');
+    list.innerHTML = "";
+    allSettings.forEach((item, i) => {
+        let action = item === "General" ? "openPage('general-page')" : `alert('${item} coming soon')`;
+        let isBlue = (item === "Help" || item === "Send Feedback") ? "blue-text" : "";
+        list.innerHTML += `<div class="list-row ${isBlue}" onclick="${action}">${i+1}. ${item}</div>`;
+    });
+}
+
+// 3. General Settings (With 26th Option: My-Tub Future)
+const generalItems = [
+    "Remind me to take a break", "Remind me when it's bedtime", "Appearance", 
+    "Playback in feeds", "Double-tap to seek", "Uploads", "Voice search language", 
+    "Location: India", "Restricted Mode", "Stats for nerds"
+];
+
+const genDiv = document.getElementById('general-items');
+generalItems.forEach((item, i) => {
+    genDiv.innerHTML += `<div class="list-row">${i+1}. ${item}</div>`;
+});
+
+// AAPKA MASTER FEATURE
+genDiv.innerHTML += `
+    <div class="list-row special-future" onclick="triggerFuture()">
+        26. 🌟 MY-TUB FUTURE (Master Control)
+        <br><small>Kanoon, Granth & Plate Settings</small>
+    </div>
+`;
+
+function triggerFuture() {
+    let key = prompt("Enter Master Key:");
+    if(key === "NainaMaster") {
+        alert("Success! Owner Dashboard & Plate Script Unlocked.");
+        // Yahan se paise kamane wala dashboard khulega
     }
-};
-window.onload = () => NainaApp.heart.init();
+}
+
+function closePage(id) { document.getElementById(id).classList.remove('active'); }
+function handleSearch() {
+    let q = prompt("Search My-Tub:");
+    if(q === "my") triggerFuture();
+}
