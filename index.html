@@ -3,33 +3,151 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My-Tub Final</title>
-    <link rel="stylesheet" href="style.css">
+    <title>My-Tub Ultra Build</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* ASLI YOUTUBE LOOK & FEEL */
+        :root { --yt-red: #FF0000; --yt-black: #0f0f0f; --yt-gray: #606060; --yt-light: #f2f2f2; }
+        * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
+        body { background: #fff; font-family: "Roboto", Arial, sans-serif; overflow-x: hidden; }
+
+        /* HEADER: Gap aur Alignment sahi kar di hai */
+        .header { position: fixed; top: 0; width: 100%; height: 56px; background: #fff; display: flex; justify-content: space-between; align-items: center; padding: 0 16px; z-index: 1000; }
+        .logo-box { display: flex; align-items: center; gap: 4px; }
+        .logo-box img { height: 22px; }
+        .logo-box span { font-weight: bold; font-size: 19px; letter-spacing: -1px; }
+        .header-right { display: flex; gap: 22px; align-items: center; }
+        .header-right i { font-size: 20px; color: var(--yt-black); }
+        .user-pfp { width: 28px; height: 28px; background: #007bff; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+
+        /* VIDEO PLAYER: Asli internal quality aur skip buttons */
+        .player-overlay { position: fixed; top: 0; left: 100%; width: 100%; height: 100%; background: #000; z-index: 5000; transition: 0.3s; color: #fff; }
+        .player-overlay.active { left: 0; }
+        .video-box { width: 100%; height: 215px; background: #333; position: relative; margin-top: 50px; }
+        .controls-layer { position: absolute; top: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; background: rgba(0,0,0,0.4); }
+        .skip-btn { width: 30%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 25px; opacity: 0; }
+        .skip-btn:active { opacity: 1; background: rgba(255,255,255,0.1); }
+
+        /* SETTINGS: Gehrai wala section (26 Options) */
+        .settings-overlay { position: fixed; top: 0; left: 100%; width: 100%; height: 100%; background: #fff; z-index: 4000; transition: 0.3s; overflow-y: auto; }
+        .settings-overlay.active { left: 0; }
+        .s-header { padding: 15px; border-bottom: 1px solid #ddd; display: flex; gap: 20px; align-items: center; font-weight: bold; }
+        .s-row { padding: 16px 20px; border-bottom: 1px solid #f9f9f9; display: flex; align-items: center; justify-content: space-between; cursor: pointer; }
+        .s-row:active { background: #eee; }
+        .blue-item { color: #065fd4; font-weight: bold; }
+
+        /* BOTTOM NAV */
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; height: 60px; background: #fff; border-top: 1px solid #ddd; display: flex; justify-content: space-around; align-items: center; z-index: 1000; }
+        .nav-item { display: flex; flex-direction: column; align-items: center; font-size: 10px; color: var(--yt-gray); }
+        .nav-item i { font-size: 22px; margin-bottom: 2px; }
+        .plus-btn i { font-size: 38px; color: #000; }
+
+        /* SECRET DASHBOARD (Profit Logic) */
+        #secret-heart { display: none; padding: 20px; background: #f0f7ff; margin: 10px; border-radius: 10px; border: 2px dashed #065fd4; }
+    </style>
 </head>
 <body>
+
     <header class="header">
-        <div class="logo"><img src="1000041495.jpg" alt="Logo"><span>My-Tub</span></div>
-        <div class="top-icons">
-            <i class="fas fa-tv" onclick="openPanel('tv-panel')"></i>
-            <i class="fas fa-bell" onclick="openPanel('notif-panel')"></i>
-            <i class="fas fa-search" onclick="openSearch()"></i>
-            <div class="user-pfp" onclick="openPanel('account-panel')">N</div>
+        <div class="logo-box">
+            <img src="1000041495.jpg"> <span>My-Tub</span>
+        </div>
+        <div class="header-right">
+            <i class="fas fa-tv" onclick="openTV()"></i>
+            <i class="fas fa-bell"></i>
+            <i class="fas fa-search" onclick="startSearch()"></i>
+            <div class="user-pfp" onclick="toggleScreen('settings-screen', true)">N</div>
         </div>
     </header>
 
-    <main id="video-feed"></main>
+    <main style="margin-top: 60px;">
+        <div class="video-card" onclick="toggleScreen('player-screen', true)">
+            <div style="width:100%; height:200px; background:#ccc;"></div>
+            <div style="padding:12px; display:flex; gap:10px;">
+                <div class="user-pfp">N</div>
+                <div>
+                    <h4 style="font-size:14px;">Master Script: Option 26 Unlocked</h4>
+                    <p style="font-size:12px; color:#606060;">Naina Master • 50M views • 1 day ago</p>
+                </div>
+            </div>
+        </div>
+    </main>
 
-    <div id="panel-container"></div>
+    <div id="player-screen" class="player-overlay">
+        <div style="padding:15px; display:flex; justify-content:space-between;">
+            <i class="fas fa-chevron-down" onclick="toggleScreen('player-screen', false)"></i>
+            <div style="display:flex; gap:20px;">
+                <i class="fas fa-cog" onclick="openQuality()"></i>
+            </div>
+        </div>
+        <div class="video-box">
+            <div class="controls-layer">
+                <div class="skip-btn" onclick="videoAction('back')"><i class="fas fa-undo"></i></div>
+                <i class="fas fa-play" style="font-size:40px;"></i>
+                <div class="skip-btn" onclick="videoAction('forward')"><i class="fas fa-redo"></i></div>
+            </div>
+        </div>
+        <div id="video-actions" style="padding:15px; display:flex; gap:15px; overflow-x:auto;">
+            <button style="padding:8px 15px; border-radius:20px; border:none; background:#333; color:#fff;"><i class="fas fa-thumbs-up"></i> Like</button>
+            <button style="padding:8px 15px; border-radius:20px; border:none; background:#333; color:#fff;"><i class="fas fa-share"></i> Share</button>
+            <button style="padding:8px 15px; border-radius:20px; border:none; background:#333; color:#fff;"><i class="fas fa-scissors"></i> Remix</button>
+        </div>
+    </div>
+
+    <div id="settings-screen" class="settings-overlay">
+        <div class="s-header"><i class="fas fa-arrow-left" onclick="toggleScreen('settings-screen', false)"></i> Settings</div>
+        <div id="settings-list-container"></div>
+    </div>
 
     <nav class="bottom-nav">
-        <div class="nav-item" onclick="location.reload()"><i class="fas fa-home"></i><span>Home</span></div>
-        <div class="nav-item" onclick="openExplore()"><i class="fas fa-compass"></i><span>Explore</span></div>
-        <div class="nav-item plus"><i class="fas fa-plus-circle"></i></div>
-        <div class="nav-item" onclick="openPanel('subs-panel')"><i class="fas fa-layer-group"></i><span>Subs</span></div>
-        <div class="nav-item" onclick="openPanel('account-panel')"><i class="fas fa-user-circle"></i><span>You</span></div>
+        <div class="nav-item"><i class="fas fa-home"></i>Home</div>
+        <div class="nav-item"><i class="fas fa-bolt"></i>Shorts</div>
+        <div class="nav-item plus-btn"><i class="fas fa-plus-circle"></i></div>
+        <div class="nav-item"><i class="fas fa-layer-group"></i>Subs</div>
+        <div class="nav-item" onclick="toggleScreen('settings-screen', true)"><i class="fas fa-user-circle"></i>You</div>
     </nav>
 
-    <script src="brain.js"></script>
+    <script>
+        const settings = ["General", "Account", "Data Saving", "Autoplay", "Video Quality", "Downloads", "Watch on TV", "History & Privacy", "Try New Features", "Purchases", "Billing", "Your Data", "Notifications", "Connected Apps", "Live Chat", "Captions", "Accessibility", "About", "Help", "Send Feedback", "Your Clips", "Your Movies", "Time Watched", "Break Reminder", "Bedtime", "Creator Studio"];
+
+        function init() {
+            const list = document.getElementById('settings-list-container');
+            settings.forEach((item, i) => {
+                let isBlue = (item === "Help" || item === "Send Feedback") ? "blue-item" : "";
+                list.innerHTML += `<div class="s-row ${isBlue}" onclick="handleSetting('${item}')"><span>${i+1}. ${item}</span> <i class="fas fa-chevron-right"></i></div>`;
+            });
+        }
+
+        function handleSetting(name) {
+            if(name === "General") {
+                let key = prompt("Inside General: 1-10 YouTube + Option 26. Type 'my' for Master Future:");
+                if(key === 'my') activateMasterFuture();
+            } else {
+                alert("Opening internal logic for: " + name);
+            }
+        }
+
+        function activateMasterFuture() {
+            alert("🌟 PLATE SCRIPT ACTIVE: Kanoon, Granth & Profit Dashboard Loaded.");
+            document.body.style.background = "#eefaff";
+        }
+
+        function toggleScreen(id, show) {
+            const el = document.getElementById(id);
+            if(show) el.classList.add('active');
+            else el.classList.remove('active');
+        }
+
+        function startSearch() {
+            let s = prompt("Search:");
+            if(s === 'my') activateMasterFuture();
+        }
+
+        function openQuality() {
+            alert("Quality: 1080p (HD)\n720p\n480p\n360p\nAuto (Recommended)");
+        }
+
+        window.onload = init;
+    </script>
 </body>
 </html>
