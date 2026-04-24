@@ -1,58 +1,40 @@
-// 1. Settings 1-26 ki list
-const allSettings = [
-    "General", "Account", "Data Saving", "Autoplay", "Video Quality", 
-    "Downloads", "Watch on TV", "History & Privacy", "Try New Features",
-    "Purchases", "Billing", "Your Data", "Notifications", "Connected Apps", 
-    "Live Chat", "Captions", "Accessibility", "About", "Help", "Send Feedback",
-    "Your Clips", "Your Movies", "Time Watched", "Break Reminder", "Bedtime", "Creator Studio"
-];
+const NainaApp = {
+    // 26 Settings List
+    settingsList: ["General", "Account", "Data Saving", "Autoplay", "Video Quality", "Downloads", "Watch on TV", "History & Privacy", "Try New Features", "Purchases", "Billing", "Your Data", "Notifications", "Connected Apps", "Live Chat", "Captions", "Accessibility", "About", "Help", "Send Feedback", "Your Clips", "Your Movies", "Time Watched", "Break Reminder", "Bedtime", "Creator Studio"],
 
-// 2. Settings Load Karo
-function openPage(id) {
-    document.getElementById(id).classList.add('active');
-    if(id === 'account-page') loadMainSettings();
-}
+    init: function() {
+        this.loadSettings();
+        console.log("My-Tub Engine Started");
+    },
 
-function loadMainSettings() {
-    const list = document.getElementById('full-settings-list');
-    list.innerHTML = "";
-    allSettings.forEach((item, i) => {
-        let action = item === "General" ? "openPage('general-page')" : `alert('${item} coming soon')`;
-        let isBlue = (item === "Help" || item === "Send Feedback") ? "blue-text" : "";
-        list.innerHTML += `<div class="list-row ${isBlue}" onclick="${action}">${i+1}. ${item}</div>`;
-    });
-}
+    loadSettings: function() {
+        const container = document.getElementById('panel-container');
+        // Account Panel banayein
+        let html = `<div id="account-panel" class="full-panel">
+            <div class="panel-header" onclick="document.getElementById('account-panel').classList.remove('active')"><i class="fas fa-arrow-left"></i> Settings</div>`;
+        
+        this.settingsList.forEach((item, i) => {
+            let color = (item === "Help" || item === "Send Feedback") ? "color:#065fd4;font-weight:bold;" : "";
+            html += `<div style="padding:15px; border-bottom:1px solid #f1f1f1; ${color}" onclick="NainaApp.openDetail('${item}')">${i+1}. ${item}</div>`;
+        });
+        html += `</div>`;
+        container.innerHTML = html;
+    },
 
-// 3. General Settings (With 26th Option: My-Tub Future)
-const generalItems = [
-    "Remind me to take a break", "Remind me when it's bedtime", "Appearance", 
-    "Playback in feeds", "Double-tap to seek", "Uploads", "Voice search language", 
-    "Location: India", "Restricted Mode", "Stats for nerds"
-];
-
-const genDiv = document.getElementById('general-items');
-generalItems.forEach((item, i) => {
-    genDiv.innerHTML += `<div class="list-row">${i+1}. ${item}</div>`;
-});
-
-// AAPKA MASTER FEATURE
-genDiv.innerHTML += `
-    <div class="list-row special-future" onclick="triggerFuture()">
-        26. 🌟 MY-TUB FUTURE (Master Control)
-        <br><small>Kanoon, Granth & Plate Settings</small>
-    </div>
-`;
-
-function triggerFuture() {
-    let key = prompt("Enter Master Key:");
-    if(key === "NainaMaster") {
-        alert("Success! Owner Dashboard & Plate Script Unlocked.");
-        // Yahan se paise kamane wala dashboard khulega
+    openDetail: function(name) {
+        if(name === "General") {
+            alert("Inside General: 10 YouTube Options + 26. My-Tub Future Active!");
+            // Yahan hum 26th option dikhayenge
+        } else {
+            alert("Opening " + name + " internal settings...");
+        }
     }
+};
+
+function openPanel(id) { document.getElementById(id).classList.add('active'); }
+function openSearch() {
+    let q = prompt("Search My-Tub:");
+    if(q === "my") alert("Secret Owner Dashboard Unlocked!");
 }
 
-function closePage(id) { document.getElementById(id).classList.remove('active'); }
-function handleSearch() {
-    let q = prompt("Search My-Tub:");
-    if(q === "my") triggerFuture();
-}
+window.onload = () => NainaApp.init();
